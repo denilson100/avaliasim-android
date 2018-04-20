@@ -116,6 +116,13 @@
                 <!--app:opposite_res="@mipmap/ic_launcher"-->
                 <!--/>-->
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </android.support.v7.widget.CardView>

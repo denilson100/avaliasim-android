@@ -1,6 +1,7 @@
 package br.com.mobile10.avaliasim.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.allen.comparsechart.CompareIndicator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
@@ -63,6 +65,8 @@ public class RecyclerViewAdapterDetAvaliacoes extends RecyclerView.Adapter<Recyc
         holder.txtTotal.setText("Número de avaliações: " + (positive + negative));
 //        holder.compareIndicator.updateView(10, 90);
 
+//        holder.horizontal.init(context).addAll(itens()).build();
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +84,22 @@ public class RecyclerViewAdapterDetAvaliacoes extends RecyclerView.Adapter<Recyc
     public void setOnClick(RecyclerViewAdapterDetAvaliacoes.OnItemClicked onClick) {
         this.onClick = onClick;
     }
+
+//    private List<BarItem> itens() {
+//        List<BarItem> items = new ArrayList<>();
+//
+//        for (Feature feature : itemList) {
+//            int positive = 0;
+//            int negative = 0;
+//            for (MyDate date : feature.date) {
+//                positive += date.positive;
+//                negative += date.negative;
+//            }
+//            items.add(new BarItem(feature.name, (double) positive, (double) negative, Color.RED, Color.GREEN, Color.WHITE, Color.WHITE));
+//        }
+//
+//        return items;
+//    }
 
 
 }

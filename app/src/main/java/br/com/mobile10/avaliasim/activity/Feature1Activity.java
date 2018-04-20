@@ -1,11 +1,18 @@
 package br.com.mobile10.avaliasim.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.dao.AvaliacaoDaoImplementacao;
@@ -14,7 +21,10 @@ import br.com.mobile10.avaliasim.interfaces.AvaliacaoDao;
 import br.com.mobile10.avaliasim.interfaces.FeatureDao;
 import br.com.mobile10.avaliasim.modelo.Avaliacao;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
+import br.com.mobile10.avaliasim.modelo.Feature;
+import br.com.mobile10.avaliasim.modelo.MyDate;
 import br.com.mobile10.avaliasim.modelo.Produto;
+import br.com.mobile10.avaliasim.util.AnimationsUtility;
 import br.com.mobile10.avaliasim.util.BaseActivity;
 
 /**
@@ -29,6 +39,8 @@ public class Feature1Activity extends BaseActivity implements FeatureDao {
 
     TextView txtTitle, txtType, txtFeature;
     int quantidadeDeFeatures = 0;
+    private RelativeLayout fundoDinamic;
+    private ImageView imgFundoAnimation;
 
 
     @Override
@@ -47,6 +59,8 @@ public class Feature1Activity extends BaseActivity implements FeatureDao {
             finish();
         }
 
+        fundoDinamic = (RelativeLayout) findViewById(R.id.fundo);
+        imgFundoAnimation = (ImageView) findViewById(R.id.image_animation);
         txtTitle = (TextView) findViewById(R.id.title);
         txtTitle.setText(avaliacao.title);
 
@@ -63,12 +77,19 @@ public class Feature1Activity extends BaseActivity implements FeatureDao {
         try {
             txtFeature.setText(avaliacao.features.get(quantidadeDeFeatures));
         } catch (IndexOutOfBoundsException e) {
+            // Vai ate o ultimo item do array
             e.printStackTrace();
-            showToast("Avaliado com sucesso!");
-            finish();
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    showToast("Avaliado com sucesso!");
+                    finish();
+                }
+            }, 1000);
         }
     }
-
 
     @Override
     public void avaliarFeatures(Avaliacao2 avaliacao, String userId, String status, String featureAvaliada) {
@@ -79,12 +100,36 @@ public class Feature1Activity extends BaseActivity implements FeatureDao {
     public void avaliarComoRuim(View view) {
         avaliarFeatures(avaliacao, users.getUid(), "negative", avaliacao.features.get(quantidadeDeFeatures));
         quantidadeDeFeatures++;
-        updateUI();
+        DetelhesAvaliacao.keyBuscaPorId = true; // certeza que avaliou
+
+        imgFundoAnimation.setImageResource(R.drawable.ic_mood_bad_black_24dp);
+        AnimationsUtility.showCircularAnimationRuim(this, fundoDinamic, R.id.conteudo);
+        // Tempo de volta da animacao
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                AnimationsUtility.showCircularAnimationRuim(Feature1Activity.this, fundoDinamic, R.id.conteudo);
+                updateUI();
+            }
+        }, 1000);
     }
 
     public void avaliarComoBom(View view) {
         avaliarFeatures(avaliacao, users.getUid(), "positive", avaliacao.features.get(quantidadeDeFeatures));
         quantidadeDeFeatures++;
-        updateUI();
+        DetelhesAvaliacao.keyBuscaPorId = true; // certeza que avaliou
+
+        imgFundoAnimation.setImageResource(R.drawable.ic_mood_black_24dp);
+        AnimationsUtility.showCircularAnimationBom(this, fundoDinamic, R.id.conteudo);
+        // Tempo de volta da animacao
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                AnimationsUtility.showCircularAnimationBom(Feature1Activity.this, fundoDinamic, R.id.conteudo);
+                updateUI();
+            }
+        }, 1000);
     }
 }

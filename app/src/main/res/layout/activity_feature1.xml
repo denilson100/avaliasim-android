@@ -9,6 +9,7 @@
     tools:context="br.com.mobile10.avaliasim.activity.Feature1Activity">
 
     <LinearLayout
+        android:id="@+id/conteudo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
@@ -53,7 +54,7 @@
                 <android.support.v7.widget.AppCompatButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@android:color/holo_red_light"
+                    android:backgroundTint="@color/vermelho"
                     android:textColor="@color/branco"
                     android:onClick="avaliarComoRuim"
                     android:text="ruim" />
@@ -68,7 +69,7 @@
                 <android.support.v7.widget.AppCompatButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@android:color/holo_green_light"
+                    android:backgroundTint="@color/verde"
                     android:textColor="@color/branco"
                     android:onClick="avaliarComoBom"
                     android:text="bom" />
@@ -77,7 +78,22 @@
 
         </LinearLayout>
 
-
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/fundo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00FFFF"
+        android:gravity="center"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/image_animation"
+            android:src="@drawable/ic_add_black_24dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

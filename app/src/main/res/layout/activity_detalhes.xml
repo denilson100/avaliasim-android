@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <TextView
             android:id="@+id/type"
@@ -37,17 +37,22 @@
             android:text="Nenhuma avaliação"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
-        <LinearLayout
+        <br.com.mobile10.avaliasim.libBarGraph.HorizontalBar
+            android:id="@+id/horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"/>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical" />
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
 
-        </LinearLayout>
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycler_view"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:scrollbars="vertical" />-->
+
+        <!--</LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"

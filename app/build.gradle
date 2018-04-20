@@ -6,8 +6,8 @@ android {
         applicationId "br.com.mobile10.avaliasim"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 5
-        versionName "0.3"
+        versionCode 6
+        versionName "0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -39,6 +39,8 @@ dependencies {
     // RecycleVeview
     compile 'jp.wasabeef:recyclerview-animators:2.2.3'
     // Graficos
-    compile 'com.allen.comparsechart:comparsechart:1.0.1'
+    compile 'com.allen.comparsechart:comparsechart:1.0.1' // com joinha
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.3' // Completo
+   // compile 'com.github.felixsoares:HorizontalBarGraph:1.0' // horizontal abr graph
 }
 apply plugin: 'com.google.gms.google-services'

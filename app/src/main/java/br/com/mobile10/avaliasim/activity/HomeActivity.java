@@ -65,6 +65,7 @@ public class HomeActivity extends BaseActivity
         rView.setLayoutManager(lLayout);
 
         executeAsyncTaskGetDataAtual();
+        executeAsyncTaskGetAvaliacoes();
         addDataAtualNoServidor();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

@@ -50,13 +50,6 @@ public class LoadingAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>> {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                //id avaliacao
-//                for (DataSnapshot av : dataSnapshot.getChildren()) {
-//
-//                    avaliacao = av.getValue(Avaliacao.class);
-//                    avaliacao.idAvalicao = av.getKey();
-//                    listavaliacoes.add(avaliacao);
-//                }
                 List<Avaliacao2> avaliacao2List = new ArrayList<Avaliacao2>();
 
                 for (DataSnapshot av : dataSnapshot.getChildren()) {
