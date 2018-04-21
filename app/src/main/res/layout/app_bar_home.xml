@@ -4,30 +4,112 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.com.mobile10.avaliasim.activity.HomeActivity">
+    tools:context="br.com.mobile10.avaliasim.activity.HomeActivity2">
 
-    <android.support.design.widget.AppBarLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="match_parent"
+        android:gravity="bottom">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:elevation="10dp">
 
-    </android.support.design.widget.AppBarLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@drawable/shape_elevation">
 
-    <include layout="@layout/content_home" />
+            </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_add_black_24dp" />
+
+            <com.ss.bottomnavigation.BottomNavigation
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorPrimary"
+                android:elevation="6dp"
+                app:mode="phone">
+
+                <com.ss.bottomnavigation.TabItem
+                    android:id="@+id/tab_favoritos"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:tab_icon="@drawable/ic_favorite_black_24dp"
+                    app:tab_text="Favoritos" />
+
+                <com.ss.bottomnavigation.TabItem
+                    android:id="@+id/tab_top_avaliados"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:tab_icon="@drawable/ic_star_black_24dp"
+                    app:tab_text="Top 100" />
+
+                <com.ss.bottomnavigation.TabItem
+                    android:id="@+id/tab_busca"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:tab_icon="@drawable/ic_search_black_24dp"
+                    app:tab_text="Busca" />
+
+                <com.ss.bottomnavigation.TabItem
+                    android:id="@+id/tab_perfil"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:tab_icon="@drawable/ic_person_black_24dp"
+                    app:tab_text="Perfil" />
+
+            </com.ss.bottomnavigation.BottomNavigation>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="56dp"
+        android:gravity="bottom|right">
+
+        <FrameLayout
+            android:id="@+id/frame_fragment_containers"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <!--<include layout="@layout/content_home" />-->
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="56dp"
+        android:gravity="bottom|right">
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_add_black_24dp"
+            android:visibility="visible"
+            app:backgroundTint="@color/colorAccent"
+            app:fabSize="mini" />
+
+
+    </RelativeLayout>
+
+
 
 </android.support.design.widget.CoordinatorLayout>

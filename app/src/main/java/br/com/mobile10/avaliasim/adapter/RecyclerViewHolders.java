@@ -12,7 +12,7 @@ import br.com.mobile10.avaliasim.R;
  * Created by denilsonmonteiro on 03/10/16.
  */
 
-public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public TextView txtTitle;
     public TextView txtType;

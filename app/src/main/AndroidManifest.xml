@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.HomeActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -24,9 +24,8 @@
         <activity android:name=".auth.ResetActivity" />
         <activity android:name=".auth.EmailPasswordActivity" />
         <activity android:name=".activity.NewAvaliacao" />
-        <activity android:name=".activity.AvaliacaActivity"/>
-        <activity android:name=".activity.Feature1Activity"/>
-        <activity android:name=".activity.DetelhesAvaliacao"/>
+        <activity android:name=".activity.AvaliacaActivity" />
+        <activity android:name=".activity.Feature1Activity" />
 
         <!-- Coletar dados analitcs -->
         <meta-data
@@ -36,6 +35,13 @@
             android:name="firebase_crash_collection_enabled"
             android:value="false" />
 
+        <!-- <activity -->
+        <!-- android:name=".activity.MainActivity" -->
+        <!-- android:label="@string/title_activity_main2"></activity> -->
+        <activity
+            android:name=".activity.DetalhesAvaliacao"
+            android:label="@string/title_activity_detalhes_avaliacao2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

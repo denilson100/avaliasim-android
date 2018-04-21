@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_top"
+        android:icon="@drawable/ic_star_black_24dp"
+        android:title="Top 100" />
+
+    <item
+        android:id="@+id/navigation_favoritos"
+        android:icon="@drawable/ic_favorite_black_24dp"
+        android:title="Favorito" />
+
+    <item
+        android:id="@+id/navigation_perfil"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="Perfil" />
+
+    <item
+        android:id="@+id/navigation_busca"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="Busca" />
+
+    <item
+        android:id="@+id/navigation_add"
+        android:icon="@drawable/ic_add_black_24dp"
+        android:title="Adicionar" />
+
+</menu>

@@ -11,7 +11,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.mobile10.avaliasim.activity.HomeActivity;
+import br.com.mobile10.avaliasim.activity.HomeActivity2;
+import br.com.mobile10.avaliasim.fragments.FragmentHome;
 import br.com.mobile10.avaliasim.util.Constantes;
 
 
@@ -22,13 +23,18 @@ import br.com.mobile10.avaliasim.util.Constantes;
 
 public class LoadingDataAtual extends AsyncTask<Void, Void, Long> {
 
-    private HomeActivity activity;
+//    private HomeActivity2 activity;
+    private FragmentHome activity;
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constantes.DB_ROOT).child("dataAtual");
     Long timeStamp;
 
-    public LoadingDataAtual(HomeActivity activity) {
-        this.activity = activity;
+//    public LoadingDataAtual(HomeActivity2 activity) {
+//        this.activity = activity;
+//
+//    }
 
+    public LoadingDataAtual(FragmentHome fragmentHome) {
+        this.activity = fragmentHome;
     }
 
     @Override

@@ -8,14 +8,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import br.com.mobile10.avaliasim.activity.DetelhesAvaliacao;
-import br.com.mobile10.avaliasim.activity.HomeActivity;
-import br.com.mobile10.avaliasim.modelo.Avaliacao;
+import br.com.mobile10.avaliasim.activity.DetalhesAvaliacao;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
-import br.com.mobile10.avaliasim.modelo.Feature;
 import br.com.mobile10.avaliasim.util.Constantes;
 
 
@@ -26,14 +20,14 @@ import br.com.mobile10.avaliasim.util.Constantes;
 
 public class LoadingAvaliacoesGetTotal extends AsyncTask<Void, Void, String> {
 
-    private DetelhesAvaliacao activity;
+    private DetalhesAvaliacao activity;
     private Avaliacao2 avaliacao;
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constantes.DB_ROOT).child("avaliacoes");
 //    private Feature feature = new Feature();
     private String total;
     private int result;
 
-    public LoadingAvaliacoesGetTotal(DetelhesAvaliacao activity, Avaliacao2 avaliacao) {
+    public LoadingAvaliacoesGetTotal(DetalhesAvaliacao activity, Avaliacao2 avaliacao) {
         this.activity = activity;
         this.avaliacao = avaliacao;
 

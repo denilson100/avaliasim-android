@@ -13,8 +13,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import br.com.mobile10.avaliasim.R;
-import br.com.mobile10.avaliasim.activity.HomeActivity;
-import br.com.mobile10.avaliasim.activity.NewAvaliacao;
 
 public class BaseActivity extends AppCompatActivity {
 

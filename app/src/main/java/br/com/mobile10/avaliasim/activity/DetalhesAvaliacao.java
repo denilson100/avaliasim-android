@@ -1,23 +1,27 @@
 package br.com.mobile10.avaliasim.activity;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.view.animation.TranslateAnimation;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.allen.comparsechart.CompareIndicator;
-import com.google.firebase.auth.EmailAuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.adapter.RecyclerViewAdapterDetAvaliacoes;
 import br.com.mobile10.avaliasim.asyncTask.LoadingAvaliacaoPorID;
@@ -25,18 +29,14 @@ import br.com.mobile10.avaliasim.asyncTask.LoadingAvaliacoesGetTotal;
 import br.com.mobile10.avaliasim.auth.EmailPasswordActivity;
 import br.com.mobile10.avaliasim.libBarGraph.HorizontalBar;
 import br.com.mobile10.avaliasim.libBarGraph.model.BarItem;
-import br.com.mobile10.avaliasim.modelo.Avaliacao;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 import br.com.mobile10.avaliasim.modelo.Feature;
 import br.com.mobile10.avaliasim.modelo.MyDate;
+import br.com.mobile10.avaliasim.util.AnimationsUtility;
 import br.com.mobile10.avaliasim.util.AvalicaoUtil;
 import br.com.mobile10.avaliasim.util.BaseActivity;
 
-/**
- * Created by denmont on 16/04/2018.
- */
-
-public class DetelhesAvaliacao extends BaseActivity implements RecyclerViewAdapterDetAvaliacoes.OnItemClicked {
+public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapterDetAvaliacoes.OnItemClicked {
 
     Avaliacao2 avaliacao;
     private List<Feature> featureList = new ArrayList<Feature>();
@@ -46,6 +46,9 @@ public class DetelhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
     TextView txtTitle, txtType;
     HorizontalBar horizontal;
     public static boolean keyBuscaPorId;
+    private RelativeLayout fundoDinamic;
+    ObjectAnimator objectanimator;
+    FloatingActionButton fab;
 
     private RecyclerView.LayoutManager lLayout;
     RecyclerViewAdapterDetAvaliacoes rcAdapter;
@@ -54,7 +57,7 @@ public class DetelhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalhes);
+        setContentView(R.layout.activity_detalhes_avaliacao2);
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -67,8 +70,11 @@ public class DetelhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
             finish();
         }
 
+        fundoDinamic = (RelativeLayout) findViewById(R.id.fundo);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(avaliacao.title);
+        setSupportActionBar(toolbar);
         updateUI(avaliacao);
-
 
 //        lLayout = new LinearLayoutManager(this);
 //        rView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -76,9 +82,40 @@ public class DetelhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
 //        rView.setLayoutManager(lLayout);
 //        atualizarLista(avaliacao.listaAvaliacoes);
 
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(users != null) {
+
+                    AnimationsUtility.showCircularAnimationAvaliar(DetalhesAvaliacao.this, fundoDinamic, R.id.conteudo);
+
+                    moverButtonParaDireita();
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(DetalhesAvaliacao.this, Feature1Activity.class);
+                            intent.putExtra("avaliacao", avaliacao);
+                            startActivity(intent);
+                        }
+                    }, 1000);
+
+                } else {
+                    Intent intent = new Intent(DetalhesAvaliacao.this, EmailPasswordActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
+
+//        objectanimator = ObjectAnimator.ofFloat(fab,"x",1200);
+
     }
 
-//    public void atualizarLista(List<Feature> itemList) {
+    //    public void atualizarLista(List<Feature> itemList) {
 //        try {
 //            rcAdapter = new RecyclerViewAdapterDetAvaliacoes(this, itemList);
 //            rView.setAdapter(rcAdapter);
@@ -90,8 +127,8 @@ public class DetelhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
 //    }
 
     public void updateUI(Avaliacao2 avaliacao) {
-        TextView txtTitle = (TextView) findViewById(R.id.title);
-        txtTitle.setText(avaliacao.title);
+//        TextView txtTitle = (TextView) findViewById(R.id.title);
+//        txtTitle.setText(avaliacao.title);
 
         TextView txtType = (TextView) findViewById(R.id.type);
         txtType.setText(avaliacao.type);
@@ -106,13 +143,18 @@ public class DetelhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
     @Override
     protected void onResume() {
         super.onResume();
-//        executeAsyncTaskGetTotal();
         if(keyBuscaPorId) {
             executeAsyncTaskGetAvaliacaoPorId();
-//            timer();
-//            showLoadingIndicator();
             keyBuscaPorId = false;
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        // Quando sair da tela, retorna animação ao normal
+        AnimationsUtility.showCircularAnimationAvaliar(this, fundoDinamic, R.id.conteudo);
     }
 
     private void executeAsyncTaskGetTotal() {
@@ -131,16 +173,23 @@ public class DetelhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
         }
     }
 
-    public void avaliar(View view) {
-        if(users != null) {
-            Intent intent = new Intent(this, Feature1Activity.class);
-            intent.putExtra("avaliacao", avaliacao);
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(this, EmailPasswordActivity.class);
-            startActivity(intent);
-            finish();
-        }
+//    public void avaliar(View view) {
+//        if(users != null) {
+//            Intent intent = new Intent(this, Feature1Activity.class);
+//            intent.putExtra("avaliacao", avaliacao);
+//            startActivity(intent);
+//        } else {
+//            Intent intent = new Intent(this, EmailPasswordActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
+//    }
+
+    public void moverButtonParaDireita() {
+        TranslateAnimation anim = new TranslateAnimation(0f, 600f, 0f, 0f);
+        anim.setDuration(1500);
+
+        fab.startAnimation(anim);
     }
 
     @Override

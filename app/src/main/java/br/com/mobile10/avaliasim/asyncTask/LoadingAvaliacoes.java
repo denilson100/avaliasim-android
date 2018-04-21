@@ -12,7 +12,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.mobile10.avaliasim.activity.HomeActivity;
+import br.com.mobile10.avaliasim.activity.HomeActivity2;
+import br.com.mobile10.avaliasim.fragments.FragmentHome;
 import br.com.mobile10.avaliasim.modelo.Avaliacao;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 import br.com.mobile10.avaliasim.modelo.Feature;
@@ -27,16 +28,24 @@ import br.com.mobile10.avaliasim.util.Constantes;
 
 public class LoadingAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>> {
 
-    private HomeActivity activity;
+    private HomeActivity2 activity2;
+    private FragmentHome activity;
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constantes.DB_ROOT).child("avaliacoes");
     private Avaliacao avaliacao = new Avaliacao();
     private List<Avaliacao2> avaliacao2ListFinal = new ArrayList<Avaliacao2>();
 //    private Feature feature = new Feature();
     private Avaliacao2 avaliacao2;
 
-    public LoadingAvaliacoes(HomeActivity activity) {
-        this.activity = activity;
+//    public LoadingAvaliacoes(HomeActivity2 activity) {
+//        this.activity = activity;
+//
+//    }
+public LoadingAvaliacoes(HomeActivity2 activity2) {
+    this.activity2 = activity2;
+}
 
+    public LoadingAvaliacoes(FragmentHome fragmentHome) {
+        this.activity = fragmentHome;
     }
 
     @Override

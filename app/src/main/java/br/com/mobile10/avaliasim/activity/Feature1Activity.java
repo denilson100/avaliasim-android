@@ -100,7 +100,7 @@ public class Feature1Activity extends BaseActivity implements FeatureDao {
     public void avaliarComoRuim(View view) {
         avaliarFeatures(avaliacao, users.getUid(), "negative", avaliacao.features.get(quantidadeDeFeatures));
         quantidadeDeFeatures++;
-        DetelhesAvaliacao.keyBuscaPorId = true; // certeza que avaliou
+        DetalhesAvaliacao.keyBuscaPorId = true; // certeza que avaliou
 
         imgFundoAnimation.setImageResource(R.drawable.ic_mood_bad_black_24dp);
         AnimationsUtility.showCircularAnimationRuim(this, fundoDinamic, R.id.conteudo);
@@ -118,7 +118,7 @@ public class Feature1Activity extends BaseActivity implements FeatureDao {
     public void avaliarComoBom(View view) {
         avaliarFeatures(avaliacao, users.getUid(), "positive", avaliacao.features.get(quantidadeDeFeatures));
         quantidadeDeFeatures++;
-        DetelhesAvaliacao.keyBuscaPorId = true; // certeza que avaliou
+        DetalhesAvaliacao.keyBuscaPorId = true; // certeza que avaliou
 
         imgFundoAnimation.setImageResource(R.drawable.ic_mood_black_24dp);
         AnimationsUtility.showCircularAnimationBom(this, fundoDinamic, R.id.conteudo);
