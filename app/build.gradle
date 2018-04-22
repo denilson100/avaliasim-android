@@ -6,8 +6,8 @@ android {
         applicationId "br.com.mobile10.avaliasim"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 7
-        versionName "0.5"
+        versionCode 8
+        versionName "0.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 //        multiDexEnabled true
@@ -52,5 +52,11 @@ dependencies {
 
     // Menu
     implementation 'com.ss.bottomnavigation:bottomnavigation:1.5.2'
+
+    // List
+    implementation 'com.balysv:material-ripple:1.0.2'
+
+    // Imageview
+    implementation 'com.mikhaellopez:circularimageview:3.0.2'
 }
 apply plugin: 'com.google.gms.google-services'

@@ -1,5 +1,8 @@
 package br.com.mobile10.avaliasim.modelo;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.ServerValue;
@@ -16,11 +19,10 @@ import java.util.Map;
  */
 
 @IgnoreExtraProperties
-public class Avaliacao2 implements Serializable {
+public class Avaliacao2 implements Serializable, Comparable<Avaliacao2> {
     public String author;
     public String cidade;
     public String estado;
-//    public String[] features;
     public List<String> features;
     public String idAvaliacao;
     public long timeStemp;
@@ -42,33 +44,9 @@ public class Avaliacao2 implements Serializable {
         this.type = type;
         this.visible = visible;
         this.listaAvaliacoes = listaAvaliacoes;
+
     }
 
-    /**
-     * Contrutor para enviar uma nova avaliação
-     * @param author
-     * @param cidade
-     * @param estado
-     * @param features
-     * @param idAvaliacao
-     * @param timeStemp
-     * @param title
-     * @param type
-     * @param visible
-     */
-//    public Avaliacao2(String author, String cidade, String estado, String[] features,
-//                      String idAvaliacao, long timeStemp, String title, String type,
-//                      boolean visible) {
-//        this.author = author;
-//        this.cidade = cidade;
-//        this.estado = estado;
-//        this.features = features;
-//        this.idAvaliacao = idAvaliacao;
-//        this.timeStemp = timeStemp;
-//        this.title = title;
-//        this.type = type;
-//        this.visible = visible;
-//    }
 
     public Avaliacao2(String author, String cidade, String estado, List<String> features,
                       String idAvaliacao, long timeStemp, String title, String type,
@@ -82,11 +60,24 @@ public class Avaliacao2 implements Serializable {
         this.title = title;
         this.type = type;
         this.visible = visible;
+
     }
 
     // Apenas para amndar como privado
     public Avaliacao2(String idAvalicao) {
         this.idAvaliacao = idAvalicao;
+    }
+
+    public int getTotal(Avaliacao2 avaliacao) {
+        int positive = 0;
+        int negative = 0;
+        for (Feature feature : avaliacao.listaAvaliacoes) {
+            for (MyDate date : feature.date) {
+                positive += date.positive;
+                negative += date.negative;
+            }
+        }
+        return (positive + negative);
     }
 
     @Exclude
@@ -100,9 +91,6 @@ public class Avaliacao2 implements Serializable {
         result.put("cidade", cidade);
         result.put("estado", estado);
         result.put("timeStamp", ServerValue.TIMESTAMP);
-//        result.put("feature1", feature1);
-//        result.put("feature2", feature2);
-//        result.put("feature3", feature3);
 
         return result;
     }
@@ -113,5 +101,16 @@ public class Avaliacao2 implements Serializable {
         result.put("idAvaliacao", idAvaliacao);
 
         return result;
+    }
+
+    @Override
+    public int compareTo(@NonNull Avaliacao2 outraAvaliacao) {
+        if (getTotal(this) > getTotal(outraAvaliacao)) {
+            return -1;
+        }
+        if (getTotal(this) > getTotal(outraAvaliacao)) {
+            return 1;
+        }
+        return 0;
     }
 }

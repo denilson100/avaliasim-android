@@ -10,6 +10,7 @@ import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import br.com.mobile10.avaliasim.activity.HomeActivity2;
@@ -130,6 +131,7 @@ public LoadingAvaliacoes(HomeActivity2 activity2) {
     @Override
     protected void onPostExecute(List<Avaliacao2> itemList) {
         super.onPostExecute(itemList);
+        Collections.sort(itemList);
         activity.setListAvaliacoes(itemList);
     }
 }

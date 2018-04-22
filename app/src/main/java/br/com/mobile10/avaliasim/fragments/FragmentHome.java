@@ -100,18 +100,10 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
         executeAsyncTaskGetAvaliacoes();
         addDataAtualNoServidor();
 
-//        loadingIndicator = (View) getActivity().findViewById(R.id.loading_indicator);
-
         rView = (RecyclerView) getActivity().findViewById(R.id.recycler_view);
-
-        // 2. set layoutManger
         rView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-//        lLayout = new LinearLayoutManager(getActivity());
-//        rView = (RecyclerView) getActivity().findViewById(R.id.recycler_view);
         rView.setHasFixedSize(true);
 //        rView.setLayoutManager(lLayout);
-//        atualizarLista(avaliacoesList);
 
 
     }

@@ -2,8 +2,11 @@ package br.com.mobile10.avaliasim.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import br.com.mobile10.avaliasim.R;
 
@@ -15,15 +18,15 @@ import br.com.mobile10.avaliasim.R;
 public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public TextView txtTitle;
-    public TextView txtType;
     public TextView txtFeatures;
+    public ImageView imageType;
 
     public RecyclerViewHolders(View itemView) {
         super(itemView);
         itemView.setOnClickListener(this);
         txtTitle = (TextView)itemView.findViewById(R.id.title);
-        txtType = (TextView)itemView.findViewById(R.id.type);
         txtFeatures = (TextView)itemView.findViewById(R.id.features);
+        imageType = (ImageView) itemView.findViewById(R.id.imageType);
 
     }
 
