@@ -5,8 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +24,8 @@ import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.activity.DetalhesAvaliacao;
+import br.com.mobile10.avaliasim.activity.MainActivity;
+import br.com.mobile10.avaliasim.activity.MainActivity2;
 import br.com.mobile10.avaliasim.adapter.RecyclerViewAdapter;
 import br.com.mobile10.avaliasim.asyncTask.LoadingAvaliacoes;
 import br.com.mobile10.avaliasim.asyncTask.LoadingDataAtual;
@@ -41,43 +47,27 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
     public FloatingActionButton fab;
     View loadingIndicator;
 
+    Toolbar toolbar;
     private FirebaseAuth mAuth;
     FirebaseUser users;
 
+    private static final String ARG_SECTION_NUMBER = "section_number";
 
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        mAuth = FirebaseAuth.getInstance();
-//        FirebaseUser user = mAuth.getCurrentUser();
-//        users = user;
-//
-//        executeAsyncTaskGetDataAtual();
-//        executeAsyncTaskGetAvaliacoes();
-//        addDataAtualNoServidor();
-//
-////        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
-////        fab.setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View view) {
-////
-////                if(users != null) {
-////                    Intent intent = new Intent(getActivity(), NewAvaliacao.class);
-////                    startActivity(intent);
-////                } else {
-////                    Intent intent1 = new Intent(getActivity(), EmailPasswordActivity.class);
-////                    startActivity(intent1);
-////                    getActivity().finish();
-////                }
-////            }
-////        });
-//    }
+    public static FragmentHome newInstance(int sectionNumber) {
+        FragmentHome fragment = new FragmentHome();
+        Bundle args = new Bundle();
+        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onResume() {
         super.onResume();
         executeAsyncTaskGetAvaliacoes();
+
+        Log.d("TAG", "OnResume Home");
+
     }
 
     @Nullable
@@ -85,6 +75,7 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         loadingIndicator = (View) rootView.findViewById(R.id.loading_indicator);
+
         return rootView;
     }
 

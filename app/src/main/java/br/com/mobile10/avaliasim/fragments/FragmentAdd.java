@@ -52,13 +52,22 @@ public class FragmentAdd extends Fragment implements AvaliacaoDao, View.OnClickL
 
     View rootView;
 
+    private static final String ARG_SECTION_NUMBER = "section_number";
+
+    public static FragmentAdd newInstance(int sectionNumber) {
+        FragmentAdd fragment = new FragmentAdd();
+        Bundle args = new Bundle();
+        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_add, container, false);
-
-//        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
 
         return rootView;
     }

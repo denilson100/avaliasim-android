@@ -19,8 +19,6 @@ import android.widget.LinearLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.ss.bottomnavigation.BottomNavigation;
-import com.ss.bottomnavigation.events.OnSelectedItemChangeListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,22 +89,22 @@ public class HomeActivity2 extends BaseActivity  {
 //            }
 //        });
 
-        BottomNavigation bottomNavigation=(BottomNavigation)findViewById(R.id.bottom_navigation);
-        bottomNavigation.setOnSelectedItemChangeListener(new OnSelectedItemChangeListener() {
-            @Override
-            public void onSelectedItemChanged(int itemId) {
-                switch (itemId){
-                    case R.id.tab_favoritos:
-                        break;
-                    case R.id.tab_perfil:
-                        break;
-                    case R.id.tab_busca:
-                        break;
-                    case R.id.tab_top_avaliados:
-                        break;
-                }
-            }
-        });
+//        BottomNavigation bottomNavigation=(BottomNavigation)findViewById(R.id.bottom_navigation);
+//        bottomNavigation.setOnSelectedItemChangeListener(new OnSelectedItemChangeListener() {
+//            @Override
+//            public void onSelectedItemChanged(int itemId) {
+//                switch (itemId){
+//                    case R.id.tab_favoritos:
+//                        break;
+//                    case R.id.tab_perfil:
+//                        break;
+//                    case R.id.tab_busca:
+//                        break;
+//                    case R.id.tab_top_avaliados:
+//                        break;
+//                }
+//            }
+//        });
 
     }
 

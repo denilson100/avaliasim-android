@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 import br.com.mobile10.avaliasim.activity.HomeActivity2;
+import br.com.mobile10.avaliasim.activity.Main4Activity;
 import br.com.mobile10.avaliasim.fragments.FragmentHome;
 import br.com.mobile10.avaliasim.modelo.Avaliacao;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
@@ -29,7 +30,7 @@ import br.com.mobile10.avaliasim.util.Constantes;
 
 public class LoadingAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>> {
 
-    private HomeActivity2 activity2;
+    private Main4Activity activity2;
     private FragmentHome activity;
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constantes.DB_ROOT).child("avaliacoes");
     private Avaliacao avaliacao = new Avaliacao();
@@ -41,7 +42,7 @@ public class LoadingAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>> {
 //        this.activity = activity;
 //
 //    }
-public LoadingAvaliacoes(HomeActivity2 activity2) {
+public LoadingAvaliacoes(Main4Activity activity2) {
     this.activity2 = activity2;
 }
 
