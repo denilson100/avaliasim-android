@@ -3,6 +3,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#fff">
 
     <LinearLayout
@@ -45,6 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="72dp"
+                android:layout_marginRight="8dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -54,6 +56,7 @@
                     android:layout_marginBottom="8dp"
                     android:gravity="left"
                     android:text="Title"
+                    android:textStyle="bold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/primary_text_light" />
 
@@ -74,7 +77,7 @@
                 android:gravity="bottom">
 
                 <View
-                    android:background="#ccc"
+                    android:background="#eee"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="72dp">

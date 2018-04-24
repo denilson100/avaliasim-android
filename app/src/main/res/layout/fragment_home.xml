@@ -14,57 +14,17 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical" />
-
-        <LinearLayout
-            android:id="@+id/vazio"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <android.support.v4.widget.ContentLoadingProgressBar
-                        style="?android:attr/progressBarStyleLarge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Nenhum evento" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
+            android:scrollbars="horizontal" />
 
         <RelativeLayout
-            android:id="@+id/loading_indicator"
+            android:id="@+id/vazio"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/branco"
             android:gravity="center"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <android.support.v4.widget.ContentLoadingProgressBar
-                android:id="@+id/progress_bar"
                 style="?android:attr/progressBarStyleLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

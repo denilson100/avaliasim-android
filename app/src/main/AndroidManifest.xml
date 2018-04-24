@@ -3,6 +3,7 @@
     package="br.com.mobile10.avaliasim">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -25,7 +26,12 @@
         <activity android:name=".auth.EmailPasswordActivity" />
         <activity android:name=".activity.NewAvaliacao" />
         <activity android:name=".activity.AvaliacaActivity" />
-        <activity android:name=".activity.Feature1Activity" />
+
+        <activity android:name=".activity.Feature1Activity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".activity.MainIntroPermission"
+            android:theme="@style/Theme.Intro"/>
 
         <!-- Coletar dados analitcs -->
         <meta-data

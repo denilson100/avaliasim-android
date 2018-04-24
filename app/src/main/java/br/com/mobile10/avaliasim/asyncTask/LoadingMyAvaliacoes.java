@@ -6,14 +6,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import br.com.mobile10.avaliasim.activity.HomeActivity2;
 import br.com.mobile10.avaliasim.activity.Main4Activity;
 import br.com.mobile10.avaliasim.fragments.FragmentHome;
 import br.com.mobile10.avaliasim.fragments.FragmentPerfil;
@@ -29,20 +27,19 @@ import br.com.mobile10.avaliasim.util.Constantes;
  * Pega os dados do evento geral
  */
 
-public class LoadingAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>> {
+public class LoadingMyAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>> {
 
-    private Main4Activity activity2;
-    private FragmentHome activity;
+    private FragmentPerfil fragmentPerfil;
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constantes.DB_ROOT).child("avaliacoes");
     private Avaliacao avaliacao = new Avaliacao();
     private List<Avaliacao2> avaliacao2ListFinal = new ArrayList<Avaliacao2>();
     private Avaliacao2 avaliacao2;
+    private List<String> idsList;
 
-
-    public LoadingAvaliacoes(FragmentHome fragmentHome) {
-        this.activity = fragmentHome;
+    public LoadingMyAvaliacoes(FragmentPerfil fragmentPerfil, List<String> idsList) {
+        this.fragmentPerfil = fragmentPerfil;
+        this.idsList = idsList;
     }
-
 
     @Override
     protected List<Avaliacao2> doInBackground(Void... voids) {
@@ -99,13 +96,12 @@ public class LoadingAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>> {
 
                     }
 
-//                    String[] stringArray = listNamesFeatures.toArray(new String[0]);
                     Avaliacao2 av2 = new Avaliacao2(author, cidade, estado, listNamesFeatures, idAvaliacao, timeStamp, title, type, visible, featureList);
                     avaliacao2ListFinal.add(av2);
                 }
 
                 onPostExecute(avaliacao2ListFinal);
-//                activity.hideLoadingIndictor();
+//                fragmentPerfil.hideLoadingIndictor();
             }
 
             @Override
@@ -120,13 +116,12 @@ public class LoadingAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-//        activity.showLoadingIndicator();
     }
 
     @Override
     protected void onPostExecute(List<Avaliacao2> itemList) {
         super.onPostExecute(itemList);
-        Collections.sort(itemList);
-        activity.setListAvaliacoes(itemList);
+//        Collections.sort(itemList);
+        fragmentPerfil.setListMyAvaliacoes(itemList);
     }
 }

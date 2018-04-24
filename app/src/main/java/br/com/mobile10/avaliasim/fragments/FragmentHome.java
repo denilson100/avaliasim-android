@@ -46,6 +46,7 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
     RecyclerView rView;
     public FloatingActionButton fab;
     View loadingIndicator;
+    View imgVazio;
 
     Toolbar toolbar;
     private FirebaseAuth mAuth;
@@ -74,7 +75,17 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        loadingIndicator = (View) rootView.findViewById(R.id.loading_indicator);
+//        loadingIndicator = (View) rootView.findViewById(R.id.loading_indicator);
+        imgVazio = (View) rootView.findViewById(R.id.vazio);
+
+        rView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        rView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rView.setHasFixedSize(true);
+//        rView.setLayoutManager(lLayout);
+
+        executeAsyncTaskGetDataAtual();
+        executeAsyncTaskGetAvaliacoes();
+        addDataAtualNoServidor();
 
         return rootView;
     }
@@ -86,15 +97,6 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         users = user;
-
-        executeAsyncTaskGetDataAtual();
-        executeAsyncTaskGetAvaliacoes();
-        addDataAtualNoServidor();
-
-        rView = (RecyclerView) getActivity().findViewById(R.id.recycler_view);
-        rView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rView.setHasFixedSize(true);
-//        rView.setLayoutManager(lLayout);
 
 
     }
@@ -109,11 +111,11 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
 
     public void setListAvaliacoes(List<Avaliacao2> listAvaliacoes) {
         this.avaliacoesList = listAvaliacoes;
-        atualizarLista(listAvaliacoes);
+        if (listAvaliacoes.size() != 0)
+            atualizarLista(listAvaliacoes);
     }
 
     public void atualizarLista(List<Avaliacao2> listAvaliacoes) {
-        LinearLayout imgVazio = (LinearLayout) getActivity().findViewById(R.id.vazio);
         try {
             rcAdapter = new RecyclerViewAdapter(getActivity(), listAvaliacoes);
             if (listAvaliacoes.size() != 0) {
@@ -156,12 +158,12 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
         dao.addDataAtualNoServidor();
     }
 
-    public void showLoadingIndicator() {
-        loadingIndicator.setVisibility(View.VISIBLE);
-    }
-
-    public void hideLoadingIndictor() {
-        loadingIndicator.setVisibility(View.GONE);
-    }
+//    public void showLoadingIndicator() {
+//        loadingIndicator.setVisibility(View.VISIBLE);
+//    }
+//
+//    public void hideLoadingIndictor() {
+//        loadingIndicator.setVisibility(View.GONE);
+//    }
 
 }

@@ -17,11 +17,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.fragments.FragmentAdd;
@@ -66,7 +68,7 @@ public class Main4Activity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_star_black_24dp));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_favorite_black_24dp));
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_favorite_black_24dp));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_person_black_24dp));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_search_black_24dp));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_add_black_24dp));
@@ -101,17 +103,33 @@ public class Main4Activity extends AppCompatActivity {
 
     }
 
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_user, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.action_sair:
+//                Toast.makeText(this, "This is teh option help", Toast.LENGTH_LONG).show();
+//                break;
+//            default:
+//                break;
+//        }
+//        return true;
+//    }
+
     public String getMyTitle(int position) {
         switch (position) {
             case 0:
                 return "Top 100";
             case 1:
-                return "Meus Favoritos";
-            case 2:
                 return "Perfil";
-            case 3:
+            case 2:
                 return "Buscar";
-            case 4:
+            case 3:
                 return "Criar Avaliação";
             default:
                 return "";
@@ -170,13 +188,12 @@ public class Main4Activity extends AppCompatActivity {
                 case 0:
                     return FragmentHome.newInstance(position + 1);
                 case 1:
-                    return FragmentFavoritos.newInstance(position + 1);
-                case 2:
                     return FragmentPerfil.newInstance(position + 1);
-                case 3:
+                case 2:
                     return FragmentBusca.newInstance(position + 1);
-                case 4:
+                case 3:
                     return FragmentAdd.newInstance(position + 1);
+
             }
             return null;
         }
@@ -184,7 +201,7 @@ public class Main4Activity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 5;
+            return 4;
         }
 
     }

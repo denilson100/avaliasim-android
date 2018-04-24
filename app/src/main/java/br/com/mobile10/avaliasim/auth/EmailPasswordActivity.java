@@ -49,6 +49,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.activity.HomeActivity2;
+import br.com.mobile10.avaliasim.activity.Main4Activity;
 import br.com.mobile10.avaliasim.interfaces.TaskInformer;
 import br.com.mobile10.avaliasim.util.BaseActivity;
 
@@ -310,7 +311,7 @@ public class EmailPasswordActivity extends BaseActivity implements
             mDetailTextView.setText(getString(R.string.ola, user.getEmail()));
             String userEmail = user.getEmail();
 
-            Intent intent = new Intent( this, HomeActivity2.class );
+            Intent intent = new Intent( this, Main4Activity.class );
             startActivity(intent);
             finish();
 

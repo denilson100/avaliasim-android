@@ -52,7 +52,7 @@ public class LoadingDataAtual extends AsyncTask<Void, Void, Long> {
                     e.printStackTrace();
                 }
 
-                activity.hideLoadingIndictor();
+//                activity.hideLoadingIndictor();
                 Constantes.DATA_ATUAL = timeStamp;
             }
 
@@ -68,7 +68,7 @@ public class LoadingDataAtual extends AsyncTask<Void, Void, Long> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        activity.showLoadingIndicator();
+//        activity.showLoadingIndicator();
     }
 
     @Override

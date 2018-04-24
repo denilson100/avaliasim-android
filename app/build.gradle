@@ -6,8 +6,8 @@ android {
         applicationId "br.com.mobile10.avaliasim"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 8
-        versionName "0.6"
+        versionCode 9
+        versionName "0.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 //        multiDexEnabled true
@@ -18,10 +18,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/urlimageviewhelper-1.0.4.jar')
     implementation 'com.android.support:appcompat-v7:27.0.2'
     implementation 'com.android.support:design:27.0.2'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -35,6 +39,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:12.0.1'
     implementation 'com.google.firebase:firebase-auth:12.0.1'
     implementation 'com.google.firebase:firebase-database:12.0.1'
+    implementation 'com.google.firebase:firebase-storage:12.0.1'
     implementation 'com.google.firebase:firebase-crash:12.0.1'
     implementation 'com.google.android.gms:play-services-auth:12.0.1'
     implementation 'com.android.support:design:27.0.2'
@@ -58,6 +63,11 @@ dependencies {
 
     // Imageview
     implementation 'com.mikhaellopez:circularimageview:3.0.2'
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
+
+
+    //Intro
+    implementation 'com.heinrichreimersoftware:material-intro:1.6.2'
 
     // tabs
     implementation 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'

@@ -58,7 +58,7 @@ public class AvaliacaoDaoImplementacao implements AvaliacaoDao {
 
     private void writeNewPost(Avaliacao2 avaliacao, String userId) {
 
-        String key1 = mDatabase.push().getKey();
+//        String key1 = mDatabase.push().getKey();
 
         String key = mDatabase.child(Constantes.DB_ROOT)
                 .child("avaliacoes")
@@ -70,7 +70,7 @@ public class AvaliacaoDaoImplementacao implements AvaliacaoDao {
         for (int i=0; i < avaliacao.features.size(); i++) {
             list.add(avaliacao.features.get(i));
         }
-        Avaliacao2 av = new Avaliacao2(userId, avaliacao.cidade, avaliacao.estado, list, key1, timeStamp, avaliacao.title, avaliacao.type, true);
+        Avaliacao2 av = new Avaliacao2(userId, avaliacao.cidade, avaliacao.estado, list, key, timeStamp, avaliacao.title, avaliacao.type, true);
 
         Map<String, Object> postValues = av.toMap();
 
@@ -79,13 +79,13 @@ public class AvaliacaoDaoImplementacao implements AvaliacaoDao {
 
 
         mDatabase.child(Constantes.DB_ROOT)
-                .child("avaliacoes").child(key1).setValue(av);
+                .child("avaliacoes").child(key).setValue(av);
 
         mDatabase.child(Constantes.DB_ROOT)
-                .child("avaliacoes").child(key1).child("timeStamp").setValue(ServerValue.TIMESTAMP);
+                .child("avaliacoes").child(key).child("timeStamp").setValue(ServerValue.TIMESTAMP);
 
         mDatabase.child(Constantes.DB_ROOT)
                 .child("users")
-                .child(userId).child("myAvaliacoes").child(key1).setValue(postValuesPrivate);
+                .child(userId).child("myAvaliacoes").child(key).setValue(postValuesPrivate);
     }
 }
