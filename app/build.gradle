@@ -6,8 +6,8 @@ android {
         applicationId "br.com.mobile10.avaliasim"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 9
-        versionName "0.7"
+        versionCode 10
+        versionName "0.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 //        multiDexEnabled true
@@ -73,6 +73,17 @@ dependencies {
     implementation 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
     implementation 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
 //    implementation 'com.ogaclejapan.smarttablayout:utils-v13:1.6.1@aar'
+
+    // Fab
+//    implementation 'com.hlab.fabrevealmenu:fab-reveal-menu:1.0.3'
+//    implementation 'com.github.clans:fab:1.6.4'
+
+    // Transition
+    implementation 'com.github.coyarzun89:fabtransitionactivity:0.2.0'
+
+    // utilidade
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
 }
 apply plugin: 'com.google.gms.google-services'

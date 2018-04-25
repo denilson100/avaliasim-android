@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Type"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
                 android:id="@+id/total"
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Nenhuma avaliação"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <br.com.mobile10.avaliasim.libBarGraph.HorizontalBar
                 android:id="@+id/horizontal"
@@ -56,7 +56,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:background="#ccc">
+                android:layout_marginTop="16dp"
+                android:background="#eee">
+
+                <TextView
+                    android:text="Gráfico"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
 
@@ -64,7 +71,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginTop="8dp"
-                android:background="#ccc">
+                android:background="#eee">
+
+                <TextView
+                    android:text="Gráfico"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
 

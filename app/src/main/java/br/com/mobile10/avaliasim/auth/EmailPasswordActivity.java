@@ -311,8 +311,8 @@ public class EmailPasswordActivity extends BaseActivity implements
             mDetailTextView.setText(getString(R.string.ola, user.getEmail()));
             String userEmail = user.getEmail();
 
-            Intent intent = new Intent( this, Main4Activity.class );
-            startActivity(intent);
+//            Intent intent = new Intent( this, Main4Activity.class );
+//            startActivity(intent);
             finish();
 
             findViewById(R.id.content_form).setVisibility(View.GONE);

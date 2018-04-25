@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatButton;
@@ -81,6 +82,7 @@ public class FragmentPerfil extends Fragment implements RecyclerViewAdapterMyAva
     private TextView txtNome, txtEmail;
     private AppCompatButton btIrParaLogin;
     private View viewNaoLogado;
+    private FloatingActionButton fabEdit, fabExit;
 
     private String userName;
 
@@ -118,6 +120,26 @@ public class FragmentPerfil extends Fragment implements RecyclerViewAdapterMyAva
                 Intent intent2 = new Intent(getActivity(), EmailPasswordActivity.class);
                 startActivity(intent2);
                 getActivity().finish();
+            }
+        });
+
+        fabEdit = (FloatingActionButton) rootView.findViewById(R.id.fab_edit);
+        fabEdit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                alertEditInfo();
+            }
+        });
+
+        fabExit = (FloatingActionButton) rootView.findViewById(R.id.fab_exit);
+        fabExit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                alertSair();
             }
         });
 
@@ -176,13 +198,7 @@ public class FragmentPerfil extends Fragment implements RecyclerViewAdapterMyAva
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_sair :
-                try {
-                    mAuth.signOut();
-                } catch (Exception e) {
-                }
-                Intent intent2 = new Intent(getActivity(), EmailPasswordActivity.class);
-                startActivity(intent2);
-                getActivity().finish();
+                alertSair();
                 break;
             case R.id.action_edit:
                 alertEditInfo();
@@ -330,6 +346,43 @@ public class FragmentPerfil extends Fragment implements RecyclerViewAdapterMyAva
                                         executeAsyncTaskGetUserInfo();
                                     }
                                 }, 1000);
+
+                            }
+                        })
+                .setNegativeButton("Descartar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                            }
+                        });
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        // show it
+        alertDialog.getWindow().getAttributes().windowAnimations = R.style.dialog_animation;
+        alertDialog.show();
+    }
+
+    public void alertSair() {
+
+        LayoutInflater li = LayoutInflater.from(getActivity());
+        View promptsView = li.inflate(R.layout.alert_sair, null);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        alertDialogBuilder.setView(promptsView);
+
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("Sair",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                try {
+                                    mAuth.signOut();
+                                } catch (Exception e) {
+                                }
+                                Intent intent2 = new Intent(getActivity(), EmailPasswordActivity.class);
+                                startActivity(intent2);
+                                getActivity().finish();
 
                             }
                         })

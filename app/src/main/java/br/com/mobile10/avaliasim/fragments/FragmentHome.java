@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.github.fabtransitionactivity.SheetLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -26,12 +28,17 @@ import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.activity.DetalhesAvaliacao;
 import br.com.mobile10.avaliasim.activity.MainActivity;
 import br.com.mobile10.avaliasim.activity.MainActivity2;
+import br.com.mobile10.avaliasim.activity.NewAvaliacao;
 import br.com.mobile10.avaliasim.adapter.RecyclerViewAdapter;
 import br.com.mobile10.avaliasim.asyncTask.LoadingAvaliacoes;
 import br.com.mobile10.avaliasim.asyncTask.LoadingDataAtual;
+import br.com.mobile10.avaliasim.auth.EmailPasswordActivity;
 import br.com.mobile10.avaliasim.dao.DataAtualDaoImplementacao;
 import br.com.mobile10.avaliasim.interfaces.DataAtualDao;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 /**
@@ -47,12 +54,15 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
     public FloatingActionButton fab;
     View loadingIndicator;
     View imgVazio;
+    FloatingActionButton btNovaAvaliacao;
+//    SheetLayout mSheetLayout;
 
     Toolbar toolbar;
     private FirebaseAuth mAuth;
     FirebaseUser users;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
+    private static final int REQUEST_CODE = 1;
 
     public static FragmentHome newInstance(int sectionNumber) {
         FragmentHome fragment = new FragmentHome();
@@ -77,6 +87,26 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 //        loadingIndicator = (View) rootView.findViewById(R.id.loading_indicator);
         imgVazio = (View) rootView.findViewById(R.id.vazio);
+//        mSheetLayout = (SheetLayout) rootView.findViewById(R.id.bottom_sheet);
+
+        btNovaAvaliacao = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        btNovaAvaliacao.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                if (users != null) {
+                    Intent intent2 = new Intent(getActivity(), NewAvaliacao.class);
+                    startActivity(intent2);
+//                    mSheetLayout.expandFab();
+
+                } else {
+                    Intent intent2 = new Intent(getActivity(), EmailPasswordActivity.class);
+                    startActivity(intent2);
+                }
+            }
+        });
+
 
         rView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         rView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -89,6 +119,7 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
 
         return rootView;
     }
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

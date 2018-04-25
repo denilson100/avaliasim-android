@@ -56,9 +56,9 @@ public class Main4Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle("Top 100");
+//        toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        toolbar.setTitle("Top 100");
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -67,11 +67,10 @@ public class Main4Activity extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_star_black_24dp));
-//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_favorite_black_24dp));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_person_black_24dp));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_search_black_24dp));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_add_black_24dp));
+        tabLayout.addTab(tabLayout.newTab().setText("Top 100").setIcon(R.drawable.ic_star_black_24dp));
+        tabLayout.addTab(tabLayout.newTab().setText("Buscas").setIcon(R.drawable.ic_search_black_24dp));
+        tabLayout.addTab(tabLayout.newTab().setText("Perfil").setIcon(R.drawable.ic_person_black_24dp));
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_add_black_24dp));
 
         tabLayout.getTabAt(0).getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 //        tabLayout.getTabAt(1).getIcon().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
@@ -84,7 +83,7 @@ public class Main4Activity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 Log.d("TAG", "" + tab.getPosition());
-                toolbar.setTitle(getMyTitle(tab.getPosition()));
+//                toolbar.setTitle(getMyTitle(tab.getPosition()));
                 tab.getIcon().setColorFilter(Color.WHITE,PorterDuff.Mode.SRC_IN);
 
             }
@@ -126,11 +125,11 @@ public class Main4Activity extends AppCompatActivity {
             case 0:
                 return "Top 100";
             case 1:
-                return "Perfil";
-            case 2:
                 return "Buscar";
-            case 3:
-                return "Criar Avaliação";
+            case 2:
+                return "Perfil";
+//            case 3:
+//                return "Criar Avaliação";
             default:
                 return "";
 
@@ -188,11 +187,11 @@ public class Main4Activity extends AppCompatActivity {
                 case 0:
                     return FragmentHome.newInstance(position + 1);
                 case 1:
-                    return FragmentPerfil.newInstance(position + 1);
-                case 2:
                     return FragmentBusca.newInstance(position + 1);
-                case 3:
-                    return FragmentAdd.newInstance(position + 1);
+                case 2:
+                    return FragmentPerfil.newInstance(position + 1);
+//                case 3:
+//                    return FragmentAdd.newInstance(position + 1);
 
             }
             return null;
@@ -201,8 +200,7 @@ public class Main4Activity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 4;
+            return 3;
         }
-
     }
 }

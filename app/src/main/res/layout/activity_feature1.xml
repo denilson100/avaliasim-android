@@ -8,36 +8,45 @@
     android:gravity="center"
     tools:context="br.com.mobile10.avaliasim.activity.Feature1Activity">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/conteudo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/title"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Type"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
-        <TextView
-            android:id="@+id/feature"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Type"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Type"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/feature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Type"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
+
+        </LinearLayout>
 
 
         <LinearLayout
@@ -55,9 +64,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/vermelho"
-                    android:textColor="@color/branco"
                     android:onClick="avaliarComoRuim"
-                    android:text="ruim" />
+                    android:text="ruim"
+                    android:textColor="@color/branco" />
 
             </LinearLayout>
 
@@ -70,15 +79,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/verde"
-                    android:textColor="@color/branco"
                     android:onClick="avaliarComoBom"
-                    android:text="bom" />
+                    android:text="bom"
+                    android:textColor="@color/branco" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/fundo"
