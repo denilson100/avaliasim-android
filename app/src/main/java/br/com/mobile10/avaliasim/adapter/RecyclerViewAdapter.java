@@ -83,7 +83,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClick.onItemClick(position);
+                try {
+                    onClick.onItemClick(position);
+                }
+                catch (IndexOutOfBoundsException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

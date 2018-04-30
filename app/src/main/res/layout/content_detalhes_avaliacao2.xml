@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:scatter="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.DetalhesAvaliacao"
+    android:background="#eee"
     tools:showIn="@layout/activity_detalhes_avaliacao2">
 
     <RelativeLayout
@@ -24,6 +26,7 @@
                 android:id="@+id/type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:text="Type"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -36,34 +39,121 @@
                 android:text="Nenhuma avaliação"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-            <br.com.mobile10.avaliasim.libBarGraph.HorizontalBar
-                android:id="@+id/horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
-
-            <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:id="@+id/recycler_view"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:scrollbars="vertical" />-->
-
-            <!--</LinearLayout>-->
+            <!--<br.com.mobile10.avaliasim.libBarGraph.HorizontalBar-->
+                <!--android:id="@+id/horizontal"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:visibility="visible"/>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                android:visibility="visible"
                 android:background="#eee">
 
-                <TextView
-                    android:text="Gráfico"
-                    android:gravity="center"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/data"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center|left"
+                            android:text="Data:" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="right">
+
+
+                        <android.support.design.widget.FloatingActionButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|right"
+                            android:layout_marginRight="16dp"
+                            android:clickable="true"
+                            android:onClick="clickIconDateToDay"
+                            android:src="@drawable/ic_today_black_24dp"
+                            app:backgroundTint="@color/branco"
+                            app:fabSize="mini"
+                            app:layout_anchorGravity="bottom|right|end"
+                            app:rippleColor="#999" />
+
+                        <android.support.design.widget.FloatingActionButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|right"
+                            android:layout_marginRight="8dp"
+                            android:clickable="true"
+                            android:onClick="clickIconDateRange"
+                            android:src="@drawable/ic_date_range_black_24dp"
+                            app:backgroundTint="@color/branco"
+                            app:fabSize="mini"
+                            app:layout_anchorGravity="bottom|right|end"
+                            app:rippleColor="#999" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp">
+
+                <com.intrusoft.scatter.PieChart
+                    android:id="@+id/pie_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    scatter:aboutChart="About Your Chart"
+                    scatter:aboutTextColor="#212121"
+                    scatter:centerColor="#eee"
+                    scatter:chartColor="#eee"
+                    scatter:aboutTextSize="36"
+                    scatter:textSize="32"
+                    scatter:equalPartition="false"
+                    scatter:textColor="@color/branco" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:text="Caracteristica"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 

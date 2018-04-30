@@ -42,7 +42,7 @@
             android:layout_height="match_parent"
             android:background="@color/branco"
             android:gravity="center"
-            android:visibility="invisible">
+            android:visibility="visible">
 
             <android.support.v4.widget.ContentLoadingProgressBar
                 style="?android:attr/progressBarStyleLarge"

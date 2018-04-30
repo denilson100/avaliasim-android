@@ -1,5 +1,8 @@
 package br.com.mobile10.avaliasim.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 import br.com.mobile10.avaliasim.modelo.Feature;
 import br.com.mobile10.avaliasim.modelo.MyDate;
@@ -23,5 +26,19 @@ public class AvalicaoUtil {
         } else {
             return "Nenhuma avaliação";
         }
+    }
+
+    /**
+     * Recebe uma avaliação e retorna uma lista de strings com os nomes das features.
+     * @param avaliacao
+     * @return
+     */
+    public static List<String> getListFeature(Avaliacao2 avaliacao) {
+        List<String> list = new ArrayList<>();
+        list.add("Média Geral");
+        for (Feature feature : avaliacao.listaAvaliacoes) {
+            list.add(feature.name);
+        }
+        return list;
     }
 }
