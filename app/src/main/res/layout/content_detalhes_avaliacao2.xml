@@ -19,7 +19,6 @@
             android:id="@+id/content_editar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
             android:orientation="vertical">
 
             <TextView
@@ -49,6 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:padding="8dp"
                 android:orientation="vertical"
                 android:visibility="visible"
                 android:background="#eee">
@@ -68,7 +68,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center|left"
-                            android:text="Data:" />
+                            android:textStyle="bold"
+                            android:text="" />
 
                     </LinearLayout>
 
@@ -79,19 +80,21 @@
 
 
                         <android.support.design.widget.FloatingActionButton
+                            android:id="@+id/fab_all_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center|right"
-                            android:layout_marginRight="16dp"
+                            android:layout_marginRight="8dp"
                             android:clickable="true"
-                            android:onClick="clickIconDateToDay"
-                            android:src="@drawable/ic_today_black_24dp"
+                            android:onClick="clickIconAllDate"
+                            android:src="@drawable/ic_calendar"
                             app:backgroundTint="@color/branco"
                             app:fabSize="mini"
                             app:layout_anchorGravity="bottom|right|end"
                             app:rippleColor="#999" />
 
                         <android.support.design.widget.FloatingActionButton
+                            android:id="@+id/fab_range_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center|right"
@@ -99,7 +102,21 @@
                             android:clickable="true"
                             android:onClick="clickIconDateRange"
                             android:src="@drawable/ic_date_range_black_24dp"
-                            app:backgroundTint="@color/branco"
+                            app:backgroundTint="@color/cinza"
+                            app:fabSize="mini"
+                            app:layout_anchorGravity="bottom|right|end"
+                            app:rippleColor="#999" />
+
+                        <android.support.design.widget.FloatingActionButton
+                            android:id="@+id/fab_unic_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|right"
+                            android:layout_marginRight="8dp"
+                            android:clickable="true"
+                            android:onClick="clickIconUnicDate"
+                            android:src="@drawable/ic_today_black_24dp"
+                            app:backgroundTint="@color/cinza"
                             app:fabSize="mini"
                             app:layout_anchorGravity="bottom|right|end"
                             app:rippleColor="#999" />
@@ -121,8 +138,8 @@
                     scatter:aboutTextColor="#212121"
                     scatter:centerColor="#eee"
                     scatter:chartColor="#eee"
-                    scatter:aboutTextSize="36"
-                    scatter:textSize="32"
+                    scatter:aboutTextSize="46"
+                    scatter:textSize="42"
                     scatter:equalPartition="false"
                     scatter:textColor="@color/branco" />
 
@@ -134,9 +151,10 @@
                 android:text="Caracteristica"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 android:textStyle="bold"
                 android:layout_marginTop="16dp"
+                android:paddingLeft="16dp"
                 android:layout_marginBottom="8dp"/>
 
             <LinearLayout
@@ -161,7 +179,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginTop="8dp"
-                android:background="#eee">
+                android:background="#ccc">
 
                 <TextView
                     android:text="Gráfico"

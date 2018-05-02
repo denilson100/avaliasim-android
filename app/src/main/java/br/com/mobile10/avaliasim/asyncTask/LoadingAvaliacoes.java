@@ -9,8 +9,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import br.com.mobile10.avaliasim.activity.HomeActivity2;
@@ -85,11 +88,19 @@ public class LoadingAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>> {
                         List<MyDate> listDate = new ArrayList<MyDate>();
                         for (DataSnapshot data : list.getChildren()) {
 
-                            String stringDate = list.getKey();
+                            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+                            Date date = null;
+                            String stringDate = data.getKey();
+                            try {
+                                date = formatter.parse(stringDate);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
                             int positive = (int) data.child("positive").getChildrenCount();
                             int negative = (int) data.child("negative").getChildrenCount();
 
-                            MyDate myDate1 = new MyDate(positive, negative);
+                            MyDate myDate1 = new MyDate(positive, negative, date);
                             listDate.add(myDate1);
 
                         }
@@ -104,8 +115,8 @@ public class LoadingAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>> {
                     avaliacao2ListFinal.add(av2);
                 }
 
-                onPostExecute(avaliacao2ListFinal);
-//                activity.hideLoadingIndictor();
+                finished(avaliacao2ListFinal);
+                activity.hideLoadingIndictor();
             }
 
             @Override
@@ -120,13 +131,18 @@ public class LoadingAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-//        activity.showLoadingIndicator();
+        activity.showLoadingIndicator();
+    }
+
+    protected void finished(List<Avaliacao2> itemList) {
+        Collections.sort(itemList);
+        activity.setListAvaliacoes(itemList);
     }
 
     @Override
     protected void onPostExecute(List<Avaliacao2> itemList) {
         super.onPostExecute(itemList);
-        Collections.sort(itemList);
-        activity.setListAvaliacoes(itemList);
+//        Collections.sort(itemList);
+//        activity.setListAvaliacoes(itemList);
     }
 }

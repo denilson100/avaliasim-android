@@ -11,9 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.CoordinatorLayout
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#eee">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -21,19 +23,27 @@
             android:layout_height="match_parent"
             android:scrollbars="horizontal" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_gravity="bottom|right"
-                android:clickable="true"
-                android:src="@drawable/ic_add_black_24dp"
-                app:layout_anchorGravity="bottom|right|end"
-                app:rippleColor="#FFF"
-                app:layout_behavior="br.com.mobile10.avaliasim.fragments.FAB_Hide_on_Scroll"/>
 
-        </android.support.design.widget.CoordinatorLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right|bottom">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:layout_gravity="bottom|right"
+            android:clickable="true"
+            android:src="@drawable/ic_add_black_24dp"
+            app:layout_anchorGravity="bottom|right|end"
+            app:rippleColor="#FFF"
+            app:layout_behavior="br.com.mobile10.avaliasim.fragments.FAB_Hide_on_Scroll"/>
+
+        </RelativeLayout>
 
 
         <RelativeLayout

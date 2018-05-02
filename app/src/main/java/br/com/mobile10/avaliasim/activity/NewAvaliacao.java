@@ -61,6 +61,7 @@ public class NewAvaliacao extends BaseActivity implements AvaliacaoDao {
         List<String> list = new ArrayList<String>();
         list.add("Produto");
         list.add("Serviço");
+        list.add("Entreterimento");
         list.add("Outro");
 
         // Bloco Spinner para pegar click
@@ -127,6 +128,8 @@ public class NewAvaliacao extends BaseActivity implements AvaliacaoDao {
                 break;
             case "Serviço":
                 contentService.setVisibility(View.VISIBLE);
+            case "Entreterimento":
+                contentService.setVisibility(View.VISIBLE);
         }
 
     }
@@ -158,6 +161,16 @@ public class NewAvaliacao extends BaseActivity implements AvaliacaoDao {
                 long timeStamp1 = 0;
                 Avaliacao2 a2 = new Avaliacao2(users.getUid(), cidade, estado, getNamesFeatures(), "", timeStamp1, title, type, true);
                 newAvaliacao(a2, users.getUid());
+                finish();
+                break;
+
+            case "Entreterimento":
+                if (!validateFormService()) {
+                    return;
+                }
+                long timeStamp2 = 0;
+                Avaliacao2 a3 = new Avaliacao2(users.getUid(), cidade, estado, getNamesFeatures(), "", timeStamp2, title, type, true);
+                newAvaliacao(a3, users.getUid());
                 finish();
                 break;
 

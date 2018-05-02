@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.balysv.materialripple.MaterialRippleLayout;
 
@@ -44,7 +46,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
         final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         return new RecyclerViewHolders(
-                MaterialRippleLayout.on(inflater.inflate(R.layout.item_list_event, parent, false))
+                MaterialRippleLayout.on(inflater.inflate(R.layout.item_list_event_card, parent, false))
                         .rippleOverlay(true)
                         .rippleAlpha(0.2f)
                         .rippleColor(0xFF585858)
@@ -78,6 +80,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
             default:
                 holder.imageType.setImageResource(R.drawable.ic_not_interested_black_24dp);
 
+        }
+
+        int lastPosition = -1;
+        if (position > lastPosition) {
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.teste);
+            holder.itemView.startAnimation(animation);
+            lastPosition = position;
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

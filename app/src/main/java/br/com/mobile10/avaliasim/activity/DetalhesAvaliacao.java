@@ -2,6 +2,7 @@ package br.com.mobile10.avaliasim.activity;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,7 +21,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.shagi.materialdatepicker.date.DatePickerFragmentDialog;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
@@ -39,6 +43,8 @@ import br.com.mobile10.avaliasim.modelo.MyDate;
 import br.com.mobile10.avaliasim.util.AnimationsUtility;
 import br.com.mobile10.avaliasim.util.AvalicaoUtil;
 import br.com.mobile10.avaliasim.util.BaseActivity;
+import br.com.mobile10.avaliasim.util.Constantes;
+import br.com.mobile10.avaliasim.util.Format;
 import br.com.mobile10.avaliasim.util.Grafico;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
@@ -56,12 +62,17 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
     public static boolean keyBuscaPorId;
     private RelativeLayout fundoDinamic;
     ObjectAnimator objectanimator;
-    FloatingActionButton fab;
+    FloatingActionButton fab, fabAllDate, fabRangeDate, fabUnicDate;
     TextView txtData;
 
     public RecyclerView.LayoutManager lLayout;
     RecyclerViewAdapterFeatures rcAdapter;
     RecyclerView rView;
+
+    private int key; // chave para buscar grafico. 0 = geral, 1 = busca data unica, 2 = busca com range de datas
+    private final int geral = 0;
+    private final int unicDate = 1;
+    private final int rangeDate = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,10 +92,15 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
 
         txtData = (TextView) findViewById(R.id.data);
         fundoDinamic = (RelativeLayout) findViewById(R.id.fundo);
+        fundoDinamic = (RelativeLayout) findViewById(R.id.fundo);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(avaliacao.title);
         setSupportActionBar(toolbar);
         updateUI(avaliacao);
+
+        fabAllDate = (FloatingActionButton) findViewById(R.id.fab_all_date);
+        fabRangeDate = (FloatingActionButton) findViewById(R.id.fab_range_date);
+        fabUnicDate = (FloatingActionButton) findViewById(R.id.fab_unic_date);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -127,10 +143,8 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
         rView.setAdapter(rcAdapter);
         rcAdapter.setOnClick(this);
 
-//        updateGrafico(titleGrafico);
         Grafico grafico = new Grafico(this);
-//        grafico.featureName(avaliacao, AvalicaoUtil.getListFeature(avaliacao).get(0));
-        grafico.visaoGeral(avaliacao, "Visão Geral");
+        grafico.visaoGeral(avaliacao, "Média Geral");
 
     }
 
@@ -234,13 +248,35 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
     @Override
     public void onItemClickFeature(int position) {
         Log.d("TAG", "Click: " + featureList.get(position));
+
         Grafico grafico = new Grafico(this);
 
-        if (position == 0) {
-            grafico.visaoGeral(avaliacao, featureList.get(position));
-        } else {
-            grafico.featureName(avaliacao, featureList.get(position));
+        switch (key) {
+            case geral:
+                if (position == 0) {
+                    grafico.visaoGeral(avaliacao, featureList.get(position));
+                } else {
+                    grafico.featureName(avaliacao, featureList.get(position));
+                }
+                break;
+            case unicDate:
+                if (position == 0) {
+                    grafico.visaoGeralUnicDate(avaliacao, featureList.get(position));
+                } else {
+                    grafico.featureNameUnicDate(avaliacao, featureList.get(position));
+                }
+                break;
+            case rangeDate:
+                if (position == 0) {
+                    grafico.visaoGeralRangeDate(avaliacao, featureList.get(position));
+                } else {
+                    grafico.featureNameRangeDate(avaliacao, featureList.get(position));
+                }
+                break;
+            default:
+                // erro
         }
+
     }
 
     public void startCalendar() {
@@ -255,23 +291,63 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
 
     @Override
     public void onDateRangeSelected(int startDay, int startMonth, int startYear, int endDay, int endMonth, int endYear) {
-        Log.d("range : ","from: "+startDay+"-"+startMonth+"-"+startYear+" to : "+endDay+"-"+endMonth+"-"+endYear );
-        txtData.setText("Data: " + startDay + "/" + startMonth + "/" + startYear + " a " + endDay + "/" + endMonth + "/" + endYear);
+        Log.d("range : ","from: "+startDay+"-"+ (startMonth + 1) +"-"+startYear+" to : "+endDay+"-"+endMonth+"-"+endYear );
+        txtData.setText("Data: " + startDay + "/" + (startMonth + 1) + "/" + startYear + " a " + endDay + "/" + (endMonth + 1) + "/" + endYear);
+        Constantes.DATE1 = Format.convertStringInDate(startDay + "-" + (startMonth + 1) + "-" + startYear);
+        Constantes.DATE2 = Format.convertStringInDate(endDay + "-" + (endMonth + 1) + "-" + endYear);
+        key = rangeDate;
 
+    }
+
+    public void clickIconAllDate(View view) {
+        updateColorFab("all");
     }
 
     public void clickIconDateRange(View view) {
-        startCalendar();
+        DateRangePickerFragment dateRangePickerFragment= DateRangePickerFragment.newInstance(DetalhesAvaliacao.this,false);
+        dateRangePickerFragment.show(getSupportFragmentManager(),"datePicker");
+
+        updateColorFab("range");
     }
 
-    public void clickIconDateToDay(View view) {
+    public void clickIconUnicDate(View view) {
         DatePickerFragment datePickerFragment = DatePickerFragment.newInstance(DetalhesAvaliacao.this,false);
         datePickerFragment.show(getSupportFragmentManager(),"datePicker");
+
+        updateColorFab("unic");
     }
 
     @Override
     public void onDateSelected(int day, int month, int year) {
-        Log.d("TAG", "Ano: " + year + " Mes: " + month + " Dia: " + day);
-        txtData.setText("Data: " + day + "/" + month + "/" + year);
+        Log.d("range", "" + day + "-" + (month +  1) + "-" + year);
+        txtData.setText("Data: " + day + "/" + (month + 1) +  "/" + year);
+
+        String dateInString = day + "-" + (month +  1) + "-" + year;
+        Constantes.DATE_UNIC = Format.convertStringInDate(dateInString);
+        key = unicDate;
+
     }
+
+    public void updateColorFab(String fab) {
+        switch (fab) {
+            case "all":
+                fabAllDate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.branco)));
+                fabRangeDate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.cinza)));
+                fabUnicDate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.cinza)));
+                break;
+            case "range":
+                fabAllDate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.cinza)));
+                fabRangeDate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.branco)));
+                fabUnicDate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.cinza)));
+                break;
+            case "unic":
+                fabAllDate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.cinza)));
+                fabRangeDate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.cinza)));
+                fabUnicDate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.branco)));
+                break;
+            default:
+                // erro
+        }
+    }
+
 }

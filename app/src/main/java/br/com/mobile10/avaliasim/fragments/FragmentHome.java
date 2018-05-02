@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.LinearLayout;
 
 import com.github.fabtransitionactivity.SheetLayout;
@@ -39,6 +41,8 @@ import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 /**
@@ -63,6 +67,7 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
 
     private static final String ARG_SECTION_NUMBER = "section_number";
     private static final int REQUEST_CODE = 1;
+    private SwipeRefreshLayout swipeLayout;
 
     public static FragmentHome newInstance(int sectionNumber) {
         FragmentHome fragment = new FragmentHome();
@@ -72,14 +77,14 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
         return fragment;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        executeAsyncTaskGetAvaliacoes();
-
-        Log.d("TAG", "OnResume Home");
-
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        executeAsyncTaskGetAvaliacoes();
+//
+//        Log.d("TAG", "OnResume Home");
+//
+//    }
 
     @Nullable
     @Override
@@ -107,6 +112,16 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
             }
         });
 
+        swipeLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_container);
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Refresh items
+                executeAsyncTaskGetAvaliacoes();
+                swipeLayout.setRefreshing(false);
+            }
+        });
+
 
         rView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         rView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -128,7 +143,6 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         users = user;
-
 
     }
 
@@ -187,6 +201,14 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
     public void addDataAtualNoServidor() {
         DataAtualDaoImplementacao dao = new DataAtualDaoImplementacao();
         dao.addDataAtualNoServidor();
+    }
+
+    public void showLoadingIndicator() {
+        imgVazio.setVisibility(View.VISIBLE);
+    }
+
+    public void hideLoadingIndictor() {
+        imgVazio.setVisibility(View.GONE);
     }
 
 //    public void showLoadingIndicator() {
