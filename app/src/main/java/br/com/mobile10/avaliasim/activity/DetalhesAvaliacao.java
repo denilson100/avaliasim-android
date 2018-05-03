@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -46,6 +47,7 @@ import br.com.mobile10.avaliasim.util.BaseActivity;
 import br.com.mobile10.avaliasim.util.Constantes;
 import br.com.mobile10.avaliasim.util.Format;
 import br.com.mobile10.avaliasim.util.Grafico;
+import im.dacer.androidcharts.LineView;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapterDetAvaliacoes.OnItemClicked,
@@ -73,6 +75,8 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
     private final int geral = 0;
     private final int unicDate = 1;
     private final int rangeDate = 2;
+
+    int randomint = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,6 +149,16 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
 
         Grafico grafico = new Grafico(this);
         grafico.visaoGeral(avaliacao, "Média Geral");
+
+        final LineView lineView = (LineView) findViewById(R.id.line_view);
+        initLineView(lineView);
+        Button lineButton = (Button) findViewById(R.id.line_button);
+        lineButton.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) {
+                randomSet(lineView);
+            }
+        });
+        randomSet(lineView);
 
     }
 
@@ -291,7 +305,7 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
 
     @Override
     public void onDateRangeSelected(int startDay, int startMonth, int startYear, int endDay, int endMonth, int endYear) {
-        Log.d("range : ","from: "+startDay+"-"+ (startMonth + 1) +"-"+startYear+" to : "+endDay+"-"+endMonth+"-"+endYear );
+        Log.d("range : ","from: "+startDay+"-"+ (startMonth + 1) +"-"+startYear+" to : "+endDay+"-"+ (endMonth + 1) +"-"+endYear );
         txtData.setText("Data: " + startDay + "/" + (startMonth + 1) + "/" + startYear + " a " + endDay + "/" + (endMonth + 1) + "/" + endYear);
         Constantes.DATE1 = Format.convertStringInDate(startDay + "-" + (startMonth + 1) + "-" + startYear);
         Constantes.DATE2 = Format.convertStringInDate(endDay + "-" + (endMonth + 1) + "-" + endYear);
@@ -348,6 +362,48 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
             default:
                 // erro
         }
+    }
+
+    private void initLineView(LineView lineView) {
+        ArrayList<String> test = new ArrayList<String>();
+        for (int i = 0; i < randomint; i++) {
+            test.add(String.valueOf(i + 1));
+        }
+        lineView.setBottomTextList(test);
+        lineView.setColorArray(new int[] {
+                Color.parseColor("#F44336"), Color.parseColor("#9C27B0"),
+                Color.parseColor("#2196F3"), Color.parseColor("#009688")
+        });
+        lineView.setDrawDotLine(true);
+        lineView.setShowPopup(LineView.SHOW_POPUPS_NONE);
+    }
+
+    private void randomSet(LineView lineView) {
+        ArrayList<Integer> dataList = new ArrayList<>();
+        float random = (float) (Math.random() * 9 + 1);
+        for (int i = 0; i < randomint; i++) {
+            dataList.add((int) (Math.random() * random));
+        }
+
+        ArrayList<Integer> dataList2 = new ArrayList<>();
+        random = (int) (Math.random() * 9 + 1);
+        for (int i = 0; i < randomint; i++) {
+            dataList2.add((int) (Math.random() * random));
+        }
+
+        ArrayList<Integer> dataList3 = new ArrayList<>();
+        random = (int) (Math.random() * 9 + 1);
+        for (int i = 0; i < randomint; i++) {
+            dataList3.add((int) (Math.random() * random));
+        }
+
+        ArrayList<ArrayList<Integer>> dataLists = new ArrayList<>();
+        dataLists.add(dataList);
+        dataLists.add(dataList2);
+        dataLists.add(dataList3);
+
+        lineView.setDataList(dataLists);
+
     }
 
 }

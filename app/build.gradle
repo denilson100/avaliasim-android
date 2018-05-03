@@ -6,8 +6,8 @@ android {
         applicationId "br.com.mobile10.avaliasim"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 16
-        versionName "0.14"
+        versionCode 17
+        versionName "0.15"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 //        multiDexEnabled true
@@ -55,6 +55,7 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3' // Completo
     // compile 'com.github.felixsoares:HorizontalBarGraph:1.0' // horizontal abr graph
     implementation 'com.github.IntruderShanky:scatter-piechart:1.0.0'
+    implementation 'im.dacer:AndroidCharts:1.0.4'
 
     // Menu
 //    implementation 'com.ss.bottomnavigation:bottomnavigation:1.5.2'
