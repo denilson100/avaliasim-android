@@ -8,9 +8,7 @@ import com.google.firebase.auth.FirebaseUser;
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.dao.AvaliacaoDaoImplementacao;
 import br.com.mobile10.avaliasim.interfaces.AvaliacaoDao;
-import br.com.mobile10.avaliasim.modelo.Avaliacao;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
-import br.com.mobile10.avaliasim.modelo.Produto;
 import br.com.mobile10.avaliasim.util.BaseActivity;
 
 /**

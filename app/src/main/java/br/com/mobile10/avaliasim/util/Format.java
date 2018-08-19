@@ -11,7 +11,6 @@ import java.util.Date;
 public class Format {
 
     public static String Date(Long timeStamp) {
-        long val = 1346524199000l;
         Date date = new Date(timeStamp);
         SimpleDateFormat df2 = new SimpleDateFormat("dd-MM-yyyy");
         return df2.format(date);

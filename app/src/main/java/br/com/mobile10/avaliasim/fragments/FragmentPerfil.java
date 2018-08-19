@@ -18,8 +18,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,7 +26,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,9 +39,7 @@ import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.activity.DetalhesAvaliacao;
-import br.com.mobile10.avaliasim.activity.Main4Activity;
 import br.com.mobile10.avaliasim.activity.MainIntroPermission;
-import br.com.mobile10.avaliasim.adapter.RecyclerViewAdapter;
 import br.com.mobile10.avaliasim.adapter.RecyclerViewAdapterMyAvaliacoes;
 import br.com.mobile10.avaliasim.asyncTask.LoadingIdsListMyAvaliacoes;
 import br.com.mobile10.avaliasim.asyncTask.LoadingMyAvaliacoes;
@@ -64,27 +59,21 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 public class FragmentPerfil extends Fragment implements RecyclerViewAdapterMyAvaliacoes.OnItemClicked, UserDao {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
-    View loadingIndicatorMyAvaliacoes;
-    View imgVazio;
-    List<String> idsList = new ArrayList<>();
-    List<Avaliacao2> myAvaliacoesList = new ArrayList<Avaliacao2>();
-
-    public RecyclerView.LayoutManager lLayout;
-    RecyclerViewAdapterMyAvaliacoes rcAdapter;
-    RecyclerView rView;
-
-    private int PICK_IMAGE_REQUEST = 1;
     private ImageUtility imageUtility = new ImageUtility();
-
     private FirebaseAuth mAuth;
-    FirebaseUser users;
     private ImageView imgUser;
     private TextView txtNome, txtEmail;
     private AppCompatButton btIrParaLogin;
     private View viewNaoLogado;
     private FloatingActionButton fabEdit, fabExit;
-
     private String userName;
+
+    RecyclerView rView;
+    RecyclerViewAdapterMyAvaliacoes rcAdapter;
+    View imgVazio;
+        FirebaseUser users;
+    List<String> idsList = new ArrayList<>();
+    List<Avaliacao2> myAvaliacoesList = new ArrayList<Avaliacao2>();
 
     public static FragmentPerfil newInstance(int sectionNumber) {
         FragmentPerfil fragment = new FragmentPerfil();
@@ -104,14 +93,13 @@ public class FragmentPerfil extends Fragment implements RecyclerViewAdapterMyAva
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_perfil, container, false);
-//        loadingIndicatorMyAvaliacoes = (View) rootView.findViewById(R.id.loading_indicator_myavaliacoes);
 
-        imgVazio = (View) rootView.findViewById(R.id.vazio);
-        txtNome = (TextView) rootView.findViewById(R.id.nome);
-        txtEmail = (TextView) rootView.findViewById(R.id.email);
-        viewNaoLogado = (View) rootView.findViewById(R.id.nao_logado);
+        imgVazio = rootView.findViewById(R.id.vazio);
+        txtNome = rootView.findViewById(R.id.nome);
+        txtEmail = rootView.findViewById(R.id.email);
+        viewNaoLogado = rootView.findViewById(R.id.nao_logado);
 
-        btIrParaLogin = (AppCompatButton) rootView.findViewById(R.id.login);
+        btIrParaLogin = rootView.findViewById(R.id.login);
         btIrParaLogin.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -123,7 +111,7 @@ public class FragmentPerfil extends Fragment implements RecyclerViewAdapterMyAva
             }
         });
 
-        fabEdit = (FloatingActionButton) rootView.findViewById(R.id.fab_edit);
+        fabEdit = rootView.findViewById(R.id.fab_edit);
         fabEdit.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -133,7 +121,7 @@ public class FragmentPerfil extends Fragment implements RecyclerViewAdapterMyAva
             }
         });
 
-        fabExit = (FloatingActionButton) rootView.findViewById(R.id.fab_exit);
+        fabExit = rootView.findViewById(R.id.fab_exit);
         fabExit.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -143,7 +131,7 @@ public class FragmentPerfil extends Fragment implements RecyclerViewAdapterMyAva
             }
         });
 
-        imgUser = (ImageView) rootView.findViewById(R.id.escolher_imagem);
+        imgUser = rootView.findViewById(R.id.escolher_imagem);
         imgUser.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -156,14 +144,13 @@ public class FragmentPerfil extends Fragment implements RecyclerViewAdapterMyAva
                     //Permissio
                     Intent intent2 = new Intent(getActivity(), MainIntroPermission.class);
                     startActivity(intent2);
-                } else {
+                } else
                     // Escolhe imagem
                     startActivityForResult(imageUtility.getPickImageChooserIntent(getActivity()), 200);
-                }
             }
         });
 
-        rView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        rView = rootView.findViewById(R.id.recycler_view);
         rView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         rView.setHasFixedSize(true);
 
@@ -230,32 +217,31 @@ public class FragmentPerfil extends Fragment implements RecyclerViewAdapterMyAva
     public void setListMyAvaliacoes(List<Avaliacao2> itemList) {
         // Recebe todos avaliacoes
         List<Avaliacao2> listMyAvaliacoes = new ArrayList<>();
-        for (Avaliacao2 avaliacao : itemList) {
-            for (String id : idsList) {
-                if (avaliacao.idAvaliacao.equalsIgnoreCase(id)) {
+
+        for (Avaliacao2 avaliacao : itemList)
+            for (String id : idsList)
+                if (avaliacao.idAvaliacao.equalsIgnoreCase(id))
                     listMyAvaliacoes.add(avaliacao);
-                }
-            }
-        }
+
         if (listMyAvaliacoes.size() != 0)
             this.myAvaliacoesList = listMyAvaliacoes;
-            atualizarLista(listMyAvaliacoes);
+
+        atualizarLista(listMyAvaliacoes);
     }
 
     public void atualizarLista(List<Avaliacao2> listAvaliacoes) {
         try {
             rcAdapter = new RecyclerViewAdapterMyAvaliacoes(this, listAvaliacoes);
-            if (listAvaliacoes.size() != 0) {
+            if (listAvaliacoes.size() != 0)
                 imgVazio.setVisibility(View.GONE);
-            } else {
+            else
                 imgVazio.setVisibility(View.VISIBLE);
-            }
+
             rView.setItemAnimator(new SlideInUpAnimator());
             rView.setAdapter(rcAdapter);
             rcAdapter.setOnClick(this);
         } catch (NullPointerException e) {
             e.printStackTrace();
-//            getActivity().showToast("Erro");
         }
     }
 
@@ -326,7 +312,7 @@ public class FragmentPerfil extends Fragment implements RecyclerViewAdapterMyAva
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
         alertDialogBuilder.setView(promptsView);
-        final EditText editNome = (EditText) promptsView.findViewById(R.id.edit_nome);
+        final EditText editNome = promptsView.findViewById(R.id.edit_nome);
         editNome.setText(userName);
 
         alertDialogBuilder

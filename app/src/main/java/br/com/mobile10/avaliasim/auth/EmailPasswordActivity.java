@@ -1,23 +1,6 @@
-/**
- * Copyright 2016 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package br.com.mobile10.avaliasim.auth;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -48,14 +31,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import br.com.mobile10.avaliasim.R;
-import br.com.mobile10.avaliasim.activity.HomeActivity2;
-import br.com.mobile10.avaliasim.activity.Main4Activity;
-import br.com.mobile10.avaliasim.interfaces.TaskInformer;
 import br.com.mobile10.avaliasim.util.BaseActivity;
 
 
 public class EmailPasswordActivity extends BaseActivity implements
-        View.OnClickListener, GoogleApiClient.OnConnectionFailedListener, TaskInformer {
+        View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "EmailPassword";
     private static final int RC_SIGN_IN = 9001;
@@ -64,27 +44,17 @@ public class EmailPasswordActivity extends BaseActivity implements
     private TextView mDetailTextView;
     private EditText mEmailField;
     private EditText mPasswordField;
-    private TextView textSign, textCriarConta;
     private DatabaseReference mDatabase;
-    private Context context;
 
-    // [START declare_auth]
     private FirebaseAuth mAuth;
-    // [END declare_auth]
-
-    // [START declare_auth_listener]
     private FirebaseAuth.AuthStateListener mAuthListener;
-    // [END declare_auth_listener]
+
     boolean chavePulaValidate;
     String nome;
     FirebaseUser users;
-
-    private GoogleApiClient mGoogleApiClient;
-    View promptsView, btEmail;
-    private EditText editEmail, editSenha;
+    View promptsView;
     AlertDialog dialog;
     AlertDialog.Builder alertDialogBuilder;
-    String resposta;
     TextView txtResposta;
 
 
@@ -96,12 +66,12 @@ public class EmailPasswordActivity extends BaseActivity implements
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // Views
-        mStatusTextView = (TextView) findViewById(R.id.status);
-        mDetailTextView = (TextView) findViewById(R.id.detail);
-        mEmailField = (EditText) findViewById(R.id.field_email);
-        mPasswordField = (EditText) findViewById(R.id.field_password);
+        mStatusTextView = findViewById(R.id.status);
+        mDetailTextView = findViewById(R.id.detail);
+        mEmailField = findViewById(R.id.field_email);
+        mPasswordField = findViewById(R.id.field_password);
 
-        txtResposta = (TextView) findViewById(R.id.resposta);
+        txtResposta = findViewById(R.id.resposta);
 
         // Buttons
         findViewById(R.id.email_sign_in_button).setOnClickListener(this);
@@ -114,11 +84,12 @@ public class EmailPasswordActivity extends BaseActivity implements
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
+
+                if (user != null)
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                } else {
+                else
                     Log.d(TAG, "onAuthStateChanged:signed_out");
-                }
+
                 updateUI(user);
             }
         };
@@ -134,17 +105,16 @@ public class EmailPasswordActivity extends BaseActivity implements
     @Override
     public void onStop() {
         super.onStop();
-        if (mAuthListener != null) {
+        if (mAuthListener != null)
             mAuth.removeAuthStateListener(mAuthListener);
-        }
     }
 
 
     private void createAccount(String email, String password) {
         Log.d(TAG, "createAccount:" + email);
-        if (!validateForm()) {
+
+        if (!validateForm())
             return;
-        }
 
         showProgressDialog("Carregando...");
 
@@ -169,7 +139,7 @@ public class EmailPasswordActivity extends BaseActivity implements
     private void signIn(String email, String password) {
         Log.d(TAG, "signIn:" + email);
 
-        if(chavePulaValidate != true) {
+        if (!chavePulaValidate) {
             if (!validateForm()) {
                 return;
             }
@@ -179,7 +149,7 @@ public class EmailPasswordActivity extends BaseActivity implements
         showProgressDialog("Carregando...");
 
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this,  new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
@@ -191,20 +161,6 @@ public class EmailPasswordActivity extends BaseActivity implements
                         hideProgressDialog();
                     }
                 });
-    }
-
-    private void signInGoogle() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    private void signOut() {
-        mAuth.signOut();
-        mEmailField.setText("");
-        mPasswordField.setText("");
-
-        updateUI(null);
-
     }
 
     @Override
@@ -232,28 +188,6 @@ public class EmailPasswordActivity extends BaseActivity implements
             valid = false;
         } else {
             mPasswordField.setError(null);
-        }
-
-        return valid;
-    }
-
-    private boolean validateFormNewAcauth() {
-        boolean valid = true;
-
-        String email = editEmail.getText().toString();
-        if (TextUtils.isEmpty(email)) {
-            editEmail.setError("Necessário.");
-            valid = false;
-        } else {
-            editEmail.setError(null);
-        }
-
-        String password = editSenha.getText().toString();
-        if (TextUtils.isEmpty(password)) {
-            editSenha.setError("Necessário.");
-            valid = false;
-        } else {
-            editSenha.setError(null);
         }
 
         return valid;
@@ -307,12 +241,8 @@ public class EmailPasswordActivity extends BaseActivity implements
         if (user != null) {
             mStatusTextView.setText(getString(R.string.emailpassword_status_fmt, user.getEmail()));
             Log.d("ID", "ID é: " + user.getUid());
-
             mDetailTextView.setText(getString(R.string.ola, user.getEmail()));
-            String userEmail = user.getEmail();
 
-//            Intent intent = new Intent( this, Main4Activity.class );
-//            startActivity(intent);
             finish();
 
             findViewById(R.id.content_form).setVisibility(View.GONE);
@@ -341,17 +271,17 @@ public class EmailPasswordActivity extends BaseActivity implements
         }
     }
 
-    public void alertNovaConta(){
+    public void alertNovaConta() {
 
         LayoutInflater li = LayoutInflater.from(this);
         promptsView = li.inflate(R.layout.alert_nova_conta, null);
 
         alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setView(promptsView);
-        mEmailField = (EditText) promptsView.findViewById(R.id.email);
-        mPasswordField = (EditText) promptsView.findViewById(R.id.senha);
+        mEmailField = promptsView.findViewById(R.id.email);
+        mPasswordField = promptsView.findViewById(R.id.senha);
 
-        Button btNovaConta = (Button) promptsView.findViewById(R.id.nova_conta);
+        Button btNovaConta = promptsView.findViewById(R.id.nova_conta);
         btNovaConta.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -378,28 +308,14 @@ public class EmailPasswordActivity extends BaseActivity implements
                             }
 
                         });
-//        if(!validateForm()) {
-        // create alertAddPaoquente dialog
         dialog = alertDialogBuilder.create();
         // show it
         dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_animation;
         dialog.show();
-//        }
     }
 
-    public void callSignUp(View view){
-        Intent intent = new Intent( this, EmailPasswordActivity.class );
+    public void callReset(View view) {
+        Intent intent = new Intent(this, ResetActivity.class);
         startActivity(intent);
     }
-
-    public void callReset(View view){
-        Intent intent = new Intent( this, ResetActivity.class );
-        startActivity(intent);
-    }
-
-    @Override
-    public void onResponseReceive(String data) {
-
-    }
-
 }

@@ -8,15 +8,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import br.com.mobile10.avaliasim.interfaces.FeatureDao;
-import br.com.mobile10.avaliasim.modelo.Avaliacao;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
-import br.com.mobile10.avaliasim.modelo.Feature;
 import br.com.mobile10.avaliasim.modelo.Voto;
 import br.com.mobile10.avaliasim.util.Constantes;
 import br.com.mobile10.avaliasim.util.Format;
@@ -58,14 +54,6 @@ public class FeatureDaoImplementacao implements FeatureDao {
 
 
     private void writeNewPost(Avaliacao2 avaliacao, String userId, String status, String featureAvaliada) {
-
-//        Avaliacao2 av = new Avaliacao(avaliacao.idAvaliacao, avaliacao.title, avaliacao.type, avaliacao.author,
-//                avaliacao.visible, avaliacao.cidade, avaliacao.estado, avaliacao.timeStemp, avaliacao.features);
-
-//        Feature feature = new Feature(avaliacao.features.get(0), avaliacao.features.get(1), avaliacao.features.get(2));
-//        Feature feature = new Feature(avaliacao.features.get(0));
-
-
         String key = mDatabase.child(Constantes.DB_ROOT).child("avaliacoes").child(avaliacao.idAvaliacao).child("listAvaliacoes").child(featureAvaliada).child(dataAtual).child(status).child(userId).getKey();
         Voto voto = new Voto(userId);
         Map<String, Object> postValuesVoto = voto.toMap();
@@ -76,6 +64,5 @@ public class FeatureDaoImplementacao implements FeatureDao {
         childUpdates.put(caminhoPrivado + key, postValuesVoto);
 
         mDatabase.updateChildren(childUpdates);
-
     }
 }

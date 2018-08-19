@@ -1,6 +1,5 @@
 package br.com.mobile10.avaliasim.adapter;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +21,6 @@ import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 public class RecyclerViewAdapterMyAvaliacoes extends RecyclerView.Adapter<RecyclerViewHoldersMyAvaliacoes> {
 
     private List<Avaliacao2> itemList;
-    private Context context;
     private FragmentPerfil fragmentPerfil;
     //declare interface
     private OnItemClicked onClick;

@@ -1,18 +1,12 @@
 package br.com.mobile10.avaliasim.modelo;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
-import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
-import com.google.firebase.database.ServerValue;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by denmont on 18/04/2018.
@@ -23,12 +17,12 @@ public class Avaliacao2 implements Serializable, Comparable<Avaliacao2> {
     public String author;
     public String cidade;
     public String estado;
-    public List<String> features;
-    public String idAvaliacao;
-    public long timeStemp;
     public String title;
     public String type;
+    public String idAvaliacao;
+    public long timeStemp;
     public boolean visible;
+    public List<String> features;
     public List<Feature> listaAvaliacoes = new ArrayList<Feature>();
 
     public Avaliacao2(String author, String cidade, String estado, List<String> features,
@@ -47,7 +41,6 @@ public class Avaliacao2 implements Serializable, Comparable<Avaliacao2> {
 
     }
 
-
     public Avaliacao2(String author, String cidade, String estado, List<String> features,
                       String idAvaliacao, long timeStemp, String title, String type,
                       boolean visible) {
@@ -63,12 +56,12 @@ public class Avaliacao2 implements Serializable, Comparable<Avaliacao2> {
 
     }
 
-    // Apenas para amndar como privado
+    // Apenas para mandar como privado
     public Avaliacao2(String idAvalicao) {
         this.idAvaliacao = idAvalicao;
     }
 
-    public int getTotal(Avaliacao2 avaliacao) {
+    private int getTotal(Avaliacao2 avaliacao) {
         int positive = 0;
         int negative = 0;
         for (Feature feature : avaliacao.listaAvaliacoes) {
@@ -78,29 +71,6 @@ public class Avaliacao2 implements Serializable, Comparable<Avaliacao2> {
             }
         }
         return (positive + negative);
-    }
-
-    @Exclude
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("idAvaliacao", idAvaliacao);
-        result.put("title", title);
-        result.put("type", type);
-        result.put("author", author);
-        result.put("visible", visible);
-        result.put("cidade", cidade);
-        result.put("estado", estado);
-        result.put("timeStamp", ServerValue.TIMESTAMP);
-
-        return result;
-    }
-
-    @Exclude
-    public Map<String, Object> toMap2() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("idAvaliacao", idAvaliacao);
-
-        return result;
     }
 
     @Override

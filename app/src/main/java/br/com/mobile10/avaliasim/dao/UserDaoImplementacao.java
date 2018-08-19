@@ -11,24 +11,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import br.com.mobile10.avaliasim.fragments.FragmentPerfil;
 import br.com.mobile10.avaliasim.interfaces.UserDao;
-import br.com.mobile10.avaliasim.modelo.Avaliacao;
-import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 import br.com.mobile10.avaliasim.modelo.User;
-import br.com.mobile10.avaliasim.modelo.Voto;
 import br.com.mobile10.avaliasim.util.Constantes;
 
 public class UserDaoImplementacao implements UserDao {
@@ -38,7 +30,6 @@ public class UserDaoImplementacao implements UserDao {
 
     public UserDaoImplementacao(FragmentPerfil fragmentPerfil) {
         this.fragmentPerfil = fragmentPerfil;
-
     }
 
     @Override
@@ -61,20 +52,17 @@ public class UserDaoImplementacao implements UserDao {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
-//                sendMsg("" + downloadUrl, 2);
                 String urlFoto = "" + downloadUrl;
 
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
                 mDatabase = database.getReference(Constantes.DB_ROOT).child("users").child(userId);
 
-                if(urlFoto != "") {
+                if (urlFoto != "")
                     mDatabase.child("foto").setValue(urlFoto);
-                } else {
+                else
                     Log.d("TAG", "Erro ao enviar foto");
-                }
 
                 fragmentPerfil.executeAsyncTaskGetUserInfo();
-
                 Log.d("downloadUrl-->", "" + downloadUrl);
             }
         });
@@ -106,9 +94,7 @@ public class UserDaoImplementacao implements UserDao {
     }
 
     private void writeNewPost(User user, String userId) {
-
         mDatabase.child(Constantes.DB_ROOT)
                 .child("users").child(userId).child("nome").setValue(user.nome);
-
     }
 }

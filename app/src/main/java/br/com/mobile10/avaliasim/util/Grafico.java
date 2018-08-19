@@ -26,7 +26,7 @@ public class Grafico {
      * @param nome
      */
     public void featureName(Avaliacao2 avaliacao, String nome) {
-        List<ChartData> data = new ArrayList<>();
+        List<ChartData> data;
 
         //chart data with specified colors
         PieChart pieChart = (PieChart) activity.findViewById(R.id.pie_chart);
@@ -52,10 +52,10 @@ public class Grafico {
      * @param title
      */
     public void visaoGeral(Avaliacao2 avaliacao, String title) {
-        List<ChartData> data = new ArrayList<>();
+        List<ChartData> data;
 
         //chart data with specified colors
-        PieChart pieChart = (PieChart) activity.findViewById(R.id.pie_chart);
+        PieChart pieChart = activity.findViewById(R.id.pie_chart);
         pieChart.setAboutChart(title);
         data = new ArrayList<>();
 
@@ -78,10 +78,10 @@ public class Grafico {
      * @param avaliacao
      */
     public void visaoGeralUnicDate(Avaliacao2 avaliacao, String title) {
-        List<ChartData> data = new ArrayList<>();
+        List<ChartData> data;
 
         //chart data with specified colors
-        PieChart pieChart = (PieChart) activity.findViewById(R.id.pie_chart);
+        PieChart pieChart = activity.findViewById(R.id.pie_chart);
         pieChart.setAboutChart(title);
         data = new ArrayList<>();
 
@@ -105,10 +105,10 @@ public class Grafico {
      * @param nome
      */
     public void featureNameUnicDate(Avaliacao2 avaliacao, String nome) {
-        List<ChartData> data = new ArrayList<>();
+        List<ChartData> data;
 
         //chart data with specified colors
-        PieChart pieChart = (PieChart) activity.findViewById(R.id.pie_chart);
+        PieChart pieChart = activity.findViewById(R.id.pie_chart);
         pieChart.setAboutChart(nome);
         data = new ArrayList<>();
 
@@ -130,10 +130,10 @@ public class Grafico {
      * @param avaliacao
      */
     public void visaoGeralRangeDate(Avaliacao2 avaliacao, String title) {
-        List<ChartData> data = new ArrayList<>();
+        List<ChartData> data;
 
         //chart data with specified colors
-        PieChart pieChart = (PieChart) activity.findViewById(R.id.pie_chart);
+        PieChart pieChart = activity.findViewById(R.id.pie_chart);
         pieChart.setAboutChart(title);
         data = new ArrayList<>();
 
@@ -157,10 +157,10 @@ public class Grafico {
      * @param nome
      */
     public void featureNameRangeDate(Avaliacao2 avaliacao, String nome) {
-        List<ChartData> data = new ArrayList<>();
+        List<ChartData> data;
 
         //chart data with specified colors
-        PieChart pieChart = (PieChart) activity.findViewById(R.id.pie_chart);
+        PieChart pieChart = activity.findViewById(R.id.pie_chart);
         pieChart.setAboutChart(nome);
         data = new ArrayList<>();
 

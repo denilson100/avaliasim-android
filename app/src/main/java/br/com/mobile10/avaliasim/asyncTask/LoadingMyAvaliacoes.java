@@ -9,11 +9,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import br.com.mobile10.avaliasim.activity.Main4Activity;
-import br.com.mobile10.avaliasim.fragments.FragmentHome;
 import br.com.mobile10.avaliasim.fragments.FragmentPerfil;
 import br.com.mobile10.avaliasim.modelo.Avaliacao;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
@@ -30,10 +27,8 @@ import br.com.mobile10.avaliasim.util.Constantes;
 public class LoadingMyAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>> {
 
     private FragmentPerfil fragmentPerfil;
-    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constantes.DB_ROOT).child("avaliacoes");
-    private Avaliacao avaliacao = new Avaliacao();
+    private DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constantes.DB_ROOT).child("avaliacoes");
     private List<Avaliacao2> avaliacao2ListFinal = new ArrayList<Avaliacao2>();
-    private Avaliacao2 avaliacao2;
     private List<String> idsList;
 
     public LoadingMyAvaliacoes(FragmentPerfil fragmentPerfil, List<String> idsList) {
@@ -44,16 +39,9 @@ public class LoadingMyAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>>
     @Override
     protected List<Avaliacao2> doInBackground(Void... voids) {
 
-        final List<Avaliacao> listavaliacoes = new ArrayList<Avaliacao>();
-
-        final List<Feature> listaAvaliacoes = new ArrayList<Feature>();
-
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-                List<Avaliacao2> avaliacao2List = new ArrayList<Avaliacao2>();
-
                 for (DataSnapshot av : dataSnapshot.getChildren()) {
 
                     String idAvaliacao = av.getKey();
@@ -67,11 +55,8 @@ public class LoadingMyAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>>
 
                     List<String> listNamesFeatures = new ArrayList<String>();
                     for (DataSnapshot ft : av.child("features").getChildren()) {
-
-                        int key = Integer.parseInt(ft.getKey());
                         String value = ft.getValue().toString();
                         listNamesFeatures.add(value);
-
                     }
 
                     List<Feature> featureList = new ArrayList<Feature>();
@@ -82,7 +67,6 @@ public class LoadingMyAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>>
                         List<MyDate> listDate = new ArrayList<MyDate>();
                         for (DataSnapshot data : list.getChildren()) {
 
-                            String stringDate = list.getKey();
                             int positive = (int) data.child("positive").getChildrenCount();
                             int negative = (int) data.child("negative").getChildrenCount();
 
@@ -101,7 +85,6 @@ public class LoadingMyAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>>
                 }
 
                 onPostExecute(avaliacao2ListFinal);
-//                fragmentPerfil.hideLoadingIndictor();
             }
 
             @Override
@@ -121,7 +104,6 @@ public class LoadingMyAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>>
     @Override
     protected void onPostExecute(List<Avaliacao2> itemList) {
         super.onPostExecute(itemList);
-//        Collections.sort(itemList);
         fragmentPerfil.setListMyAvaliacoes(itemList);
     }
 }

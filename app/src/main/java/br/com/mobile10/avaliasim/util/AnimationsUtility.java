@@ -35,7 +35,6 @@ public class AnimationsUtility extends BaseActivity {
                 view.setBackgroundColor(activity.getResources().getColor(R.color.verde));
                 view.setVisibility(View.VISIBLE);
                 Animator animator = ViewAnimationUtils.createCircularReveal(view, centerX, centerY, 0, radius);
-//                animator.setStartDelay(1000);
                 animator.setDuration(700);
                 animator.start();
 
@@ -67,7 +66,6 @@ public class AnimationsUtility extends BaseActivity {
                 view.setBackgroundColor(activity.getResources().getColor(R.color.vermelho));
                 view.setVisibility(View.VISIBLE);
                 Animator animator = ViewAnimationUtils.createCircularReveal(view, centerX, centerY, 0, radius);
-//                animator.setStartDelay(1000);
                 animator.setDuration(700);
                 animator.start();
 
@@ -99,7 +97,6 @@ public class AnimationsUtility extends BaseActivity {
                 view.setBackgroundColor(activity.getResources().getColor(R.color.branco));
                 view.setVisibility(View.VISIBLE);
                 Animator animator = ViewAnimationUtils.createCircularReveal(view, centerX, centerY, 0, radius);
-//                animator.setStartDelay(1000);
                 animator.setDuration(700);
                 animator.start();
 

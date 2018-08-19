@@ -10,14 +10,12 @@ import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import br.com.mobile10.avaliasim.interfaces.AvaliacaoDao;
 import br.com.mobile10.avaliasim.modelo.Avaliacao;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
-import br.com.mobile10.avaliasim.modelo.Produto;
 import br.com.mobile10.avaliasim.util.Constantes;
 import br.com.mobile10.avaliasim.util.Format;
 
@@ -28,7 +26,6 @@ import br.com.mobile10.avaliasim.util.Format;
 public class AvaliacaoDaoImplementacao implements AvaliacaoDao {
 
     private DatabaseReference mDatabase;
-    String dataAtual = Format.Date(Constantes.DATA_ATUAL);
 
     @Override
     public void newAvaliacao(final Avaliacao2 avaliacao, final String userId) {
@@ -57,26 +54,20 @@ public class AvaliacaoDaoImplementacao implements AvaliacaoDao {
 
 
     private void writeNewPost(Avaliacao2 avaliacao, String userId) {
-
-//        String key1 = mDatabase.push().getKey();
-
         String key = mDatabase.child(Constantes.DB_ROOT)
                 .child("avaliacoes")
                 .push().getKey();
-//        Avaliacao av = new Avaliacao(key1, avaliacao.title, avaliacao.type, avaliacao.author,
-//                avaliacao.visible, avaliacao.cidade, avaliacao.estado, avaliacao.timeStamp, avaliacao.features);
+
         long timeStamp = 0;
         List<String> list = new ArrayList<String>();
-        for (int i=0; i < avaliacao.features.size(); i++) {
-            list.add(avaliacao.features.get(i));
-        }
-        Avaliacao2 av = new Avaliacao2(userId, avaliacao.cidade, avaliacao.estado, list, key, timeStamp, avaliacao.title, avaliacao.type, true);
 
-        Map<String, Object> postValues = av.toMap();
+        for (int i = 0; i < avaliacao.features.size(); i++)
+            list.add(avaliacao.features.get(i));
+
+        Avaliacao2 av = new Avaliacao2(userId, avaliacao.cidade, avaliacao.estado, list, key, timeStamp, avaliacao.title, avaliacao.type, true);
 
         Avaliacao av2 = new Avaliacao(key);
         Map<String, Object> postValuesPrivate = av2.toMap2();
-
 
         mDatabase.child(Constantes.DB_ROOT)
                 .child("avaliacoes").child(key).setValue(av);

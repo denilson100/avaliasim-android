@@ -1,13 +1,11 @@
 package br.com.mobile10.avaliasim.activity;
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -22,25 +20,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.shagi.materialdatepicker.date.DatePickerFragmentDialog;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.adapter.RecyclerViewAdapterDetAvaliacoes;
 import br.com.mobile10.avaliasim.adapter.RecyclerViewAdapterFeatures;
 import br.com.mobile10.avaliasim.asyncTask.LoadingAvaliacaoPorID;
-import br.com.mobile10.avaliasim.asyncTask.LoadingAvaliacoesGetTotal;
 import br.com.mobile10.avaliasim.auth.EmailPasswordActivity;
 import br.com.mobile10.avaliasim.fragments.DatePickerFragment;
 import br.com.mobile10.avaliasim.fragments.DateRangePickerFragment;
-import br.com.mobile10.avaliasim.libBarGraph.HorizontalBar;
-import br.com.mobile10.avaliasim.libBarGraph.model.BarItem;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
-import br.com.mobile10.avaliasim.modelo.Feature;
-import br.com.mobile10.avaliasim.modelo.MyDate;
 import br.com.mobile10.avaliasim.util.AnimationsUtility;
 import br.com.mobile10.avaliasim.util.AvalicaoUtil;
 import br.com.mobile10.avaliasim.util.BaseActivity;
@@ -59,15 +49,11 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
     private FirebaseAuth mAuth;
     FirebaseUser users;
 
-    TextView txtTitle, txtType;
-    HorizontalBar horizontal;
     public static boolean keyBuscaPorId;
     private RelativeLayout fundoDinamic;
-    ObjectAnimator objectanimator;
     FloatingActionButton fab, fabAllDate, fabRangeDate, fabUnicDate;
     TextView txtData;
 
-    public RecyclerView.LayoutManager lLayout;
     RecyclerViewAdapterFeatures rcAdapter;
     RecyclerView rView;
 
@@ -87,31 +73,31 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
         FirebaseUser user = mAuth.getCurrentUser();
         users = user;
 
-        if(getIntent() != null) {
+        if (getIntent() != null) {
             avaliacao = (Avaliacao2) getIntent().getSerializableExtra("avaliacao");
-        } else  {
+        } else {
             showToast("Tente novamente");
             finish();
         }
 
-        txtData = (TextView) findViewById(R.id.data);
-        fundoDinamic = (RelativeLayout) findViewById(R.id.fundo);
-        fundoDinamic = (RelativeLayout) findViewById(R.id.fundo);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        txtData = findViewById(R.id.data);
+        fundoDinamic = findViewById(R.id.fundo);
+        fundoDinamic = findViewById(R.id.fundo);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(avaliacao.title);
         setSupportActionBar(toolbar);
         updateUI(avaliacao);
 
-        fabAllDate = (FloatingActionButton) findViewById(R.id.fab_all_date);
-        fabRangeDate = (FloatingActionButton) findViewById(R.id.fab_range_date);
-        fabUnicDate = (FloatingActionButton) findViewById(R.id.fab_unic_date);
+        fabAllDate = findViewById(R.id.fab_all_date);
+        fabRangeDate = findViewById(R.id.fab_range_date);
+        fabUnicDate = findViewById(R.id.fab_unic_date);
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(users != null) {
+                if (users != null) {
 
                     AnimationsUtility.showCircularAnimationAvaliar(DetalhesAvaliacao.this, fundoDinamic, R.id.conteudo);
 
@@ -138,7 +124,7 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
         this.featureList = AvalicaoUtil.getListFeature(avaliacao);
 
         // Recyleview
-        rView = (RecyclerView) findViewById(R.id.recycler_view);
+        rView = findViewById(R.id.recycler_view);
         rView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         rView.setHasFixedSize(true);
 
@@ -152,9 +138,10 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
 
         final LineView lineView = (LineView) findViewById(R.id.line_view);
         initLineView(lineView);
-        Button lineButton = (Button) findViewById(R.id.line_button);
+        Button lineButton = findViewById(R.id.line_button);
         lineButton.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
                 randomSet(lineView);
             }
         });
@@ -164,23 +151,17 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
 
 
     public void updateUI(Avaliacao2 avaliacao) {
-//        TextView txtTitle = (TextView) findViewById(R.id.title);
-//        txtTitle.setText(avaliacao.title);
-
-        TextView txtType = (TextView) findViewById(R.id.type);
+        TextView txtType = findViewById(R.id.type);
         txtType.setText(avaliacao.type);
 
-        TextView txtTotal = (TextView) findViewById(R.id.total);
+        TextView txtTotal = findViewById(R.id.total);
         txtTotal.setText(AvalicaoUtil.getTotoalDeAvaliacoes(avaliacao));
-
-//        horizontal = findViewById(R.id.horizontal);
-//        horizontal.init(this).hasAnimation(true).addAll(itens(avaliacao)).build();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(keyBuscaPorId) {
+        if (keyBuscaPorId) {
             executeAsyncTaskGetAvaliacaoPorId();
             keyBuscaPorId = false;
         }
@@ -194,20 +175,14 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
         AnimationsUtility.showCircularAnimationAvaliar(this, fundoDinamic, R.id.conteudo);
     }
 
-    private void executeAsyncTaskGetTotal() {
-        new LoadingAvaliacoesGetTotal(this, avaliacao).execute();
-    }
-
     private void executeAsyncTaskGetAvaliacaoPorId() {
         new LoadingAvaliacaoPorID(this, avaliacao.idAvaliacao).execute();
     }
 
     public void setAvaliacoesTotal(String result) {
-        TextView txtTotal = (TextView) findViewById(R.id.total);
-        if(result != null) {
+        TextView txtTotal = findViewById(R.id.total);
+        if (result != null)
             txtTotal.setText(result);
-//            atualizarLista(avaliacao.listaAvaliacoes);
-        }
     }
 
     public void moverButtonParaDireita() {
@@ -222,41 +197,9 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
 
     }
 
-    private List<BarItem> itens(Avaliacao2 avaliacao) {
-        horizontal.removeAll();
-        List<BarItem> items = new ArrayList<>();
-
-        for (Feature feature : avaliacao.listaAvaliacoes) {
-            int positive = 0;
-            int negative = 0;
-            for (MyDate date : feature.date) {
-                positive += date.positive;
-                negative += date.negative;
-            }
-
-            items.add(new BarItem(feature.name, (double) positive, (double) negative,
-                    ContextCompat.getColor(this, R.color.verde),
-                    ContextCompat.getColor(this, R.color.vermelho),
-                    Color.WHITE,
-                    Color.WHITE));
-        }
-
-        return items;
-    }
-
     public void setAvaliacaoPorId(Avaliacao2 avaliacao) {
-        if(avaliacao != null)
+        if (avaliacao != null)
             updateUI(avaliacao);
-    }
-
-    public void timer() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                executeAsyncTaskGetAvaliacaoPorId();
-                hideLoadingIndictor();
-            }
-        }, 3000);
     }
 
     @Override
@@ -293,11 +236,6 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
 
     }
 
-    public void startCalendar() {
-        DateRangePickerFragment dateRangePickerFragment= DateRangePickerFragment.newInstance(DetalhesAvaliacao.this,false);
-        dateRangePickerFragment.show(getSupportFragmentManager(),"datePicker");
-    }
-
     @Override
     public void onDateSet(DatePickerFragmentDialog view, int year, int monthOfYear, int dayOfMonth) {
         Log.d("TAG", "Ano: " + year + " Mes: " + monthOfYear + " Dia: " + dayOfMonth);
@@ -305,7 +243,7 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
 
     @Override
     public void onDateRangeSelected(int startDay, int startMonth, int startYear, int endDay, int endMonth, int endYear) {
-        Log.d("range : ","from: "+startDay+"-"+ (startMonth + 1) +"-"+startYear+" to : "+endDay+"-"+ (endMonth + 1) +"-"+endYear );
+        Log.d("range : ", "from: " + startDay + "-" + (startMonth + 1) + "-" + startYear + " to : " + endDay + "-" + (endMonth + 1) + "-" + endYear);
         txtData.setText("Data: " + startDay + "/" + (startMonth + 1) + "/" + startYear + " a " + endDay + "/" + (endMonth + 1) + "/" + endYear);
         Constantes.DATE1 = Format.convertStringInDate(startDay + "-" + (startMonth + 1) + "-" + startYear);
         Constantes.DATE2 = Format.convertStringInDate(endDay + "-" + (endMonth + 1) + "-" + endYear);
@@ -318,25 +256,25 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
     }
 
     public void clickIconDateRange(View view) {
-        DateRangePickerFragment dateRangePickerFragment= DateRangePickerFragment.newInstance(DetalhesAvaliacao.this,false);
-        dateRangePickerFragment.show(getSupportFragmentManager(),"datePicker");
+        DateRangePickerFragment dateRangePickerFragment = DateRangePickerFragment.newInstance(DetalhesAvaliacao.this, false);
+        dateRangePickerFragment.show(getSupportFragmentManager(), "datePicker");
 
         updateColorFab("range");
     }
 
     public void clickIconUnicDate(View view) {
-        DatePickerFragment datePickerFragment = DatePickerFragment.newInstance(DetalhesAvaliacao.this,false);
-        datePickerFragment.show(getSupportFragmentManager(),"datePicker");
+        DatePickerFragment datePickerFragment = DatePickerFragment.newInstance(DetalhesAvaliacao.this, false);
+        datePickerFragment.show(getSupportFragmentManager(), "datePicker");
 
         updateColorFab("unic");
     }
 
     @Override
     public void onDateSelected(int day, int month, int year) {
-        Log.d("range", "" + day + "-" + (month +  1) + "-" + year);
-        txtData.setText("Data: " + day + "/" + (month + 1) +  "/" + year);
+        Log.d("range", "" + day + "-" + (month + 1) + "-" + year);
+        txtData.setText("Data: " + day + "/" + (month + 1) + "/" + year);
 
-        String dateInString = day + "-" + (month +  1) + "-" + year;
+        String dateInString = day + "-" + (month + 1) + "-" + year;
         Constantes.DATE_UNIC = Format.convertStringInDate(dateInString);
         key = unicDate;
 
@@ -370,7 +308,7 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
             test.add(String.valueOf(i + 1));
         }
         lineView.setBottomTextList(test);
-        lineView.setColorArray(new int[] {
+        lineView.setColorArray(new int[]{
                 Color.parseColor("#F44336"), Color.parseColor("#9C27B0"),
                 Color.parseColor("#2196F3"), Color.parseColor("#009688")
         });
@@ -381,21 +319,18 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
     private void randomSet(LineView lineView) {
         ArrayList<Integer> dataList = new ArrayList<>();
         float random = (float) (Math.random() * 9 + 1);
-        for (int i = 0; i < randomint; i++) {
+        for (int i = 0; i < randomint; i++)
             dataList.add((int) (Math.random() * random));
-        }
 
         ArrayList<Integer> dataList2 = new ArrayList<>();
         random = (int) (Math.random() * 9 + 1);
-        for (int i = 0; i < randomint; i++) {
+        for (int i = 0; i < randomint; i++)
             dataList2.add((int) (Math.random() * random));
-        }
 
         ArrayList<Integer> dataList3 = new ArrayList<>();
         random = (int) (Math.random() * 9 + 1);
-        for (int i = 0; i < randomint; i++) {
+        for (int i = 0; i < randomint; i++)
             dataList3.add((int) (Math.random() * random));
-        }
 
         ArrayList<ArrayList<Integer>> dataLists = new ArrayList<>();
         dataLists.add(dataList);

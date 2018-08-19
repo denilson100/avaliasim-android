@@ -1,6 +1,5 @@
 package br.com.mobile10.avaliasim.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -11,19 +10,10 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.mobile10.avaliasim.R;
-import br.com.mobile10.avaliasim.dao.AvaliacaoDaoImplementacao;
 import br.com.mobile10.avaliasim.dao.FeatureDaoImplementacao;
-import br.com.mobile10.avaliasim.interfaces.AvaliacaoDao;
 import br.com.mobile10.avaliasim.interfaces.FeatureDao;
-import br.com.mobile10.avaliasim.modelo.Avaliacao;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
-import br.com.mobile10.avaliasim.modelo.Feature;
-import br.com.mobile10.avaliasim.modelo.MyDate;
-import br.com.mobile10.avaliasim.modelo.Produto;
 import br.com.mobile10.avaliasim.util.AnimationsUtility;
 import br.com.mobile10.avaliasim.util.BaseActivity;
 
@@ -59,18 +49,16 @@ public class Feature1Activity extends BaseActivity implements FeatureDao {
             finish();
         }
 
-        fundoDinamic = (RelativeLayout) findViewById(R.id.fundo);
-        imgFundoAnimation = (ImageView) findViewById(R.id.image_animation);
-        txtTitle = (TextView) findViewById(R.id.title);
+        fundoDinamic = findViewById(R.id.fundo);
+        imgFundoAnimation = findViewById(R.id.image_animation);
+        txtTitle = findViewById(R.id.title);
         txtTitle.setText(avaliacao.title);
 
-        txtType = (TextView) findViewById(R.id.type);
+        txtType = findViewById(R.id.type);
         txtType.setText(avaliacao.type);
 
-        txtFeature = (TextView) findViewById(R.id.feature);
+        txtFeature = findViewById(R.id.feature);
         updateUI();
-
-//        avaliarFeature1(avaliacao, users.getUid(), "positive");
     }
 
     public void updateUI() {

@@ -1,14 +1,5 @@
 package br.com.mobile10.avaliasim.util;
 
-import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import br.com.mobile10.avaliasim.R;
-import br.com.mobile10.avaliasim.libBarGraph.model.BarItem;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 import br.com.mobile10.avaliasim.modelo.Feature;
 import br.com.mobile10.avaliasim.modelo.MyDate;

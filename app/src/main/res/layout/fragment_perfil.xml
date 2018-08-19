@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -68,7 +66,7 @@
                                 android:layout_gravity="bottom|right"
                                 android:layout_margin="16dp"
                                 android:clickable="true"
-                                android:src="@drawable/ic_edit_black_24dp"
+                                app:srcCompat="@drawable/ic_edit_black_24dp"
                                 app:fabSize="mini"
                                 app:backgroundTint="@color/branco"
                                 app:layout_anchorGravity="bottom|right|end"
@@ -92,7 +90,7 @@
                                 android:layout_height="100dp"
                                 android:background="@drawable/shape_circle"
                                 android:backgroundTint="@color/colorPrimary"
-                                android:src="@drawable/ic_person_black_24dp" />
+                                app:srcCompat="@drawable/ic_person_black_24dp" />
 
                             </RelativeLayout>
 
@@ -112,7 +110,7 @@
                                 android:layout_margin="16dp"
                                 android:rotation="90"
                                 android:clickable="true"
-                                android:src="@drawable/ic_exit_to_app_black_24dp"
+                                app:srcCompat="@drawable/ic_exit_to_app_black_24dp"
                                 app:fabSize="mini"
                                 app:backgroundTint="@color/branco"
                                 app:layout_anchorGravity="bottom|right|end"
@@ -223,6 +221,9 @@
 
     </ScrollView>
 
+
+    <!-- tela com botão para entrar na tela de login -->
+
     <RelativeLayout
         android:id="@+id/nao_logado"
         android:layout_width="match_parent"
@@ -234,8 +235,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_alignParentLeft="true">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -246,15 +250,16 @@
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@drawable/ic_person_black_24dp" />
+                app:srcCompat="@drawable/ic_person_black_24dp"
+                android:contentDescription="Ícone representando uma pessoa" />
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/login"
                 android:layout_width="150dp"
                 android:layout_height="40dp"
                 android:background="@color/colorPrimaryDark"
-                android:textColor="@color/branco"
-                android:text="Login"/>
+                android:text="Login"
+                android:textColor="@color/branco" />
 
         </LinearLayout>
 

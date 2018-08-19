@@ -1,6 +1,5 @@
 package br.com.mobile10.avaliasim.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,8 +12,6 @@ import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.activity.DetalhesAvaliacao;
-import br.com.mobile10.avaliasim.fragments.FragmentPerfil;
-import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 
 
 /**

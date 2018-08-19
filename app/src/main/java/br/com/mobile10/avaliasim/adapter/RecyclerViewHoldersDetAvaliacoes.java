@@ -3,12 +3,7 @@ package br.com.mobile10.avaliasim.adapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.allen.comparsechart.CompareIndicator;
-import com.github.mikephil.charting.charts.HorizontalBarChart;
 
 import br.com.mobile10.avaliasim.R;
 

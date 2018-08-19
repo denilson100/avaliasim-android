@@ -19,13 +19,11 @@ public class RecyclerViewHoldersFeatures extends RecyclerView.ViewHolder impleme
     public RecyclerViewHoldersFeatures(View itemView) {
         super(itemView);
         itemView.setOnClickListener(this);
-        txtTitle = (TextView)itemView.findViewById(R.id.title);
-
+        txtTitle = itemView.findViewById(R.id.title);
     }
 
     @Override
     public void onClick(View view) {
         Toast.makeText(view.getContext(), "Clicked Country Position = " + getPosition(), Toast.LENGTH_SHORT).show();
-
     }
 }

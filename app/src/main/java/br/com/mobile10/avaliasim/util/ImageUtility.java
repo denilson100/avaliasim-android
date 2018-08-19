@@ -5,8 +5,6 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.provider.MediaStore;
@@ -20,25 +18,6 @@ import java.util.List;
  */
 
 public class ImageUtility {
-
-    /**
-     *
-     * @param path
-     * @param sampleSize 1 = 100%, 2 = 50%(1/2), 4 = 25%(1/4), ...
-     * @return
-     */
-    public Bitmap getBitmapFromLocalPath(String path, int sampleSize) {
-        try {
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = sampleSize;
-            return BitmapFactory.decodeFile(path, options);
-        }
-        catch(Exception e) {
-            //  Logger.e(e.toString());
-        }
-
-        return null;
-    }
 
     /**
      * Create a chooser intent to select the  source to get image from.<br/>
@@ -109,7 +88,7 @@ public class ImageUtility {
     }
 
     /**
-     * Get the URI of the selected image from  {@link #getPickImageChooserIntent()}.<br/>
+     * Get the URI of the selected image from  {@link #getPickImageChooserIntent(Activity)}.<br/>
      * Will return the correct URI for camera  and gallery image.
      *
      * @param data the returned data of the  activity result
@@ -122,6 +101,4 @@ public class ImageUtility {
         }
         return isCamera ?  getCaptureImageOutputUri(activity) : data.getData();
     }
-
-
 }

@@ -15,8 +15,6 @@ import java.util.Map;
 public class DataAtual {
     public long dataAtual;
 
-    public DataAtual() {}
-
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();

@@ -6,8 +6,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mikhaellopez.circularimageview.CircularImageView;
-
 import br.com.mobile10.avaliasim.R;
 
 

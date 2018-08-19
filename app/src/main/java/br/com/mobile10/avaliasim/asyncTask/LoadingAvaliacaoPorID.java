@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.mobile10.avaliasim.activity.DetalhesAvaliacao;
-import br.com.mobile10.avaliasim.modelo.Avaliacao;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 import br.com.mobile10.avaliasim.modelo.Feature;
 import br.com.mobile10.avaliasim.modelo.MyDate;
@@ -40,16 +39,9 @@ public class LoadingAvaliacaoPorID extends AsyncTask<Void, Void, Avaliacao2> {
     @Override
     protected Avaliacao2 doInBackground(Void... voids) {
 
-        final List<Avaliacao> listavaliacoes = new ArrayList<Avaliacao>();
-
-        final List<Feature> listaAvaliacoes = new ArrayList<Feature>();
-
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-                List<Avaliacao2> avaliacao2List = new ArrayList<Avaliacao2>();
-
                 for (DataSnapshot av : dataSnapshot.getChildren()) {
 
                     if (idDaBusca.equalsIgnoreCase(av.getKey())) {
@@ -65,11 +57,8 @@ public class LoadingAvaliacaoPorID extends AsyncTask<Void, Void, Avaliacao2> {
 
                         List<String> listNamesFeatures = new ArrayList<String>();
                         for (DataSnapshot ft : av.child("features").getChildren()) {
-
-                            int key = Integer.parseInt(ft.getKey());
                             String value = ft.getValue().toString();
                             listNamesFeatures.add(value);
-
                         }
 
                         List<Feature> featureList = new ArrayList<Feature>();
@@ -79,14 +68,11 @@ public class LoadingAvaliacaoPorID extends AsyncTask<Void, Void, Avaliacao2> {
 
                             List<MyDate> listDate = new ArrayList<MyDate>();
                             for (DataSnapshot data : list.getChildren()) {
-
-                                String stringDate = list.getKey();
                                 int positive = (int) data.child("positive").getChildrenCount();
                                 int negative = (int) data.child("negative").getChildrenCount();
 
                                 MyDate myDate1 = new MyDate(positive, negative);
                                 listDate.add(myDate1);
-
                             }
 
                             Feature feature = new Feature(featureName, listDate);
@@ -94,7 +80,6 @@ public class LoadingAvaliacaoPorID extends AsyncTask<Void, Void, Avaliacao2> {
 
                         }
 
-//                    String[] stringArray = listNamesFeatures.toArray(new String[0]);
                         avaliacao2 = new Avaliacao2(author, cidade, estado, listNamesFeatures, idAvaliacao, timeStamp, title, type, visible, featureList);
                     }
                 }

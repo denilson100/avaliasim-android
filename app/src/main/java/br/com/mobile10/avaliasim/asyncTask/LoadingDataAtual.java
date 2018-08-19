@@ -8,10 +8,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import br.com.mobile10.avaliasim.activity.HomeActivity2;
 import br.com.mobile10.avaliasim.fragments.FragmentHome;
 import br.com.mobile10.avaliasim.util.Constantes;
 
@@ -23,15 +19,9 @@ import br.com.mobile10.avaliasim.util.Constantes;
 
 public class LoadingDataAtual extends AsyncTask<Void, Void, Long> {
 
-//    private HomeActivity2 activity;
     private FragmentHome activity;
-    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constantes.DB_ROOT).child("dataAtual");
-    Long timeStamp;
-
-//    public LoadingDataAtual(HomeActivity2 activity) {
-//        this.activity = activity;
-//
-//    }
+    private DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constantes.DB_ROOT).child("dataAtual");
+    private Long timeStamp;
 
     public LoadingDataAtual(FragmentHome fragmentHome) {
         this.activity = fragmentHome;
@@ -46,13 +36,10 @@ public class LoadingDataAtual extends AsyncTask<Void, Void, Long> {
 
                 try {
                     timeStamp = (Long) dataSnapshot.child("timeStamp").getValue();
-
                 } catch (ClassCastException e){
                     // Captura a excecao caso tenha algum dado inesperado. Tipo latitude == 0.
                     e.printStackTrace();
                 }
-
-//                activity.hideLoadingIndictor();
                 Constantes.DATA_ATUAL = timeStamp;
             }
 
@@ -68,7 +55,6 @@ public class LoadingDataAtual extends AsyncTask<Void, Void, Long> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-//        activity.showLoadingIndicator();
     }
 
     @Override

@@ -1,8 +1,6 @@
 package br.com.mobile10.avaliasim.activity;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -20,17 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
-import br.com.mobile10.avaliasim.adapter.RecyclerViewAdapter;
-import br.com.mobile10.avaliasim.asyncTask.LoadingAvaliacoes;
-import br.com.mobile10.avaliasim.asyncTask.LoadingDataAtual;
 import br.com.mobile10.avaliasim.dao.AvaliacaoDaoImplementacao;
-import br.com.mobile10.avaliasim.dao.DataAtualDaoImplementacao;
 import br.com.mobile10.avaliasim.interfaces.AvaliacaoDao;
-import br.com.mobile10.avaliasim.interfaces.DataAtualDao;
-import br.com.mobile10.avaliasim.modelo.Avaliacao;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
-import br.com.mobile10.avaliasim.modelo.Feature;
-import br.com.mobile10.avaliasim.modelo.Produto;
 import br.com.mobile10.avaliasim.util.BaseActivity;
 import br.com.mobile10.avaliasim.util.ListEstados;
 
@@ -54,9 +44,9 @@ public class NewAvaliacao extends BaseActivity implements AvaliacaoDao {
         FirebaseUser user = mAuth.getCurrentUser();
         users = user;
 
-        editTitle = (EditText) findViewById(R.id.edit_title);
-        editFeature = (EditText) findViewById(R.id.edit_features);
-        editCidade = (EditText) findViewById(R.id.edit_cidade);
+        editTitle = findViewById(R.id.edit_title);
+        editFeature = findViewById(R.id.edit_features);
+        editCidade = findViewById(R.id.edit_cidade);
 
         List<String> list = new ArrayList<String>();
         list.add("Produto");
@@ -67,8 +57,7 @@ public class NewAvaliacao extends BaseActivity implements AvaliacaoDao {
         // Bloco Spinner para pegar click
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, list);
-        materialDesignSpinner = (MaterialBetterSpinner)
-                findViewById(R.id.categoria);
+        materialDesignSpinner = findViewById(R.id.categoria);
         materialDesignSpinner.setAdapter(arrayAdapter);
         materialDesignSpinner.addTextChangedListener(new TextWatcher() {
             @Override

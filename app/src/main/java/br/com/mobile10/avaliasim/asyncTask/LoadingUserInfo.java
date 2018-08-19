@@ -8,12 +8,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import br.com.mobile10.avaliasim.activity.Main4Activity;
 import br.com.mobile10.avaliasim.fragments.FragmentPerfil;
-import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 import br.com.mobile10.avaliasim.modelo.User;
 import br.com.mobile10.avaliasim.util.Constantes;
 
