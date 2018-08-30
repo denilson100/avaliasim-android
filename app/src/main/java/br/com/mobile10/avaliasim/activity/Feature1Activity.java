@@ -44,7 +44,7 @@ public class Feature1Activity extends BaseActivity implements FeatureDao {
         if(getIntent() != null) {
             avaliacao = (Avaliacao2) getIntent().getSerializableExtra("avaliacao");
         } else  {
-            showToast("Tente novamente");
+//            showToast("Tente novamente");
             finish();
         }
 
@@ -71,7 +71,7 @@ public class Feature1Activity extends BaseActivity implements FeatureDao {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    showToast("Avaliado com sucesso!");
+//                    showToast("Avaliado com sucesso!");
                     finish();
                 }
             }, 1000);

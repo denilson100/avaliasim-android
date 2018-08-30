@@ -32,9 +32,9 @@ import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 import br.com.mobile10.avaliasim.util.AnimationsUtility;
 import br.com.mobile10.avaliasim.util.AvalicaoUtil;
 import br.com.mobile10.avaliasim.util.BaseActivity;
-import br.com.mobile10.avaliasim.util.Constantes;
+import br.com.mobile10.avaliasim.util.Constants;
 import br.com.mobile10.avaliasim.util.Format;
-import br.com.mobile10.avaliasim.util.Grafico;
+import br.com.mobile10.avaliasim.util.Graphic;
 import im.dacer.androidcharts.LineView;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
@@ -74,7 +74,7 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
         if (getIntent() != null) {
             avaliacao = (Avaliacao2) getIntent().getSerializableExtra("avaliacao");
         } else {
-            showToast("Tente novamente");
+//            showToast("Tente novamente");
             finish();
         }
 
@@ -133,8 +133,8 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
         rView.setAdapter(rcAdapter);
         rcAdapter.setOnClick(this);
 
-        Grafico grafico = new Grafico(this);
-        grafico.visaoGeral(avaliacao, "Média Geral");
+        Graphic graphic = new Graphic(this);
+        graphic.visaoGeral(avaliacao, "Média Geral");
 
         final LineView lineView = (LineView) findViewById(R.id.line_view);
         initLineView(lineView);
@@ -206,28 +206,28 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
     public void onItemClickFeature(int position) {
         Log.d("TAG", "Click: " + featureList.get(position));
 
-        Grafico grafico = new Grafico(this);
+        Graphic graphic = new Graphic(this);
 
         switch (key) {
             case geral:
                 if (position == 0) {
-                    grafico.visaoGeral(avaliacao, featureList.get(position));
+                    graphic.visaoGeral(avaliacao, featureList.get(position));
                 } else {
-                    grafico.featureName(avaliacao, featureList.get(position));
+                    graphic.featureName(avaliacao, featureList.get(position));
                 }
                 break;
             case unicDate:
                 if (position == 0) {
-                    grafico.visaoGeralUnicDate(avaliacao, featureList.get(position));
+                    graphic.visaoGeralUnicDate(avaliacao, featureList.get(position));
                 } else {
-                    grafico.featureNameUnicDate(avaliacao, featureList.get(position));
+                    graphic.featureNameUnicDate(avaliacao, featureList.get(position));
                 }
                 break;
             case rangeDate:
                 if (position == 0) {
-                    grafico.visaoGeralRangeDate(avaliacao, featureList.get(position));
+                    graphic.visaoGeralRangeDate(avaliacao, featureList.get(position));
                 } else {
-                    grafico.featureNameRangeDate(avaliacao, featureList.get(position));
+                    graphic.featureNameRangeDate(avaliacao, featureList.get(position));
                 }
                 break;
             default:
@@ -245,8 +245,8 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
     public void onDateRangeSelected(int startDay, int startMonth, int startYear, int endDay, int endMonth, int endYear) {
         Log.d("range : ", "from: " + startDay + "-" + (startMonth + 1) + "-" + startYear + " to : " + endDay + "-" + (endMonth + 1) + "-" + endYear);
         txtData.setText("Data: " + startDay + "/" + (startMonth + 1) + "/" + startYear + " a " + endDay + "/" + (endMonth + 1) + "/" + endYear);
-        Constantes.DATE1 = Format.convertStringInDate(startDay + "-" + (startMonth + 1) + "-" + startYear);
-        Constantes.DATE2 = Format.convertStringInDate(endDay + "-" + (endMonth + 1) + "-" + endYear);
+        Constants.DATE1 = Format.convertStringInDate(startDay + "-" + (startMonth + 1) + "-" + startYear);
+        Constants.DATE2 = Format.convertStringInDate(endDay + "-" + (endMonth + 1) + "-" + endYear);
         key = rangeDate;
 
     }
@@ -275,7 +275,7 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
         txtData.setText("Data: " + day + "/" + (month + 1) + "/" + year);
 
         String dateInString = day + "-" + (month + 1) + "-" + year;
-        Constantes.DATE_UNIC = Format.convertStringInDate(dateInString);
+        Constants.DATE_UNIC = Format.convertStringInDate(dateInString);
         key = unicDate;
 
     }

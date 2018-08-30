@@ -16,8 +16,7 @@ import java.util.Map;
 import br.com.mobile10.avaliasim.interfaces.AvaliacaoDao;
 import br.com.mobile10.avaliasim.modelo.Avaliacao;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
-import br.com.mobile10.avaliasim.util.Constantes;
-import br.com.mobile10.avaliasim.util.Format;
+import br.com.mobile10.avaliasim.util.Constants;
 
 /**
  * Created by denmont on 16/04/2018.
@@ -30,7 +29,7 @@ public class AvaliacaoDaoImplementacao implements AvaliacaoDao {
     @Override
     public void newAvaliacao(final Avaliacao2 avaliacao, final String userId) {
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child(Constantes.DB_ROOT)
+        mDatabase.child(Constants.DB_ROOT)
                 .child("avaliacaoes")
                 .addListenerForSingleValueEvent(
                         new ValueEventListener() {
@@ -54,7 +53,7 @@ public class AvaliacaoDaoImplementacao implements AvaliacaoDao {
 
 
     private void writeNewPost(Avaliacao2 avaliacao, String userId) {
-        String key = mDatabase.child(Constantes.DB_ROOT)
+        String key = mDatabase.child(Constants.DB_ROOT)
                 .child("avaliacoes")
                 .push().getKey();
 
@@ -69,13 +68,13 @@ public class AvaliacaoDaoImplementacao implements AvaliacaoDao {
         Avaliacao av2 = new Avaliacao(key);
         Map<String, Object> postValuesPrivate = av2.toMap2();
 
-        mDatabase.child(Constantes.DB_ROOT)
+        mDatabase.child(Constants.DB_ROOT)
                 .child("avaliacoes").child(key).setValue(av);
 
-        mDatabase.child(Constantes.DB_ROOT)
+        mDatabase.child(Constants.DB_ROOT)
                 .child("avaliacoes").child(key).child("timeStamp").setValue(ServerValue.TIMESTAMP);
 
-        mDatabase.child(Constantes.DB_ROOT)
+        mDatabase.child(Constants.DB_ROOT)
                 .child("users")
                 .child(userId).child("myAvaliacoes").child(key).setValue(postValuesPrivate);
     }

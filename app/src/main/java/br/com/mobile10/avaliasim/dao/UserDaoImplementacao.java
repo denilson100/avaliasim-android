@@ -21,7 +21,7 @@ import java.io.ByteArrayOutputStream;
 import br.com.mobile10.avaliasim.fragments.ProfileFragment;
 import br.com.mobile10.avaliasim.interfaces.UserDao;
 import br.com.mobile10.avaliasim.modelo.User;
-import br.com.mobile10.avaliasim.util.Constantes;
+import br.com.mobile10.avaliasim.util.Constants;
 
 public class UserDaoImplementacao implements UserDao {
 
@@ -55,7 +55,7 @@ public class UserDaoImplementacao implements UserDao {
                 String urlFoto = "" + downloadUrl;
 
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                mDatabase = database.getReference(Constantes.DB_ROOT).child("users").child(userId);
+                mDatabase = database.getReference(Constants.DB_ROOT).child("users").child(userId);
 
                 if (urlFoto != "")
                     mDatabase.child("foto").setValue(urlFoto);
@@ -71,7 +71,7 @@ public class UserDaoImplementacao implements UserDao {
     @Override
     public void editUserInfo(final User user, final String userId) {
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child(Constantes.DB_ROOT)
+        mDatabase.child(Constants.DB_ROOT)
                 .child("users").child(userId)
                 .addListenerForSingleValueEvent(
                         new ValueEventListener() {
@@ -94,7 +94,7 @@ public class UserDaoImplementacao implements UserDao {
     }
 
     private void writeNewPost(User user, String userId) {
-        mDatabase.child(Constantes.DB_ROOT)
+        mDatabase.child(Constants.DB_ROOT)
                 .child("users").child(userId).child("nome").setValue(user.nome);
     }
 }

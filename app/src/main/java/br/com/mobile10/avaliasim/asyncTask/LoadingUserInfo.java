@@ -10,7 +10,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import br.com.mobile10.avaliasim.fragments.ProfileFragment;
 import br.com.mobile10.avaliasim.modelo.User;
-import br.com.mobile10.avaliasim.util.Constantes;
+import br.com.mobile10.avaliasim.util.Constants;
 
 
 /**
@@ -22,7 +22,7 @@ public class LoadingUserInfo extends AsyncTask<Void, Void, User> {
 
     private ProfileFragment fragmentPerfil;
     private String userId;
-    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constantes.DB_ROOT).child("users");
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constants.DB_ROOT).child("users");
     private User user;
 
     public LoadingUserInfo(ProfileFragment fragmentPerfil, String userId) {

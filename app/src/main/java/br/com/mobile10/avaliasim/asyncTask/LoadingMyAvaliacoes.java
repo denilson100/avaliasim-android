@@ -15,7 +15,7 @@ import br.com.mobile10.avaliasim.fragments.ProfileFragment;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 import br.com.mobile10.avaliasim.modelo.Feature;
 import br.com.mobile10.avaliasim.modelo.MyDate;
-import br.com.mobile10.avaliasim.util.Constantes;
+import br.com.mobile10.avaliasim.util.Constants;
 
 
 /**
@@ -26,7 +26,7 @@ import br.com.mobile10.avaliasim.util.Constantes;
 public class LoadingMyAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>> {
 
     private ProfileFragment fragmentPerfil;
-    private DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constantes.DB_ROOT).child("avaliacoes");
+    private DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constants.DB_ROOT).child("avaliacoes");
     private List<Avaliacao2> avaliacao2ListFinal = new ArrayList<Avaliacao2>();
     private List<String> idsList;
 

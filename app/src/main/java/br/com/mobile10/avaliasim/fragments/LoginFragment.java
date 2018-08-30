@@ -1,6 +1,6 @@
 package br.com.mobile10.avaliasim.fragments;
 
-import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,6 +22,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.auth.ResetActivity;
+import br.com.mobile10.avaliasim.util.InterfaceUtils;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class LoginFragment extends Fragment {
@@ -78,24 +78,23 @@ public class LoginFragment extends Fragment {
         String password = pswEditText.getText().toString();
 
         if (isFormValidated()) {
-//            showProgressDialog("Carregando...");
+            ProgressDialog progressDialog = InterfaceUtils.showProgressDialog(getContext(), "Logando...");
 
-            authenticator.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            getFragmentManager()
-                                    .beginTransaction()
-                                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                                    .replace(R.id.login_fragment, new ProfileFragment())
-                                    .commit();
-                            hideKeyboard(getActivity());
-                        } else {
-                            Toast.makeText(getContext(), "Erro ao logar.", Toast.LENGTH_SHORT).show();
-                            task.getException().printStackTrace();
-                        }
+            authenticator.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    getFragmentManager()
+                            .beginTransaction()
+                            .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                            .replace(R.id.login_fragment, new ProfileFragment())
+                            .commit();
+                    InterfaceUtils.hideKeyboard(getActivity());
+                } else {
+                    Toast.makeText(getContext(), "Erro ao logar.", Toast.LENGTH_SHORT).show();
+                    task.getException().printStackTrace();
+                }
 
-//                    hideProgressDialog();
-                    });
+                InterfaceUtils.hideProgressDialog(progressDialog);
+            });
         }
     }
 
@@ -103,24 +102,28 @@ public class LoginFragment extends Fragment {
         String email = emailEditText.getText().toString();
         String password = pswEditText.getText().toString();
 
-        // TODO: refatorar métodos de exibição de diálogo progressivo
-//        showProgressDialog("Carregando...");
-        authenticator.fetchSignInMethodsForEmail(email).addOnCompleteListener(listener -> {
-            List<String> signInMethods = listener.getResult().getSignInMethods();
-            AtomicBoolean isRegistered = new AtomicBoolean(false);
 
-            signInMethods.forEach(method -> {
-                if ("password".equals(method))
-                    isRegistered.set(true);
+        if (isFormValidated()) {
+            ProgressDialog progressDialog = InterfaceUtils.showProgressDialog(getContext(), "Logando...");
+
+            authenticator.fetchSignInMethodsForEmail(email).addOnCompleteListener(listener -> {
+                List<String> signInMethods = listener.getResult().getSignInMethods();
+                AtomicBoolean isRegistered = new AtomicBoolean(false);
+
+                signInMethods.forEach(method -> {
+                    if ("password".equals(method))
+                        isRegistered.set(true);
+                });
+
+                if (!isRegistered.get())
+                    authenticator.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task ->
+                            Toast.makeText(getContext(), "Cadastro realizado com sucesso.", Toast.LENGTH_SHORT).show());
+                else
+                    Toast.makeText(getActivity(), "Este email já está cadastrado. Tente recuperar a senha", Toast.LENGTH_SHORT).show();
+
+                InterfaceUtils.hideProgressDialog(progressDialog);
             });
-
-            if (!isRegistered.get())
-                authenticator.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task ->
-                        Toast.makeText(getContext(), "Cadastro realizado com sucesso.", Toast.LENGTH_SHORT).show());
-            else
-                Toast.makeText(getActivity(), "Este email já está cadastrado. Tente recuperar a senha", Toast.LENGTH_SHORT).show();
-
-        });
+        }
     }
 
     private boolean isFormValidated() {
@@ -136,14 +139,4 @@ public class LoginFragment extends Fragment {
 
         return isValid.get();
     }
-
-    public static void hideKeyboard(Activity activity) {
-        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        View view = activity.getCurrentFocus();
-        if (view == null)
-            view = new View(activity);
-
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
-
 }

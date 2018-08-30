@@ -33,7 +33,7 @@ public class AvaliacaActivity extends BaseActivity implements AvaliacaoDao {
         if(getIntent() != null) {
             avaliacao = (Avaliacao2) getIntent().getSerializableExtra("avaliacao");
         } else  {
-            showToast("Tente novamente");
+//            showToast("Tente novamente");
         }
     }
 

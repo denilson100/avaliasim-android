@@ -20,7 +20,7 @@ import br.com.mobile10.avaliasim.fragments.HomeFragment;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 import br.com.mobile10.avaliasim.modelo.Feature;
 import br.com.mobile10.avaliasim.modelo.MyDate;
-import br.com.mobile10.avaliasim.util.Constantes;
+import br.com.mobile10.avaliasim.util.Constants;
 
 
 /**
@@ -32,7 +32,7 @@ public class LoadingAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>> {
 
     private Main4Activity activity2;
     private HomeFragment activity;
-    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constantes.DB_ROOT).child("avaliacoes");
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constants.DB_ROOT).child("avaliacoes");
     private List<Avaliacao2> avaliacao2ListFinal = new ArrayList<Avaliacao2>();
 
 

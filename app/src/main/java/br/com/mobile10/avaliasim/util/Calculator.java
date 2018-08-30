@@ -68,7 +68,7 @@ public class Calculator {
             int positive = 0;
             int negative = 0;
             for (MyDate date : feature.date) {
-                if (date.date.equals(Constantes.DATE_UNIC)) {
+                if (date.date.equals(Constants.DATE_UNIC)) {
                     positive += date.positive;
                     negative += date.negative;
                 }
@@ -92,7 +92,7 @@ public class Calculator {
             int positive = 0;
             int negative = 0;
             for (MyDate date : feature.date) {
-                if (date.date.equals(Constantes.DATE_UNIC)) {
+                if (date.date.equals(Constants.DATE_UNIC)) {
                     positive += date.positive;
                     negative += date.negative;
                 }
@@ -115,7 +115,7 @@ public class Calculator {
                 int positive = 0;
                 int negative = 0;
                 for (MyDate date : feature.date) {
-                    if (date.date.equals(Constantes.DATE_UNIC)) {
+                    if (date.date.equals(Constants.DATE_UNIC)) {
                         positive += date.positive;
                         negative += date.negative;
                     }
@@ -136,7 +136,7 @@ public class Calculator {
                 int positive = 0;
                 int negative = 0;
                 for (MyDate date : feature.date) {
-                    if (date.date.equals(Constantes.DATE_UNIC)) {
+                    if (date.date.equals(Constants.DATE_UNIC)) {
                         positive += date.positive;
                         negative += date.negative;
                     }
@@ -164,7 +164,7 @@ public class Calculator {
             int positive = 0;
             int negative = 0;
             for (MyDate date : feature.date) {
-                if (!Constantes.DATE1.after(date.date) && !Constantes.DATE2.before(date.date)) {
+                if (!Constants.DATE1.after(date.date) && !Constants.DATE2.before(date.date)) {
                     positive += date.positive;
                     negative += date.negative;
                 }
@@ -188,7 +188,7 @@ public class Calculator {
             int positive = 0;
             int negative = 0;
             for (MyDate date : feature.date) {
-                if (!Constantes.DATE1.after(date.date) && !Constantes.DATE2.before(date.date)) {
+                if (!Constants.DATE1.after(date.date) && !Constants.DATE2.before(date.date)) {
                     positive += date.positive;
                     negative += date.negative;
                 }
@@ -210,7 +210,7 @@ public class Calculator {
                 int positive = 0;
                 int negative = 0;
                 for (MyDate date : feature.date) {
-                    if (!Constantes.DATE1.after(date.date) && !Constantes.DATE2.before(date.date)) {
+                    if (!Constants.DATE1.after(date.date) && !Constants.DATE2.before(date.date)) {
                         positive += date.positive;
                         negative += date.negative;
                     }
@@ -231,7 +231,7 @@ public class Calculator {
                 int positive = 0;
                 int negative = 0;
                 for (MyDate date : feature.date) {
-                    if (!Constantes.DATE1.after(date.date) && !Constantes.DATE2.before(date.date)) {
+                    if (!Constants.DATE1.after(date.date) && !Constants.DATE2.before(date.date)) {
                         positive += date.positive;
                         negative += date.negative;
                     }

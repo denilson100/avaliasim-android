@@ -14,7 +14,7 @@ import java.util.List;
 import br.com.mobile10.avaliasim.activity.Main4Activity;
 import br.com.mobile10.avaliasim.fragments.ProfileFragment;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
-import br.com.mobile10.avaliasim.util.Constantes;
+import br.com.mobile10.avaliasim.util.Constants;
 
 
 /**
@@ -27,7 +27,7 @@ public class LoadingIdsListMyAvaliacoes extends AsyncTask<Void, Void, List<Strin
     private Main4Activity activity;
     private ProfileFragment fragmentPerfil;
     private String userId;
-    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constantes.DB_ROOT).child("users");
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constants.DB_ROOT).child("users");
     private Avaliacao2 avaliacao2;
     private List<String> list = new ArrayList<>();
 

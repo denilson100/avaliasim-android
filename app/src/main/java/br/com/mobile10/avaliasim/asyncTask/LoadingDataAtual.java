@@ -9,7 +9,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import br.com.mobile10.avaliasim.fragments.HomeFragment;
-import br.com.mobile10.avaliasim.util.Constantes;
+import br.com.mobile10.avaliasim.util.Constants;
 
 
 /**
@@ -20,7 +20,7 @@ import br.com.mobile10.avaliasim.util.Constantes;
 public class LoadingDataAtual extends AsyncTask<Void, Void, Long> {
 
     private HomeFragment activity;
-    private DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constantes.DB_ROOT).child("dataAtual");
+    private DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constants.DB_ROOT).child("dataAtual");
     private Long timeStamp;
 
     public LoadingDataAtual(HomeFragment fragmentHome) {
@@ -40,7 +40,7 @@ public class LoadingDataAtual extends AsyncTask<Void, Void, Long> {
                     // Captura a excecao caso tenha algum dado inesperado. Tipo latitude == 0.
                     e.printStackTrace();
                 }
-                Constantes.DATA_ATUAL = timeStamp;
+                Constants.DATA_ATUAL = timeStamp;
             }
 
             @Override

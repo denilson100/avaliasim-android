@@ -12,11 +12,11 @@ import java.util.List;
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 
-public class Grafico {
+public class Graphic {
 
     private Activity activity;
 
-    public Grafico(Activity activity) {
+    public Graphic(Activity activity) {
         this.activity = activity;
     }
 

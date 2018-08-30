@@ -1,6 +1,6 @@
 package br.com.mobile10.avaliasim.fragments;
 
-import android.content.DialogInterface;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,6 +31,7 @@ import br.com.mobile10.avaliasim.asyncTask.LoadingUserInfo;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 import br.com.mobile10.avaliasim.modelo.User;
 import br.com.mobile10.avaliasim.util.ImageUtility;
+import br.com.mobile10.avaliasim.util.InterfaceUtils;
 
 /**
  * Created by denmont on 20/04/2018.
@@ -228,8 +228,6 @@ public class ProfileFragment extends Fragment implements RecyclerViewAdapterMyAv
 //
     private void alertEditInfo(View v) {
 
-        Toast.makeText(getContext(), "EDIÇÃO", Toast.LENGTH_SHORT).show();
-
         LayoutInflater li = LayoutInflater.from(getActivity());
         View promptsView = li.inflate(R.layout.alert_edit_info, null);
 
@@ -262,11 +260,11 @@ public class ProfileFragment extends Fragment implements RecyclerViewAdapterMyAv
         alertDialog.getWindow().getAttributes().windowAnimations = R.style.dialog_animation;
         alertDialog.show();
     }
-//
 
     private void alertSair(View v) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
         alertDialogBuilder.setMessage("Deslogar da aplicação?");
+
 
         alertDialogBuilder
                 .setPositiveButton("Deslogar",

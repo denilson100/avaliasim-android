@@ -167,7 +167,7 @@ public class NewAvaliacao extends BaseActivity implements AvaliacaoDao {
                 if (!validateFormProduct()) {
                     return;
                 }
-                showToast("Nao adicionou. Tente novamente");
+//                showToast("Nao adicionou. Tente novamente");
         }
 
     }
@@ -191,7 +191,7 @@ public class NewAvaliacao extends BaseActivity implements AvaliacaoDao {
     public void newAvaliacao(Avaliacao2 avaliacao, String userId) {
         AvaliacaoDaoImplementacao dao = new AvaliacaoDaoImplementacao();
         dao.newAvaliacao(avaliacao, users.getUid());
-        showToast("Avaliação criada com sucess!");
+//        showToast("Avaliação criada com sucess!");
         finish();
     }
 
