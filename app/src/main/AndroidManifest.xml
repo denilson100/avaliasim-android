@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".auth.ResetActivity" />
-        <activity android:name=".auth.EmailPasswordActivity" />
+        <activity android:name=".auth.EmailPasswordActivity">
+        </activity>
         <activity android:name=".activity.NewAvaliacao" />
         <activity android:name=".activity.AvaliacaActivity" />
 

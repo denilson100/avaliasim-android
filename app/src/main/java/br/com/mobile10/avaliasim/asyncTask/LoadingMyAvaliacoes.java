@@ -11,8 +11,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.mobile10.avaliasim.fragments.FragmentPerfil;
-import br.com.mobile10.avaliasim.modelo.Avaliacao;
+import br.com.mobile10.avaliasim.fragments.ProfileFragment;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 import br.com.mobile10.avaliasim.modelo.Feature;
 import br.com.mobile10.avaliasim.modelo.MyDate;
@@ -26,12 +25,12 @@ import br.com.mobile10.avaliasim.util.Constantes;
 
 public class LoadingMyAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>> {
 
-    private FragmentPerfil fragmentPerfil;
+    private ProfileFragment fragmentPerfil;
     private DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constantes.DB_ROOT).child("avaliacoes");
     private List<Avaliacao2> avaliacao2ListFinal = new ArrayList<Avaliacao2>();
     private List<String> idsList;
 
-    public LoadingMyAvaliacoes(FragmentPerfil fragmentPerfil, List<String> idsList) {
+    public LoadingMyAvaliacoes(ProfileFragment fragmentPerfil, List<String> idsList) {
         this.fragmentPerfil = fragmentPerfil;
         this.idsList = idsList;
     }
@@ -104,6 +103,6 @@ public class LoadingMyAvaliacoes extends AsyncTask<Void, Void, List<Avaliacao2>>
     @Override
     protected void onPostExecute(List<Avaliacao2> itemList) {
         super.onPostExecute(itemList);
-        fragmentPerfil.setListMyAvaliacoes(itemList);
+//        fragmentPerfil.setListMyAvaliacoes(itemList);
     }
 }

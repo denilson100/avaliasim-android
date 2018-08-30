@@ -1,6 +1,8 @@
 package br.com.mobile10.avaliasim.asyncTask;
 
 import android.os.AsyncTask;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +25,7 @@ import br.com.mobile10.avaliasim.util.Constantes;
  * Pega os dados do evento geral
  */
 
+@RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
 public class LoadingAvaliacaoPorID extends AsyncTask<Void, Void, Avaliacao2> {
 
     private DetalhesAvaliacao activity;

@@ -13,35 +13,21 @@ import br.com.mobile10.avaliasim.R;
  * Created by denmont on 20/04/2018.
  */
 
-public class FragmentBusca extends Fragment {
+public class BuscaFragment extends Fragment {
 
-    private static final String ARG_SECTION_NUMBER = "section_number";
-
-    public static FragmentBusca newInstance(int sectionNumber) {
-        FragmentBusca fragment = new FragmentBusca();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
-        return fragment;
+    public BuscaFragment() {
+        this.setArguments(new Bundle());
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_busca, container, false);
-
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
     }
 }

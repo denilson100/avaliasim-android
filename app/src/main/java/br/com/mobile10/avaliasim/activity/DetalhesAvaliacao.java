@@ -26,8 +26,6 @@ import java.util.List;
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.adapter.RecyclerViewAdapterDetAvaliacoes;
 import br.com.mobile10.avaliasim.adapter.RecyclerViewAdapterFeatures;
-import br.com.mobile10.avaliasim.asyncTask.LoadingAvaliacaoPorID;
-import br.com.mobile10.avaliasim.auth.EmailPasswordActivity;
 import br.com.mobile10.avaliasim.fragments.DatePickerFragment;
 import br.com.mobile10.avaliasim.fragments.DateRangePickerFragment;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
@@ -97,6 +95,7 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
             @Override
             public void onClick(View view) {
 
+                //Se o usuário está logado...
                 if (users != null) {
 
                     AnimationsUtility.showCircularAnimationAvaliar(DetalhesAvaliacao.this, fundoDinamic, R.id.conteudo);
@@ -113,9 +112,10 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
                     }, 1000);
 
                 } else {
-                    Intent intent = new Intent(DetalhesAvaliacao.this, EmailPasswordActivity.class);
-                    startActivity(intent);
-                    finish();
+                    //TODO: passar para o fragment de login quando o usuário não estiver autenticado
+//                    Intent intent = new Intent(DetalhesAvaliacao.this, EmailPasswordActivity.class);
+//                    startActivity(intent);
+//                    finish();
                 }
             }
         });
@@ -176,7 +176,7 @@ public class DetalhesAvaliacao extends BaseActivity implements RecyclerViewAdapt
     }
 
     private void executeAsyncTaskGetAvaliacaoPorId() {
-        new LoadingAvaliacaoPorID(this, avaliacao.idAvaliacao).execute();
+//        new LoadingAvaliacaoPorID(this, avaliacao.idAvaliacao).execute();
     }
 
     public void setAvaliacoesTotal(String result) {

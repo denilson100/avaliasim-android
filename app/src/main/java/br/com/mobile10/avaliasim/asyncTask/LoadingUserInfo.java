@@ -8,7 +8,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import br.com.mobile10.avaliasim.fragments.FragmentPerfil;
+import br.com.mobile10.avaliasim.fragments.ProfileFragment;
 import br.com.mobile10.avaliasim.modelo.User;
 import br.com.mobile10.avaliasim.util.Constantes;
 
@@ -20,12 +20,12 @@ import br.com.mobile10.avaliasim.util.Constantes;
 
 public class LoadingUserInfo extends AsyncTask<Void, Void, User> {
 
-    private FragmentPerfil fragmentPerfil;
+    private ProfileFragment fragmentPerfil;
     private String userId;
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constantes.DB_ROOT).child("users");
     private User user;
 
-    public LoadingUserInfo(FragmentPerfil fragmentPerfil, String userId) {
+    public LoadingUserInfo(ProfileFragment fragmentPerfil, String userId) {
         this.fragmentPerfil = fragmentPerfil;
         this.userId = userId;
 
@@ -63,7 +63,7 @@ public class LoadingUserInfo extends AsyncTask<Void, Void, User> {
     @Override
     protected void onPostExecute(User item) {
         super.onPostExecute(item);
-        if(item != null)
-            fragmentPerfil.updateUI(user);
+//        if(item != null)
+//            fragmentPerfil.updateUI(user);
     }
 }

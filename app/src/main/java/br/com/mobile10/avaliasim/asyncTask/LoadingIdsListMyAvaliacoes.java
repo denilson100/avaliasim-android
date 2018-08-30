@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.mobile10.avaliasim.activity.Main4Activity;
-import br.com.mobile10.avaliasim.fragments.FragmentPerfil;
+import br.com.mobile10.avaliasim.fragments.ProfileFragment;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 import br.com.mobile10.avaliasim.util.Constantes;
 
@@ -25,13 +25,13 @@ import br.com.mobile10.avaliasim.util.Constantes;
 public class LoadingIdsListMyAvaliacoes extends AsyncTask<Void, Void, List<String>> {
 
     private Main4Activity activity;
-    private FragmentPerfil fragmentPerfil;
+    private ProfileFragment fragmentPerfil;
     private String userId;
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constantes.DB_ROOT).child("users");
     private Avaliacao2 avaliacao2;
     private List<String> list = new ArrayList<>();
 
-    public LoadingIdsListMyAvaliacoes(FragmentPerfil fragmentPerfil, String userId) {
+    public LoadingIdsListMyAvaliacoes(ProfileFragment fragmentPerfil, String userId) {
         this.fragmentPerfil = fragmentPerfil;
         this.userId = userId;
 
@@ -66,12 +66,11 @@ public class LoadingIdsListMyAvaliacoes extends AsyncTask<Void, Void, List<Strin
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-//        fragmentPerfil.showLoadingIndicator();
     }
 
     @Override
     protected void onPostExecute(List<String> item) {
         super.onPostExecute(item);
-        fragmentPerfil.getListIdMyAvaliacoes(item);
+//        fragmentPerfil.getListIdMyAvaliacoes(item);
     }
 }

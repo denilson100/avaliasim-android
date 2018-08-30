@@ -18,7 +18,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 
-import br.com.mobile10.avaliasim.fragments.FragmentPerfil;
+import br.com.mobile10.avaliasim.fragments.ProfileFragment;
 import br.com.mobile10.avaliasim.interfaces.UserDao;
 import br.com.mobile10.avaliasim.modelo.User;
 import br.com.mobile10.avaliasim.util.Constantes;
@@ -26,9 +26,9 @@ import br.com.mobile10.avaliasim.util.Constantes;
 public class UserDaoImplementacao implements UserDao {
 
     private DatabaseReference mDatabase;
-    private FragmentPerfil fragmentPerfil;
+    private ProfileFragment fragmentPerfil;
 
-    public UserDaoImplementacao(FragmentPerfil fragmentPerfil) {
+    public UserDaoImplementacao(ProfileFragment fragmentPerfil) {
         this.fragmentPerfil = fragmentPerfil;
     }
 
@@ -62,8 +62,8 @@ public class UserDaoImplementacao implements UserDao {
                 else
                     Log.d("TAG", "Erro ao enviar foto");
 
-                fragmentPerfil.executeAsyncTaskGetUserInfo();
-                Log.d("downloadUrl-->", "" + downloadUrl);
+//                fragmentPerfil.executeAsyncTaskGetUserInfo();
+//                Log.d("downloadUrl-->", "" + downloadUrl);
             }
         });
     }

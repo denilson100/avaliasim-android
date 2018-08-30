@@ -20,7 +20,6 @@ import br.com.mobile10.avaliasim.util.BaseActivity;
 /**
  * Created by denmont on 16/04/2018.
  */
-
 public class Feature1Activity extends BaseActivity implements FeatureDao {
 
     Avaliacao2 avaliacao;

@@ -10,7 +10,7 @@ import com.balysv.materialripple.MaterialRippleLayout;
 import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
-import br.com.mobile10.avaliasim.fragments.FragmentPerfil;
+import br.com.mobile10.avaliasim.fragments.ProfileFragment;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 
 
@@ -21,11 +21,11 @@ import br.com.mobile10.avaliasim.modelo.Avaliacao2;
 public class RecyclerViewAdapterMyAvaliacoes extends RecyclerView.Adapter<RecyclerViewHoldersMyAvaliacoes> {
 
     private List<Avaliacao2> itemList;
-    private FragmentPerfil fragmentPerfil;
+    private ProfileFragment fragmentPerfil;
     //declare interface
     private OnItemClicked onClick;
 
-    public RecyclerViewAdapterMyAvaliacoes(FragmentPerfil fragmentPerfil, List<Avaliacao2> itemList) {
+    public RecyclerViewAdapterMyAvaliacoes(ProfileFragment fragmentPerfil, List<Avaliacao2> itemList) {
         this.itemList = itemList;
         this.fragmentPerfil = fragmentPerfil;
 

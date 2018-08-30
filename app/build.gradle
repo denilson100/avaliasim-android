@@ -21,6 +21,10 @@ android {
     dataBinding {
         enabled = true
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -65,7 +69,7 @@ dependencies {
 
     // Imageview
     implementation 'com.mikhaellopez:circularimageview:3.0.2'
-    implementation 'de.hdodenhof:circleimageview:2.1.0'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 
     // Calendario
     implementation('com.shagi:material-datepicker:1.3') {

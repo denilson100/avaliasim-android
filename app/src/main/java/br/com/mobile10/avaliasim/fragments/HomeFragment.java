@@ -24,7 +24,6 @@ import br.com.mobile10.avaliasim.activity.NewAvaliacao;
 import br.com.mobile10.avaliasim.adapter.RecyclerViewAdapter;
 import br.com.mobile10.avaliasim.asyncTask.LoadingAvaliacoes;
 import br.com.mobile10.avaliasim.asyncTask.LoadingDataAtual;
-import br.com.mobile10.avaliasim.auth.EmailPasswordActivity;
 import br.com.mobile10.avaliasim.dao.DataAtualDaoImplementacao;
 import br.com.mobile10.avaliasim.interfaces.DataAtualDao;
 import br.com.mobile10.avaliasim.modelo.Avaliacao2;
@@ -34,7 +33,7 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
  * Created by denmont on 20/04/2018.
  */
 
-public class FragmentHome extends Fragment implements DataAtualDao, RecyclerViewAdapter.OnItemClicked {
+public class HomeFragment extends Fragment implements DataAtualDao, RecyclerViewAdapter.OnItemClicked {
 
     List<Avaliacao2> avaliacoesList = new ArrayList<Avaliacao2>();
     RecyclerViewAdapter rcAdapter;
@@ -49,12 +48,8 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
     private static final String ARG_SECTION_NUMBER = "section_number";
     private SwipeRefreshLayout swipeLayout;
 
-    public static FragmentHome newInstance(int sectionNumber) {
-        FragmentHome fragment = new FragmentHome();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
-        return fragment;
+    public HomeFragment() {
+        this.setArguments(new Bundle());
     }
 
     @Nullable
@@ -72,8 +67,8 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
                     Intent intent2 = new Intent(getActivity(), NewAvaliacao.class);
                     startActivity(intent2);
                 } else {
-                    Intent intent2 = new Intent(getActivity(), EmailPasswordActivity.class);
-                    startActivity(intent2);
+//                    Intent intent2 = new Intent(getActivity(), EmailPasswordActivity.class);
+//                    startActivity(intent2);
                 }
             }
         });
@@ -167,10 +162,10 @@ public class FragmentHome extends Fragment implements DataAtualDao, RecyclerView
     }
 
     public void showLoadingIndicator() {
-        imgVazio.setVisibility(View.VISIBLE);
+//        imgVazio.setVisibility(View.VISIBLE);
     }
 
     public void hideLoadingIndictor() {
-        imgVazio.setVisibility(View.GONE);
+//        imgVazio.setVisibility(View.GONE);
     }
 }

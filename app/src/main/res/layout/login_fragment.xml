@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/login_fragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="24sp"
+            android:text="Login"
+            android:textColor="@color/colorAccent"
+            android:textSize="24sp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#BDBDBD">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/field_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="#BDBDBD" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#BDBDBD"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="#BDBDBD">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/field_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Senha"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="#BDBDBD" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/email_sign_in_button"
+            style="@style/LoginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Entrar"
+            android:textAllCaps="true"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/register_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00ffffff"
+            android:text="ou cadastre-se"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/forgot_psw_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:layout_marginTop="8dp"
+            android:background="@color/transparent"
+            android:paddingBottom="8dp"
+            android:text="Esqueceu a Senha?"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="10sp"/>
+
+    </LinearLayout>
+
+</FrameLayout>
