@@ -60,6 +60,10 @@ dependencies {
     // compile 'com.github.felixsoares:HorizontalBarGraph:1.0' // horizontal abr graph
     implementation 'com.github.IntruderShanky:scatter-piechart:1.0.0'
     implementation 'im.dacer:AndroidCharts:1.0.4'
+    // https://mvnrepository.com/artifact/org.springframework/spring-beans
+    implementation group: 'org.springframework', name: 'spring-beans', version: '5.0.8.RELEASE'
+
+
 
     // Menu
 //    implementation 'com.ss.bottomnavigation:bottomnavigation:1.5.2'

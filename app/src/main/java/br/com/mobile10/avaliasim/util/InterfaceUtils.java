@@ -3,10 +3,17 @@ package br.com.mobile10.avaliasim.util;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+
 import br.com.mobile10.avaliasim.R;
+import br.com.mobile10.avaliasim.presentation.interfaces.OnLoadedBitmapListener;
 
 public class InterfaceUtils {
 
@@ -29,5 +36,16 @@ public class InterfaceUtils {
             view = new View(activity);
 
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public static void loadImageFromUrl(URL url, OnLoadedBitmapListener onLoadedBitmapListener) {
+        new Thread(() -> {
+            try {
+                Bitmap bmp = BitmapFactory.decodeStream((InputStream) url.getContent());
+                onLoadedBitmapListener.onLoadCallback(bmp);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 }

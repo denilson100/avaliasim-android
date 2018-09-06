@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/login_fragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/login_fragment">
+    android:layout_height="match_parent">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#ffffff"
         android:orientation="vertical"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:background="#ffffff">
+        android:paddingRight="16dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.v7.widget.AppCompatButton
+        <Button
             android:id="@+id/email_sign_in_button"
             style="@style/LoginButton"
             android:layout_width="match_parent"
@@ -71,7 +71,8 @@
             android:textAllCaps="true"
             android:textSize="18sp" />
 
-        <android.support.v7.widget.AppCompatButton
+
+        <Button
             android:id="@+id/register_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,7 +81,7 @@
             android:textColor="@color/colorAccent"
             android:textSize="14sp" />
 
-        <android.support.v7.widget.AppCompatButton
+        <Button
             android:id="@+id/forgot_psw_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -90,7 +91,7 @@
             android:paddingBottom="8dp"
             android:text="Esqueceu a Senha?"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="10sp"/>
+            android:textSize="10sp" />
 
     </LinearLayout>
 

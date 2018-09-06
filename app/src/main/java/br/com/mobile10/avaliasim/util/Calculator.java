@@ -1,8 +1,8 @@
 package br.com.mobile10.avaliasim.util;
 
-import br.com.mobile10.avaliasim.modelo.Avaliacao2;
-import br.com.mobile10.avaliasim.modelo.Feature;
-import br.com.mobile10.avaliasim.modelo.MyDate;
+import br.com.mobile10.avaliasim.model.Avaliacao2;
+import br.com.mobile10.avaliasim.model.Feature;
+import br.com.mobile10.avaliasim.model.MyDate;
 
 public class Calculator {
 
@@ -11,6 +11,7 @@ public class Calculator {
 
     /**
      * Recebe uma avaliação, interar somando os valores pos e neg. Retorna o calculo da porcentagem.
+     *
      * @param avaliacao
      * @return
      */
@@ -28,11 +29,12 @@ public class Calculator {
             totalPos += positive;
             totalNeg += negative;
         }
-        return calculaPorcentagem( (totalPos + totalNeg), totalPos);
+        return calculaPorcentagem((totalPos + totalNeg), totalPos);
     }
 
     /**
      * Recebe uma avaliação, interar somando os valores pos e neg. Retorna o calculo da porcentagem.
+     *
      * @param avaliacao
      * @return
      */
@@ -50,13 +52,14 @@ public class Calculator {
             totalPos += positive;
             totalNeg += negative;
         }
-        return calculaPorcentagem( (totalPos + totalNeg), totalNeg);
+        return calculaPorcentagem((totalPos + totalNeg), totalNeg);
     }
 
     /* ------------------------ Media geral com data ---------------------------------- */
 
     /**
      * Recebe uma avaliação, interar somando os valores pos e neg. Retorna o calculo da porcentagem.
+     *
      * @param avaliacao
      * @return
      */
@@ -64,23 +67,24 @@ public class Calculator {
         int totalPos = 0;
         int totalNeg = 0;
 
-        for (Feature feature : avaliacao.listaAvaliacoes) {
-            int positive = 0;
-            int negative = 0;
-            for (MyDate date : feature.date) {
-                if (date.date.equals(Constants.DATE_UNIC)) {
-                    positive += date.positive;
-                    negative += date.negative;
-                }
-            }
-            totalPos += positive;
-            totalNeg += negative;
-        }
-        return calculaPorcentagem( (totalPos + totalNeg), totalPos);
+//        for (Feature feature : avaliacao.listaAvaliacoes) {
+//            int positive = 0;
+//            int negative = 0;
+//            for (MyDate date : feature.date) {
+//                if (date.date.equals(Constants.DATE_UNIC)) {
+//                    positive += date.positive;
+//                    negative += date.negative;
+//                }
+//            }
+//            totalPos += positive;
+//            totalNeg += negative;
+//        }
+        return calculaPorcentagem((totalPos + totalNeg), totalPos);
     }
 
     /**
      * Recebe uma avaliação, interar somando os valores pos e neg. Retorna o calculo da porcentagem.
+     *
      * @param avaliacao
      * @return
      */
@@ -88,19 +92,19 @@ public class Calculator {
         int totalPos = 0;
         int totalNeg = 0;
 
-        for (Feature feature : avaliacao.listaAvaliacoes) {
-            int positive = 0;
-            int negative = 0;
-            for (MyDate date : feature.date) {
-                if (date.date.equals(Constants.DATE_UNIC)) {
-                    positive += date.positive;
-                    negative += date.negative;
-                }
-            }
-            totalPos += positive;
-            totalNeg += negative;
-        }
-        return calculaPorcentagem( (totalPos + totalNeg), totalNeg);
+//        for (Feature feature : avaliacao.listaAvaliacoes) {
+//            int positive = 0;
+//            int negative = 0;
+//            for (MyDate date : feature.date) {
+//                if (date.date.equals(Constants.DATE_UNIC)) {
+//                    positive += date.positive;
+//                    negative += date.negative;
+//                }
+//            }
+//            totalPos += positive;
+//            totalNeg += negative;
+//        }
+        return calculaPorcentagem((totalPos + totalNeg), totalNeg);
     }
 
 
@@ -110,42 +114,42 @@ public class Calculator {
         int totalPos = 0;
         int totalNeg = 0;
 
-        for (Feature feature : avaliacao.listaAvaliacoes) {
-            if (feature.name.equalsIgnoreCase(nomeFeature)) {
-                int positive = 0;
-                int negative = 0;
-                for (MyDate date : feature.date) {
-                    if (date.date.equals(Constants.DATE_UNIC)) {
-                        positive += date.positive;
-                        negative += date.negative;
-                    }
-                }
-                totalPos += positive;
-                totalNeg += negative;
-            }
-        }
-        return calculaPorcentagem( (totalPos + totalNeg), totalPos);
+//        for (Feature feature : avaliacao.listaAvaliacoes) {
+//            if (feature.name.equalsIgnoreCase(nomeFeature)) {
+//                int positive = 0;
+//                int negative = 0;
+//                for (MyDate date : feature.date) {
+//                    if (date.date.equals(Constants.DATE_UNIC)) {
+//                        positive += date.positive;
+//                        negative += date.negative;
+//                    }
+//                }
+//                totalPos += positive;
+//                totalNeg += negative;
+//            }
+//        }
+        return calculaPorcentagem((totalPos + totalNeg), totalPos);
     }
 
     public static float totalPorcentFeatureNegativeUnicDate(Avaliacao2 avaliacao, String nomeFeature) {
         int totalPos = 0;
         int totalNeg = 0;
 
-        for (Feature feature : avaliacao.listaAvaliacoes) {
-            if (feature.name.equalsIgnoreCase(nomeFeature)) {
-                int positive = 0;
-                int negative = 0;
-                for (MyDate date : feature.date) {
-                    if (date.date.equals(Constants.DATE_UNIC)) {
-                        positive += date.positive;
-                        negative += date.negative;
-                    }
-                }
-                totalPos += positive;
-                totalNeg += negative;
-            }
-        }
-        return calculaPorcentagem( (totalPos + totalNeg), totalNeg);
+//        for (Feature feature : avaliacao.listaAvaliacoes) {
+//            if (feature.name.equalsIgnoreCase(nomeFeature)) {
+//                int positive = 0;
+//                int negative = 0;
+//                for (MyDate date : feature.date) {
+//                    if (date.date.equals(Constants.DATE_UNIC)) {
+//                        positive += date.positive;
+//                        negative += date.negative;
+//                    }
+//                }
+//                totalPos += positive;
+//                totalNeg += negative;
+//            }
+//        }
+        return calculaPorcentagem((totalPos + totalNeg), totalNeg);
     }
 
 
@@ -153,6 +157,7 @@ public class Calculator {
 
     /**
      * Recebe uma avaliação, interar somando os valores pos e neg. Retorna o calculo da porcentagem.
+     *
      * @param avaliacao
      * @return
      */
@@ -160,23 +165,24 @@ public class Calculator {
         int totalPos = 0;
         int totalNeg = 0;
 
-        for (Feature feature : avaliacao.listaAvaliacoes) {
-            int positive = 0;
-            int negative = 0;
-            for (MyDate date : feature.date) {
-                if (!Constants.DATE1.after(date.date) && !Constants.DATE2.before(date.date)) {
-                    positive += date.positive;
-                    negative += date.negative;
-                }
-            }
-            totalPos += positive;
-            totalNeg += negative;
-        }
-        return calculaPorcentagem( (totalPos + totalNeg), totalPos);
+//        for (Feature feature : avaliacao.listaAvaliacoes) {
+//            int positive = 0;
+//            int negative = 0;
+//            for (MyDate date : feature.date) {
+//                if (!Constants.DATE1.after(date.date) && !Constants.DATE2.before(date.date)) {
+//                    positive += date.positive;
+//                    negative += date.negative;
+//                }
+//            }
+//            totalPos += positive;
+//            totalNeg += negative;
+//        }
+        return calculaPorcentagem((totalPos + totalNeg), totalPos);
     }
 
     /**
      * Recebe uma avaliação, interar somando os valores pos e neg. Retorna o calculo da porcentagem.
+     *
      * @param avaliacao
      * @return
      */
@@ -184,19 +190,19 @@ public class Calculator {
         int totalPos = 0;
         int totalNeg = 0;
 
-        for (Feature feature : avaliacao.listaAvaliacoes) {
-            int positive = 0;
-            int negative = 0;
-            for (MyDate date : feature.date) {
-                if (!Constants.DATE1.after(date.date) && !Constants.DATE2.before(date.date)) {
-                    positive += date.positive;
-                    negative += date.negative;
-                }
-            }
-            totalPos += positive;
-            totalNeg += negative;
-        }
-        return calculaPorcentagem( (totalPos + totalNeg), totalNeg);
+//        for (Feature feature : avaliacao.listaAvaliacoes) {
+//            int positive = 0;
+//            int negative = 0;
+//            for (MyDate date : feature.date) {
+//                if (!Constants.DATE1.after(date.date) && !Constants.DATE2.before(date.date)) {
+//                    positive += date.positive;
+//                    negative += date.negative;
+//                }
+//            }
+//            totalPos += positive;
+//            totalNeg += negative;
+//        }
+        return calculaPorcentagem((totalPos + totalNeg), totalNeg);
     }
 
     /* ------------------------ Feature com range de data ---------------------------------- */
@@ -205,42 +211,42 @@ public class Calculator {
         int totalPos = 0;
         int totalNeg = 0;
 
-        for (Feature feature : avaliacao.listaAvaliacoes) {
-            if (feature.name.equalsIgnoreCase(nomeFeature)) {
-                int positive = 0;
-                int negative = 0;
-                for (MyDate date : feature.date) {
-                    if (!Constants.DATE1.after(date.date) && !Constants.DATE2.before(date.date)) {
-                        positive += date.positive;
-                        negative += date.negative;
-                    }
-                }
-                totalPos += positive;
-                totalNeg += negative;
-            }
-        }
-        return calculaPorcentagem( (totalPos + totalNeg), totalPos);
+//        for (Feature feature : avaliacao.listaAvaliacoes) {
+//            if (feature.name.equalsIgnoreCase(nomeFeature)) {
+//                int positive = 0;
+//                int negative = 0;
+//                for (MyDate date : feature.date) {
+//                    if (!Constants.DATE1.after(date.date) && !Constants.DATE2.before(date.date)) {
+//                        positive += date.positive;
+//                        negative += date.negative;
+//                    }
+//                }
+//                totalPos += positive;
+//                totalNeg += negative;
+//            }
+//        }
+        return calculaPorcentagem((totalPos + totalNeg), totalPos);
     }
 
     public static float totalPorcentFeatureNegativeRangeDate(Avaliacao2 avaliacao, String nomeFeature) {
         int totalPos = 0;
         int totalNeg = 0;
 
-        for (Feature feature : avaliacao.listaAvaliacoes) {
-            if (feature.name.equalsIgnoreCase(nomeFeature)) {
-                int positive = 0;
-                int negative = 0;
-                for (MyDate date : feature.date) {
-                    if (!Constants.DATE1.after(date.date) && !Constants.DATE2.before(date.date)) {
-                        positive += date.positive;
-                        negative += date.negative;
-                    }
-                }
-                totalPos += positive;
-                totalNeg += negative;
-            }
-        }
-        return calculaPorcentagem( (totalPos + totalNeg), totalNeg);
+//        for (Feature feature : avaliacao.listaAvaliacoes) {
+//            if (feature.name.equalsIgnoreCase(nomeFeature)) {
+//                int positive = 0;
+//                int negative = 0;
+//                for (MyDate date : feature.date) {
+//                    if (!Constants.DATE1.after(date.date) && !Constants.DATE2.before(date.date)) {
+//                        positive += date.positive;
+//                        negative += date.negative;
+//                    }
+//                }
+//                totalPos += positive;
+//                totalNeg += negative;
+//            }
+//        }
+        return calculaPorcentagem((totalPos + totalNeg), totalNeg);
     }
 
 
@@ -248,6 +254,7 @@ public class Calculator {
 
     /**
      * Calcula a porcentagem ja arredondando
+     *
      * @param total
      * @param valorParaCalculo
      * @return
@@ -255,7 +262,7 @@ public class Calculator {
     public static float calculaPorcentagem(float total, float valorParaCalculo) {
         float calc = (valorParaCalculo * 100) / total;
         int v = Math.round(calc);
-        return  v;
+        return v;
     }
 
     /* ---------------------------------------------------------- */
@@ -276,7 +283,7 @@ public class Calculator {
                 totalNeg += negative;
             }
         }
-        return calculaPorcentagem( (totalPos + totalNeg), totalPos);
+        return calculaPorcentagem((totalPos + totalNeg), totalPos);
     }
 
     public static float totalPorcentagemFeatureNeg(Avaliacao2 avaliacao, String nomeFeature) {
@@ -295,7 +302,7 @@ public class Calculator {
                 totalNeg += negative;
             }
         }
-        return calculaPorcentagem( (totalPos + totalNeg), totalNeg);
+        return calculaPorcentagem((totalPos + totalNeg), totalNeg);
     }
 
     /* ---------------------------------------------------------- */

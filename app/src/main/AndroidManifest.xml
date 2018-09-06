@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.Main4Activity"
+            android:name=".presentation.activity.TabLayoutContainerActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,20 +21,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".auth.ResetActivity" />
-        <activity android:name=".auth.EmailPasswordActivity">
-        </activity>
-        <activity android:name=".activity.NewAvaliacao" />
-        <activity android:name=".activity.AvaliacaActivity" />
+        <activity android:name=".presentation.activity.ResetActivity" />
+        <activity android:name=".presentation.activity.NewAvaliacao" />
+        <activity android:name=".presentation.activity.AvaliacaActivity" />
 
-        <activity android:name=".activity.Feature1Activity"
+        <activity android:name=".presentation.activity.Feature1Activity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
-        <activity android:name=".activity.MainIntroPermission"
+        <activity android:name=".presentation.activity.MainIntroPermission"
             android:theme="@style/Theme.Intro"/>
 
         <activity
-            android:name=".activity.DetalhesAvaliacao"
+            android:name=".presentation.activity.DetalhesAvaliacao"
             android:label="@string/title_activity_detalhes_avaliacao2"
             android:theme="@style/AppTheme.NoActionBar" />
 

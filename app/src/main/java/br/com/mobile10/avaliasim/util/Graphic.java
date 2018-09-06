@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
-import br.com.mobile10.avaliasim.modelo.Avaliacao2;
+import br.com.mobile10.avaliasim.model.Avaliacao2;
 
 public class Graphic {
 

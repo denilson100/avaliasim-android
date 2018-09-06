@@ -3,9 +3,9 @@ package br.com.mobile10.avaliasim.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.mobile10.avaliasim.modelo.Avaliacao2;
-import br.com.mobile10.avaliasim.modelo.Feature;
-import br.com.mobile10.avaliasim.modelo.MyDate;
+import br.com.mobile10.avaliasim.model.Avaliacao2;
+import br.com.mobile10.avaliasim.model.Feature;
+import br.com.mobile10.avaliasim.model.MyDate;
 
 /**
  * Created by denmont on 20/04/2018.

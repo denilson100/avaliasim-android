@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="br.com.mobile10.avaliasim.auth.ResetActivity"
+    tools:context=".presentation.activity.ResetActivity"
     tools:showIn="@layout/activity_reset">
 
     <RelativeLayout

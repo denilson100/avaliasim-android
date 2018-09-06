@@ -3,9 +3,10 @@ Implementar busca
 
 
 
-Vincular botão de logout
+
 Ao deslogar, trocar fragment de perfil por fragment de login
 
 
 
 Vincular botão de edição de perfil - OK
+Vincular botão de logout - OK 
