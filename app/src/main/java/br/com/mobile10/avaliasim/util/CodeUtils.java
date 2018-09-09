@@ -9,6 +9,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.apache.commons.beanutils.BeanUtils;
+
+import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -34,16 +37,11 @@ public class CodeUtils {
         return null;
     }
 
-    public static void synchronizeClock() {
-        FirebaseDatabase.getInstance().getReference().child(Constants.DB_ROOT).child("dataAtual").child("timeStamp").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Constants.DATA_ATUAL = Long.valueOf(dataSnapshot.getValue().toString());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+    public static void copyAttributes(Object sourceObject, Object targetObject) {
+        try {
+            BeanUtils.copyProperties(targetObject, sourceObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

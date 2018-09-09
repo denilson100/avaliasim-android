@@ -51,10 +51,6 @@ public class ProfileFragment extends Fragment {
     private FirebaseAuth authenticationManager;
     private FirebaseUser loggedUser;
 
-    public ProfileFragment() {
-        this.setArguments(new Bundle());
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

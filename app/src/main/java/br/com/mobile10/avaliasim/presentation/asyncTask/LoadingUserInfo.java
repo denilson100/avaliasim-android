@@ -37,12 +37,12 @@ public class LoadingUserInfo extends AsyncTask<Void, Void, User> {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                String nome = (String) dataSnapshot.child("nome").getValue();
-                String foto = (String) dataSnapshot.child("foto").getValue();
-                User user1 = new User(nome, foto);
-                user = user1;
-
-                onPostExecute(user);
+//                String nome = (String) dataSnapshot.child("nome").getValue();
+//                String foto = (String) dataSnapshot.child("foto").getValue();
+//                User user1 = new User(nome, foto);
+//                user = user1;
+//
+//                onPostExecute(user);
             }
 
             @Override

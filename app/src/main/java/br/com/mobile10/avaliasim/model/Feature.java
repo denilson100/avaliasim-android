@@ -3,21 +3,37 @@ package br.com.mobile10.avaliasim.model;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by denmont on 16/04/2018.
  */
-
 @IgnoreExtraProperties
 public class Feature implements Serializable {
-    public String name;
-    public List<MyDate> date;
+    private String id;
+    private String name;
+    private Float stars;
 
-    public Feature() {}
+    public String getName() {
+        return name;
+    }
 
-    public Feature(String name, List<MyDate> date) {
+    public void setName(String name) {
         this.name = name;
-        this.date = date;
+    }
+
+    public Float getStars() {
+        return stars;
+    }
+
+    public void setStars(Float stars) {
+        this.stars = stars;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -10,7 +10,6 @@ import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.model.Feature;
-import br.com.mobile10.avaliasim.model.MyDate;
 
 
 /**
@@ -45,29 +44,29 @@ public class RecyclerViewAdapterDetAvaliacoes extends RecyclerView.Adapter<Recyc
 
     @Override
     public void onBindViewHolder(RecyclerViewHoldersDetAvaliacoes holder, final int position) {
-        int positive = 0;
-        int negative = 0;
-        String nomeFeature = itemList.get(position).name;
-        for (MyDate date : itemList.get(position).date) {
-            positive += date.positive;
-            negative += date.negative;
-        }
+//        int positive = 0;
+//        int negative = 0;
+//        String nomeFeature = itemList.get(position).name;
+//        for (MyDate date : itemList.get(position).date) {
+//            positive += date.positive;
+//            negative += date.negative;
+//        }
 
-        holder.txtNomeFeature.setText(nomeFeature);
-        holder.txtPositive.setText("" + positive);
-        holder.txtNegative.setText("" + negative);
-        holder.txtTotal.setText("Número de avaliações: " + (positive + negative));
+//        holder.txtNomeFeature.setText(nomeFeature);
+//        holder.txtPositive.setText("" + positive);
+//        holder.txtNegative.setText("" + negative);
+//        holder.txtTotal.setText("Número de avaliações: " + (positive + negative));
 //        holder.compareIndicator.updateView(10, 90);
 
 //        holder.horizontal.init(context).addAll(itens()).build();
 
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClick.onItemClick(position);
-            }
-        });
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onClick.onItemClick(position);
+//            }
+//        });
     }
 
     @Override

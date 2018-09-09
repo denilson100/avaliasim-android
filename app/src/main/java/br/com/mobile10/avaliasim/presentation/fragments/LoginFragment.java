@@ -17,24 +17,21 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import br.com.mobile10.avaliasim.R;
-import br.com.mobile10.avaliasim.data.dao.UserDao;
+import br.com.mobile10.avaliasim.data.dao.UserDAO;
+import br.com.mobile10.avaliasim.data.interfaces.IUserDAO;
 import br.com.mobile10.avaliasim.presentation.activity.ResetActivity;
 import br.com.mobile10.avaliasim.util.InterfaceUtils;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class LoginFragment extends Fragment {
 
     private EditText emailEditText;
     private EditText pswEditText;
     private FirebaseAuth authenticationManager;
-
-    public LoginFragment() {
-        this.setArguments(new Bundle());
-    }
+    private IUserDAO userDAO;
 
     @Nullable
     @Override
@@ -44,11 +41,11 @@ public class LoginFragment extends Fragment {
         authenticationManager = FirebaseAuth.getInstance();
         emailEditText = view.findViewById(R.id.field_email);
         pswEditText = view.findViewById(R.id.field_password);
+        userDAO = new UserDAO();
 
         view.findViewById(R.id.email_sign_in_button).setOnClickListener(this::signIn);
         view.findViewById(R.id.register_button).setOnClickListener(this::register);
         view.findViewById(R.id.forgot_psw_button).setOnClickListener(this::startForgotPswActivity);
-        new UserDao().findById("GpsQEeHNDMUCeP09wiFPDSxZWlz2");
         return view;
     }
 
@@ -57,6 +54,7 @@ public class LoginFragment extends Fragment {
         startActivity(intent);
     }
 
+    //TODO: refatorar para o DAO
     private void signIn(View v) {
         String email = emailEditText.getText().toString();
         String password = pswEditText.getText().toString();
@@ -85,28 +83,32 @@ public class LoginFragment extends Fragment {
         String email = emailEditText.getText().toString();
         String password = pswEditText.getText().toString();
 
-
         if (isFormValidated()) {
             ProgressDialog progressDialog = InterfaceUtils.showProgressDialog(getContext(), "Logando...");
 
-            authenticationManager.fetchSignInMethodsForEmail(email).addOnCompleteListener(listener -> {
-                List<String> signInMethods = listener.getResult().getSignInMethods();
-                AtomicBoolean isRegistered = new AtomicBoolean(false);
-
-                signInMethods.forEach(method -> {
-                    if ("password".equals(method))
-                        isRegistered.set(true);
-                });
-
-                if (!isRegistered.get())
-                    authenticationManager.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task ->
-                            Toast.makeText(getContext(), "Cadastro realizado com sucesso.", Toast.LENGTH_SHORT).show());
-                else
+            userDAO.findSignInMethods(email, resultingCodeForAuthVerification -> {
+                if (((int) resultingCodeForAuthVerification) == 1) {
                     Toast.makeText(getActivity(), "Este email já está cadastrado. Tente recuperar a senha", Toast.LENGTH_SHORT).show();
-
-                InterfaceUtils.hideProgressDialog(progressDialog);
+                    InterfaceUtils.hideProgressDialog(progressDialog);
+                } else
+                    userDAO.create(email, password, resultingCodeForAccountCreation -> {
+                        if (((int) resultingCodeForAccountCreation) == 1) {
+                            Toast.makeText(getActivity(), "Usuário registrado com sucesso", Toast.LENGTH_SHORT).show();
+                            getFragmentManager()
+                                    .beginTransaction()
+                                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                                    .replace(R.id.login_fragment, new ProfileFragment())
+                                    .commit();
+                            InterfaceUtils.hideKeyboard(getActivity());
+                            InterfaceUtils.hideProgressDialog(progressDialog);
+                        } else {
+                            Toast.makeText(getActivity(), "Erro ao registrar usuário", Toast.LENGTH_SHORT).show();
+                            InterfaceUtils.hideProgressDialog(progressDialog);
+                        }
+                    });
             });
         }
+
     }
 
     private boolean isFormValidated() {

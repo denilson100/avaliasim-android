@@ -22,17 +22,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.activity.ResetActivity" />
-        <activity android:name=".presentation.activity.NewAvaliacao" />
-        <activity android:name=".presentation.activity.AvaliacaActivity" />
+        <activity android:name=".presentation.activity.NewRatingActivity" />
+        <!--<activity android:name=".presentation.activity.AvaliacaActivity" />-->
 
-        <activity android:name=".presentation.activity.Feature1Activity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <!--<activity android:name=".presentation.activity.Feature1Activity"-->
+            <!--android:theme="@style/AppTheme.NoActionBar"/>-->
 
         <activity android:name=".presentation.activity.MainIntroPermission"
             android:theme="@style/Theme.Intro"/>
 
         <activity
-            android:name=".presentation.activity.DetalhesAvaliacao"
+            android:name=".presentation.activity.RatingDetailsActivity"
             android:label="@string/title_activity_detalhes_avaliacao2"
             android:theme="@style/AppTheme.NoActionBar" />
 

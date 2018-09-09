@@ -1,99 +1,67 @@
 package br.com.mobile10.avaliasim.presentation.adapter;
 
-import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import com.balysv.materialripple.MaterialRippleLayout;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
-import br.com.mobile10.avaliasim.model.Avaliacao2;
+import br.com.mobile10.avaliasim.model.Rating;
 
 
 /**
  * Created by denilsonmonteiro on 03/10/16.
  */
+@RequiresApi(api = Build.VERSION_CODES.O)
+public class RecyclerViewAdapter extends RecyclerView.Adapter<CardViewHolder> {
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolders> {
+    private List<Rating> ratings;
 
-    private List<Avaliacao2> itemList;
-    private Context context;
-
-    public RecyclerViewAdapter(Context context, List<Avaliacao2> itemList) {
-        this.itemList = itemList;
-        this.context = context;
-
+    public RecyclerViewAdapter(List<Rating> ratings) {
+        this.ratings = ratings;
     }
 
     @Override
-    public RecyclerViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        return new RecyclerViewHolders(
-                MaterialRippleLayout.on(inflater.inflate(R.layout.item_list_event_card, parent, false))
+    public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        CardViewHolder cardViewHolder = new CardViewHolder(
+                MaterialRippleLayout.on(inflater.inflate(R.layout.card_view_holder, parent, false))
                         .rippleOverlay(true)
                         .rippleAlpha(0.2f)
                         .rippleColor(0xFF585858)
                         .rippleHover(true)
-                        .create()
-        );
+                        .create());
+        return cardViewHolder;
     }
 
+
     @Override
-    public void onBindViewHolder(RecyclerViewHolders holder, final int position) {
+    public void onBindViewHolder(CardViewHolder holder, final int position) {
+        Rating rating = ratings.get(position);
 
-        holder.txtTitle.setText(itemList.get(position).title);
+        holder.getCardTitle().setText(rating.getTitle());
+        holder.getCardDeliverableImage().setImageResource(holder.itemView.getResources().getIdentifier(rating.getDeliverable().getImageResource(), "drawable", holder.itemView.getContext().getPackageName()));
+        holder.setRating(rating);
 
-        String texto = "";
-        for (int i = 0; i < itemList.get(position).features.size(); i++) {
-            if (i == (itemList.get(position).features.size() - 1)) {
-                texto += itemList.get(position).features.get(i);
-            } else {
-                texto += itemList.get(position).features.get(i) + "  ";
-            }
-        }
-        holder.txtFeatures.setText(texto);
+        LocalDateTime ldt = LocalDateTime.ofInstant(Instant.ofEpochMilli(rating.getTimestamp()), ZoneId.systemDefault());
+        String date = ldt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        holder.getRatingCreationDate().setText(date);
 
-        switch (itemList.get(position).type) {
-            case "Produto":
-                holder.imageType.setImageResource(R.drawable.ic_type_product);
-                break;
-            case "Serviço":
-                holder.imageType.setImageResource(R.drawable.ic_type_service);
-                break;
-            default:
-                holder.imageType.setImageResource(R.drawable.ic_not_interested_black_24dp);
-
-        }
-
-        int lastPosition = -1;
-        if (position > lastPosition) {
-            Animation animation = AnimationUtils.loadAnimation(context, R.anim.teste);
-            holder.itemView.startAnimation(animation);
-            lastPosition = position;
-        }
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                try {
-//                    onClick.onItemClick(position);
-//                } catch (IndexOutOfBoundsException e) {
-//                    e.printStackTrace();
-//                }
-            }
-        });
-
+//        Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.teste);
+//        holder.itemView.startAnimation(animation);
     }
 
     @Override
     public int getItemCount() {
-        return this.itemList.size();
+        return ratings.size();
     }
 }

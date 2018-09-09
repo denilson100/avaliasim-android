@@ -16,7 +16,6 @@
             android:id="@+id/cards_switcher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
             <android.support.v4.widget.ContentLoadingProgressBar
                 style="?android:attr/progressBarStyleLarge"
                 android:layout_width="wrap_content"
@@ -26,11 +25,9 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/cards_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="horizontal" />
+                android:layout_height="wrap_content" />
         </ViewSwitcher>
     </android.support.v4.widget.SwipeRefreshLayout>
-
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/rate_btn"
@@ -43,6 +40,7 @@
         android:clickable="true"
         android:src="@drawable/ic_add_black_24dp"
         app:rippleColor="#FFF"
-        tools:ignore="VectorDrawableCompat" />
+        tools:ignore="VectorDrawableCompat"
+        android:focusable="true" />
 
 </RelativeLayout>

@@ -20,7 +20,7 @@ import br.com.mobile10.avaliasim.presentation.fragments.HomeFragment;
 import br.com.mobile10.avaliasim.presentation.fragments.LoginFragment;
 import br.com.mobile10.avaliasim.presentation.fragments.ProfileFragment;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class TabLayoutContainerActivity extends AppCompatActivity {
 
     @Override
@@ -33,6 +33,7 @@ public class TabLayoutContainerActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Top 10").setIcon(R.drawable.ic_star_black_24dp), true);
         tabLayout.addTab(tabLayout.newTab().setText("Buscar").setIcon(R.drawable.ic_search_black_24dp));
         tabLayout.addTab(tabLayout.newTab().setText("Perfil").setIcon(R.drawable.ic_person_black_24dp));
+        //TODO: criar este listener em um arquivo separado
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -45,12 +46,12 @@ public class TabLayoutContainerActivity extends AppCompatActivity {
                     case 0:
                         replaceFragment(new HomeFragment());
                         break;
-//                    case 1:
-//                        replaceFragment(new BuscaFragment());
-//                        break;
-//                    case 2:
-//                        replaceFragment(currentUser != null ? new ProfileFragment() : new LoginFragment());
-//                        break;
+                    case 1:
+                        replaceFragment(new BuscaFragment());
+                        break;
+                    case 2:
+                        replaceFragment(currentUser != null ? new ProfileFragment() : new LoginFragment());
+                        break;
                 }
             }
 

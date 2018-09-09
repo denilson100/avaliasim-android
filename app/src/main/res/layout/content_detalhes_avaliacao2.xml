@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".presentation.activity.DetalhesAvaliacao"
+    tools:context=".presentation.activity.RatingDetailsActivity"
     android:background="#eee"
-    tools:showIn="@layout/activity_detalhes_avaliacao2">
+    tools:showIn="@layout/rating_details_activity">
 
     <RelativeLayout
         android:id="@+id/conteudo"

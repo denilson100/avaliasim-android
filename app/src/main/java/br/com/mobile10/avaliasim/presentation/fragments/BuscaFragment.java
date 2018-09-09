@@ -15,10 +15,6 @@ import br.com.mobile10.avaliasim.R;
 
 public class BuscaFragment extends Fragment {
 
-    public BuscaFragment() {
-        this.setArguments(new Bundle());
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
