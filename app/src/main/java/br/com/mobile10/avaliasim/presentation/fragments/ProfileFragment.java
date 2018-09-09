@@ -140,8 +140,6 @@ public class ProfileFragment extends Fragment {
             else
                 Toast.makeText(getContext(), "Erro!", LENGTH_SHORT).show();
         });
-
-//        dao.editUserInfo(user, userId);
     }
 
     private void alertEditInfo(View v) {
@@ -157,18 +155,6 @@ public class ProfileFragment extends Fragment {
                 .setCancelable(false)
                 .setPositiveButton("Editar",
                         (dialog, id) -> {
-//
-//                            String nome = editNome.getText().toString();
-//                            User user = new User(nome, null);
-                            editUserInfo();
-//
-//                            Handler handler = new Handler();
-//                            handler.postDelayed(new Runnable() {
-//                                @Override
-//                                public void run() {
-////                                    executeAsyncTaskGetUserInfo();
-//                                }
-//                            }, 1000);
 
                         })
                 .setNegativeButton("Cancelar", null);
