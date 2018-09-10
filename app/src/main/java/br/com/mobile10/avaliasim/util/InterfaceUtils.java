@@ -13,7 +13,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 import br.com.mobile10.avaliasim.R;
-import br.com.mobile10.avaliasim.presentation.interfaces.OnLoadedBitmapListener;
+import br.com.mobile10.avaliasim.data.interfaces.OnCompleteOperationListener;
 
 public class InterfaceUtils {
 
@@ -38,11 +38,11 @@ public class InterfaceUtils {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    public static void loadImageFromUrl(URL url, OnLoadedBitmapListener onLoadedBitmapListener) {
+    public static void loadImageFromUrl(URL url, OnCompleteOperationListener onCompleteOperationListener) {
         new Thread(() -> {
             try {
                 Bitmap bmp = BitmapFactory.decodeStream((InputStream) url.getContent());
-                onLoadedBitmapListener.onLoadCallback(bmp);
+                onCompleteOperationListener.onCompletion(bmp);
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -93,7 +93,7 @@ public class ImageUtility {
      *
      * @param data the returned data of the  activity result
      */
-    public Uri getPickImageResultUri(Intent  data, Activity activity) {
+    public Uri getPickImageResultUri(Intent data, Activity activity) {
         boolean isCamera = true;
         if (data != null && data.getData() != null) {
             String action = data.getAction();

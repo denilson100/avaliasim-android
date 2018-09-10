@@ -10,7 +10,6 @@ android {
         versionName "0.15"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-//        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -48,24 +47,12 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:12.0.1'
     implementation 'com.android.support:design:27.1.0'
     implementation 'com.android.support:support-v4:27.1.0'
-
-//    implementation 'com.google.android.gms:play-services:12.0.1'
-//    implementation 'com.android.support:multidex:1.0.1'
-
     implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'
-    // RecycleVeview
     implementation 'jp.wasabeef:recyclerview-animators:2.2.3'
-    // Graficos
-    implementation 'com.allen.comparsechart:comparsechart:1.0.1' // com joinha
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3' // Completo
-    // compile 'com.github.felixsoares:HorizontalBarGraph:1.0' // horizontal abr graph
+    implementation 'com.allen.comparsechart:comparsechart:1.0.1'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     implementation 'com.github.IntruderShanky:scatter-piechart:1.0.0'
     implementation 'im.dacer:AndroidCharts:1.0.4'
-
-
-
-    // Menu
-//    implementation 'com.ss.bottomnavigation:bottomnavigation:1.5.2'
 
     // List
     implementation 'com.balysv:material-ripple:1.0.2'
@@ -79,25 +66,15 @@ dependencies {
         exclude group: 'com.android.support'
     }
     implementation 'com.wdullaer:materialdatetimepicker:3.6.0'
-
     //Intro
     implementation 'com.heinrichreimersoftware:material-intro:1.6.2'
-
     // tabs
     implementation 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
     implementation 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
-//    implementation 'com.ogaclejapan.smarttablayout:utils-v13:1.6.1@aar'
-
-    // Fab
-//    implementation 'com.hlab.fabrevealmenu:fab-reveal-menu:1.0.3'
-//    implementation 'com.github.clans:fab:1.6.4'
-
     // Transition
     implementation 'com.github.coyarzun89:fabtransitionactivity:0.2.0'
-
     // utilidade
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-
 }
 apply plugin: 'com.google.gms.google-services'

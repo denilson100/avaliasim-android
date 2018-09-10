@@ -1,17 +1,20 @@
 package br.com.mobile10.avaliasim.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
     private String id;
     private String name;
-    private String photo;
+    private String phoneNumber;
     private String email;
     private String address;
     private String city;
     private String state;
     private String country;
+    private String photoUrl;
     private List<Rating> ratings;
+
 
     public String getName() {
         return name;
@@ -19,14 +22,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
     }
 
     public String getAddress() {
@@ -83,5 +78,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 }

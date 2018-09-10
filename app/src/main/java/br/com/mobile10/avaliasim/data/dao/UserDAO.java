@@ -1,15 +1,11 @@
 package br.com.mobile10.avaliasim.data.dao;
 
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -49,7 +45,6 @@ public class UserDAO implements IUserDAO {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }
@@ -75,13 +70,15 @@ public class UserDAO implements IUserDAO {
             //Cadastrou no Firebase auth
             if (task.isSuccessful()) {
                 User user = new User();
+                user.setId(authenticationManager.getCurrentUser().getUid());
+                user.setName(authenticationManager.getCurrentUser().getDisplayName());
                 user.setEmail(authenticationManager.getCurrentUser().getEmail());
+                user.setPhotoUrl(authenticationManager.getCurrentUser().getPhotoUrl().toString());
+                user.setPhoneNumber(authenticationManager.getCurrentUser().getPhoneNumber());
                 databaseReference
                         .child(authenticationManager.getCurrentUser().getUid())
                         .setValue(user)
-                        //Cadastrou no banco de usuários do aplicativo
-                        .addOnCompleteListener(listener -> onCompleteOperationListener.onCompletion(listener.isSuccessful() ? 1 : 0)
-                        );
+                        .addOnCompleteListener(listener -> onCompleteOperationListener.onCompletion(listener.isSuccessful() ? 1 : 0));
             }
         });
     }
@@ -98,60 +95,44 @@ public class UserDAO implements IUserDAO {
                 .onCompletion(dbError == null ? 1 : 0));
     }
 
-    public void uploadFile(Bitmap bitmap, final String userId) {
-//        FirebaseStorage storage = FirebaseStorage.getInstance();
-//        StorageReference storageRef = storage.getReference();
-//        StorageReference mountainImagesRef = storageRef.child(userId).child("imgPerfil.jpg");
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
-//        byte[] data = baos.toByteArray();
-//        UploadTask uploadTask = mountainImagesRef.putBytes(data);
-//        uploadTask.addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception exception) {
-//                // Handle unsuccessful uploads
-//                Log.d("TAG", "Erro ao enviar foto: " + exception);
-//            }
-//        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-//                Uri downloadUrl = taskSnapshot.getDownloadUrl();
-//                String urlFoto = "" + downloadUrl;
-//                if (urlFoto != "")
-//                    mDatabase.child("foto").setValue(urlFoto);
-//                else
-//                    Log.d("TAG", "Erro ao enviar foto");
+    @Override
+    public void uploadFile(Bitmap bitmap, String userId) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
+        byte[] data = baos.toByteArray();
 
-//                fragmentPerfil.executeAsyncTaskGetUserInfo();
-//                Log.d("downloadUrl-->", "" + downloadUrl);
-//            }
-//        });
+        StorageReference profileImageReference = FirebaseStorage.getInstance().getReference()
+                .child(userId)
+                .child("profileImage.jpg");
+        UploadTask uploadTask = profileImageReference.putBytes(data);
+        uploadTask.addOnFailureListener(ex -> ex.printStackTrace())
+                .addOnSuccessListener(taskSnapshot -> databaseReference
+                        .child(userId)
+                        .child("photoUrl")
+                        .setValue(taskSnapshot.getDownloadUrl().toString()));
     }
 
-    public void editUserInfo(final User user, final String userId) {
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
+    @Override
+    public void signIn(String email, String password, OnCompleteOperationListener onCompleteOperationListener) {
+        authenticationManager.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> onCompleteOperationListener.onCompletion(task.isSuccessful() ? 1 : 0));
+    }
 
+    @Override
+    public void signOut() {
+        authenticationManager.signOut();
+    }
 
-//        mDatabase.child(Constants.DB_ROOT)
-//                .child("users").child(userId)
-//                .addListenerForSingleValueEvent(
-//                        new ValueEventListener() {
-//                            @Override
-//                            public void onDataChange(DataSnapshot dataSnapshot) {
-//                                try {
-//                                    writeNewPost(user, userId);
-//                                } catch (Exception e) {
-//                                    e.printStackTrace();
-//                                }
-//
-//                            }
-//
-//                            @Override
-//                            public void onCancelled(DatabaseError databaseError) {
-//                                Log.d("TAG", "Erro");
-//
-//                            }
-//                        });
+    @Override
+    public FirebaseUser getLoggedUser() {
+        return authenticationManager.getCurrentUser();
+    }
+
+    @Override
+    public void findAll(OnCompleteOperationListener onCompleteOperationListener) {
+    }
+
+    @Override
+    public void create(User object, OnCompleteOperationListener onCompleteOperationListener) {
     }
 }

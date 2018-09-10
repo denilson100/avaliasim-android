@@ -1,1 +1,1 @@
-include ':app', ':commons-beanutils-1.9.3'
+include ':app'

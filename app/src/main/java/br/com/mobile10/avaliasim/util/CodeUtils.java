@@ -4,14 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import org.apache.commons.beanutils.BeanUtils;
-
-import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -35,13 +27,5 @@ public class CodeUtils {
             context = ((ContextWrapper) context).getBaseContext();
         }
         return null;
-    }
-
-    public static void copyAttributes(Object sourceObject, Object targetObject) {
-        try {
-            BeanUtils.copyProperties(targetObject, sourceObject);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

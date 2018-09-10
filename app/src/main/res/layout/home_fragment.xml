@@ -16,6 +16,7 @@
             android:id="@+id/cards_switcher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <android.support.v4.widget.ContentLoadingProgressBar
                 style="?android:attr/progressBarStyleLarge"
                 android:layout_width="wrap_content"
@@ -38,9 +39,9 @@
         android:layout_alignRight="@id/swipe_container"
         android:layout_margin="16dp"
         android:clickable="true"
+        android:focusable="true"
         android:src="@drawable/ic_add_black_24dp"
         app:rippleColor="#FFF"
-        tools:ignore="VectorDrawableCompat"
-        android:focusable="true" />
+        tools:ignore="VectorDrawableCompat" />
 
 </RelativeLayout>
