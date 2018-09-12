@@ -132,4 +132,266 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
+    <string-array name="cities">
+        <item>Abreulândia</item>
+        <item>Aguiarnópolis</item>
+        <item>Aliança do Tocantins</item>
+        <item>Almas</item>
+        <item>Alvorada</item>
+        <item>Ananás</item>
+        <item>Angico</item>
+        <item>Aparecida do Rio Negro</item>
+        <item>Aragominas</item>
+        <item>Araguacema</item>
+        <item>Araguaçu</item>
+        <item>Araguaína</item>
+        <item>Araguanã</item>
+        <item>Araguatins</item>
+        <item>Arapoema</item>
+        <item>Arraias</item>
+        <item>Augustinópolis</item>
+        <item>Aurora do Tocantins</item>
+        <item>Axixá do Tocantins</item>
+        <item>Babaçulândia</item>
+        <item>Bandeirantes do Tocantins</item>
+        <item>Barra do Ouro</item>
+        <item>Barrolândia</item>
+        <item>Bernardo Sayão</item>
+        <item>Bom Jesus do Tocantins</item>
+        <item>Brasilândia do Tocantins</item>
+        <item>Brejinho de Nazaré</item>
+        <item>Buriti do Tocantins</item>
+        <item>Cachoeirinha</item>
+        <item>Campos Lindos</item>
+        <item>Cariri do Tocantins</item>
+        <item>Carmolândia</item>
+        <item>Carrasco Bonito</item>
+        <item>Caseara</item>
+        <item>Centenário</item>
+        <item>Chapada da Natividade</item>
+        <item>Chapada de Areia</item>
+        <item>Colinas do Tocantins</item>
+        <item>Colméia</item>
+        <item>Combinado</item>
+        <item>Conceição do Tocantins</item>
+        <item>Couto de Magalhães</item>
+        <item>Cristalândia</item>
+        <item>Crixás do Tocantins</item>
+        <item>Darcinópolis</item>
+        <item>Dianópolis</item>
+        <item>Divinópolis do Tocantins</item>
+        <item>Dois Irmãos do Tocantins</item>
+        <item>Dueré</item>
+        <item>Esperantina</item>
+        <item>Fátima</item>
+        <item>Figueirópolis</item>
+        <item>Filadélfia</item>
+        <item>Formoso do Araguaia</item>
+        <item>Fortaleza do Tabocão</item>
+        <item>Goianorte</item>
+        <item>Goiatins</item>
+        <item>Guaraí</item>
+        <item>Gurupi</item>
+        <item>Ipueiras</item>
+        <item>Itacajá</item>
+        <item>Itaguatins</item>
+        <item>Itapiratins</item>
+        <item>Itaporã do Tocantins</item>
+        <item>Jaú do Tocantins</item>
+        <item>Juarina</item>
+        <item>Lagoa da Confusão</item>
+        <item>Lagoa do Tocantins</item>
+        <item>Lajeado</item>
+        <item>Lavandeira</item>
+        <item>Lizarda</item>
+        <item>Luzinópolis</item>
+        <item>Marianópolis do Tocantins</item>
+        <item>Mateiros</item>
+        <item>Maurilândia do Tocantins</item>
+        <item>Miracema do Tocantins</item>
+        <item>Miranorte</item>
+        <item>Monte do Carmo</item>
+        <item>Monte Santo do Tocantins</item>
+        <item>Muricilândia</item>
+        <item>Natividade</item>
+        <item>Nazaré</item>
+        <item>Nova Olinda</item>
+        <item>Nova Rosalândia</item>
+        <item>Novo Acordo</item>
+        <item>Novo Alegre</item>
+        <item>Novo Jardim</item>
+        <item>Oliveira de Fátima</item>
+        <item>Palmas</item>
+        <item>Palmeirante</item>
+        <item>Palmeiras do Tocantins</item>
+        <item>Palmeirópolis</item>
+        <item>Paraíso do Tocantins</item>
+        <item>Paranã</item>
+        <item>Pau d`Arco</item>
+        <item>Pedro Afonso</item>
+        <item>Peixe</item>
+        <item>Pequizeiro</item>
+        <item>Pindorama do Tocantins</item>
+        <item>Piraquê</item>
+        <item>Pium</item>
+        <item>Ponte Alta do Bom Jesus</item>
+        <item>Ponte Alta do Tocantins</item>
+        <item>Porto Alegre do Tocantins</item>
+        <item>Porto Nacional</item>
+        <item>Praia Norte</item>
+        <item>Presidente Kennedy</item>
+        <item>Pugmil</item>
+        <item>Recursolândia</item>
+        <item>Riachinho</item>
+        <item>Rio da Conceição</item>
+        <item>Rio dos Bois</item>
+        <item>Rio Sono</item>
+        <item>Sampaio</item>
+        <item>Sandolândia</item>
+        <item>Santa Fé do Araguaia</item>
+        <item>Santa Maria do Tocantins</item>
+        <item>Santa Rita do Tocantins</item>
+        <item>Santa Rosa do Tocantins</item>
+        <item>Santa Tereza do Tocantins</item>
+        <item>Santa Terezinha do Tocantins</item>
+        <item>São Bento do Tocantins</item>
+        <item>São Félix do Tocantins</item>
+        <item>São Miguel do Tocantins</item>
+        <item>São Salvador do Tocantins</item>
+        <item>São Sebastião do Tocantins</item>
+        <item>São Valério da Natividade</item>
+        <item>Silvanópolis</item>
+        <item>Sítio Novo do Tocantins</item>
+        <item>Sucupira</item>
+        <item>Taguatinga</item>
+        <item>Taipas do Tocantins</item>
+        <item>Talismã</item>
+        <item>Tocantínia</item>
+        <item>Tocantinópolis</item>
+        <item>Tupirama</item>
+        <item>Tupiratins</item>
+        <item>Wanderlândia</item>
+        <item>Xambioá</item>
+        <item>Angra dos Reis</item>
+        <item>Aperibé</item>
+        <item>Araruama</item>
+        <item>Areal</item>
+        <item>Armação dos Búzios</item>
+        <item>Arraial do Cabo</item>
+        <item>Barra do Piraí</item>
+        <item>Barra Mansa</item>
+        <item>Belford Roxo</item>
+        <item>Bom Jardim</item>
+        <item>Bom Jesus do Itabapoana</item>
+        <item>Cabo Frio</item>
+        <item>Cachoeiras de Macacu</item>
+        <item>Cambuci</item>
+        <item>Campos dos Goytacazes</item>
+        <item>Cantagalo</item>
+        <item>Carapebus</item>
+        <item>Cardoso Moreira</item>
+        <item>Carmo</item>
+        <item>Casimiro de Abreu</item>
+        <item>Comendador Levy Gasparian</item>
+        <item>Conceição de Macabu</item>
+        <item>Cordeiro</item>
+        <item>Duas Barras</item>
+        <item>Duque de Caxias</item>
+        <item>Engenheiro Paulo de Frontin</item>
+        <item>Guapimirim</item>
+        <item>Iguaba Grande</item>
+        <item>Itaboraí</item>
+        <item>Itaguaí</item>
+        <item>Italva</item>
+        <item>Itaocara</item>
+        <item>Itaperuna</item>
+        <item>Itatiaia</item>
+        <item>Japeri</item>
+        <item>Laje do Muriaé</item>
+        <item>Macaé</item>
+        <item>Macuco</item>
+        <item>Magé</item>
+        <item>Mangaratiba</item>
+        <item>Maricá</item>
+        <item>Mendes</item>
+        <item>Mesquita</item>
+        <item>Miguel Pereira</item>
+        <item>Miracema</item>
+        <item>Natividade</item>
+        <item>Nilópolis</item>
+        <item>Niterói</item>
+        <item>Nova Friburgo</item>
+        <item>Nova Iguaçu</item>
+        <item>Paracambi</item>
+        <item>Paraíba do Sul</item>
+        <item>Parati</item>
+        <item>Paty do Alferes</item>
+        <item>Petrópolis</item>
+        <item>Pinheiral</item>
+        <item>Piraí</item>
+        <item>Porciúncula</item>
+        <item>Porto Real</item>
+        <item>Quatis</item>
+        <item>Queimados</item>
+        <item>Quissamã</item>
+        <item>Resende</item>
+        <item>Rio Bonito</item>
+        <item>Rio Claro</item>
+        <item>Rio das Flores</item>
+        <item>Rio das Ostras</item>
+        <item>Rio de Janeiro</item>
+        <item>Santa Maria Madalena</item>
+        <item>Santo Antônio de Pádua</item>
+        <item>São Fidélis</item>
+        <item>São Francisco de Itabapoana</item>
+        <item>São Gonçalo</item>
+        <item>São João da Barra</item>
+        <item>São João de Meriti</item>
+        <item>São José de Ubá</item>
+        <item>São José do Vale do Rio Pret</item>
+        <item>São Pedro da Aldeia</item>
+        <item>São Sebastião do Alto</item>
+        <item>Sapucaia</item>
+        <item>Saquarema</item>
+        <item>Seropédica</item>
+        <item>Silva Jardim</item>
+        <item>Sumidouro</item>
+        <item>Tanguá</item>
+        <item>Teresópolis</item>
+        <item>Trajano de Morais</item>
+        <item>Três Rios</item>
+        <item>Valença</item>
+        <item>Varre-Sai</item>
+        <item>Vassouras</item>
+        <item>Volta Redonda</item>
+    </string-array>
+    <string-array name="states">
+        <item>Acre (AC)</item>
+        <item>Alagoas (AL)</item>
+        <item>Amapá (AP)</item>
+        <item>Amazonas (AM)</item>
+        <item>Bahia (BA)</item>
+        <item>Ceará (CE)</item>
+        <item>Distrito Federal (DF)</item>
+        <item>Espírito Santo (ES)</item>
+        <item>Goiás (GO)</item>
+        <item>Maranhão (MA)</item>
+        <item>Mato Grosso (MT)</item>
+        <item>Mato Grosso do Sul (MS)</item>
+        <item>Minas Gerais (MG)</item>
+        <item>Pará (PA) </item>
+        <item>Paraíba (PB)</item>
+        <item>Paraná (PR)</item>
+        <item>Pernambuco (PE)</item>
+        <item>Piauí (PI)</item>
+        <item>Rio de Janeiro (RJ)</item>
+        <item>Rio Grande do Norte (RN)</item>
+        <item>Rio Grande do Sul (RS)</item>
+        <item>Rondônia (RO)</item>
+        <item>Roraima (RR)</item>
+        <item>Santa Catarina (SC)</item>
+        <item>São Paulo (SP)</item>
+        <item>Sergipe (SE)</item>
+        <item>Tocantins (TO)</item>
+    </string-array>
 </resources>

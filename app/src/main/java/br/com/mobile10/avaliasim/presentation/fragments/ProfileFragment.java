@@ -2,6 +2,7 @@ package br.com.mobile10.avaliasim.presentation.fragments;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -123,10 +124,15 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
+            //TODO: mudar para content loading progress bar
+            ProgressDialog progressDialog = InterfaceUtils.showProgressDialog(getContext(), "Carregando imagem...");
             Uri imageUri = imageUtility.getPickImageResultUri(data, getActivity());
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
-                userDAO.uploadFile(bitmap, loggedUser.getId());
+                userDAO.uploadFile(bitmap, loggedUser.getId(), result -> {
+                    profileImg.setImageBitmap(bitmap);
+                    InterfaceUtils.hideProgressDialog(progressDialog);
+                });
             } catch (IOException e) {
                 e.printStackTrace();
                 Toast.makeText(getActivity(), "Ocorreu um erro. Tente novamente.", Toast.LENGTH_SHORT).show();

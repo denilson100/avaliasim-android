@@ -96,7 +96,7 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public void uploadFile(Bitmap bitmap, String userId) {
+    public void uploadFile(Bitmap bitmap, String userId, OnCompleteOperationListener onCompleteOperationListener) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
         byte[] data = baos.toByteArray();
@@ -105,11 +105,13 @@ public class UserDAO implements IUserDAO {
                 .child(userId)
                 .child("profileImage.jpg");
         UploadTask uploadTask = profileImageReference.putBytes(data);
-        uploadTask.addOnFailureListener(ex -> ex.printStackTrace())
+        uploadTask
+                .addOnFailureListener(ex -> ex.printStackTrace())
                 .addOnSuccessListener(taskSnapshot -> databaseReference
                         .child(userId)
                         .child("photoUrl")
-                        .setValue(taskSnapshot.getDownloadUrl().toString()));
+                        .setValue(taskSnapshot.getDownloadUrl().toString())
+                        .addOnCompleteListener(listener -> onCompleteOperationListener.onCompletion(listener.isSuccessful() ? 1 : 0)));
     }
 
     @Override

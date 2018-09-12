@@ -11,7 +11,7 @@ public interface IUserDAO extends IBaseDAO<User> {
 
     void create(String email, String password, OnCompleteOperationListener onCompleteOperationListener);
 
-    void uploadFile(Bitmap bitmap, String userId);
+    void uploadFile(Bitmap bitmap, String userId, OnCompleteOperationListener onCompleteOperationListener);
 
     void signIn(String email, String password, OnCompleteOperationListener onCompleteOperationListener);
 
