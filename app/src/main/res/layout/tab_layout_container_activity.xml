@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabGravity="fill"
-        app:tabMode="fixed" />
+        app:tabMode="fixed"
+        android:backgroundTint="#00a094"/>
 
     <FrameLayout
         android:id="@+id/frame_container"

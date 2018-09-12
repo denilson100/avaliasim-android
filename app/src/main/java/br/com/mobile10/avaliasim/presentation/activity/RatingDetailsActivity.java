@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import br.com.mobile10.avaliasim.R;
-import br.com.mobile10.avaliasim.model.Rating;
 
 public class RatingDetailsActivity extends AppCompatActivity
 //        extends BaseActivity implements RecyclerViewAdapterDetAvaliacoes.OnItemClicked,
@@ -12,13 +11,12 @@ public class RatingDetailsActivity extends AppCompatActivity
 //        DateRangePickerFragment.OnDateRangeSelectedListener, DatePickerFragment.OnDateSelectedListener
 {
 //    private List<String> featureList = new ArrayList<>();
-//    private FirebaseAuth mAuth;
-//    FirebaseUser users;
 //
 //    public static boolean keyBuscaPorId;
 //    private RelativeLayout fundoDinamic;
 //    FloatingActionButton fab, fabAllDate, fabRangeDate, fabUnicDate;
 //    TextView txtData;
+//
 //
 //    RecyclerViewAdapterFeatures rcAdapter;
 //    RecyclerView rView;
@@ -35,21 +33,16 @@ public class RatingDetailsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rating_details_activity);
 
-        Rating rating = (Rating) getIntent().getSerializableExtra("rating");
+//        Rating rating = (Rating) getIntent().getSerializableExtra("rating");
+//
 
-//        mAuth = FirebaseAuth.getInstance();
-//        FirebaseUser user = mAuth.getCurrentUser();
-//        users = user;
-//
-//        Rating rating =
-//
 //        if (getIntent() != null) {
 //            avaliacao = (Avaliacao2) getIntent().getSerializableExtra("avaliacao");
 //        } else {
-////            showToast("Tente novamente");
+//            showToast("Tente novamente");
 //            finish();
 //        }
-
+//
 //        txtData = findViewById(R.id.data);
 //        fundoDinamic = findViewById(R.id.fundo);
 //        fundoDinamic = findViewById(R.id.fundo);

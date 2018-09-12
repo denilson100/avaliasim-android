@@ -5,103 +5,103 @@
     android:layout_height="match_parent"
     tools:context=".presentation.activity.NewRatingActivity">
 
-    <!--<LinearLayout-->
-        <!--android:id="@+id/content_editar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_margin="16dp"-->
-        <!--android:orientation="vertical">-->
+    <LinearLayout
+        android:id="@+id/content_editar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
 
-        <!--&lt;!&ndash;<com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner&ndash;&gt;-->
-        <!--&lt;!&ndash;android:id="@+id/categoria"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:hint="Tipo"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:textColorHint="#05ab9a"&ndash;&gt;-->
-        <!--&lt;!&ndash;app:met_floatingLabel="normal" />&ndash;&gt;-->
+        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            android:id="@+id/categoria"
+            app:met_floatingLabel="normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tipo"
+            android:textColorHint="#05ab9a" />
 
-        <!--&lt;!&ndash;<android.support.design.widget.TextInputLayout&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_height="wrap_content">&ndash;&gt;-->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <!--&lt;!&ndash;<AutoCompleteTextView&ndash;&gt;-->
-        <!--&lt;!&ndash;android:id="@+id/edit_title"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:hint="Titulo"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:inputType="textEmailAddress"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:maxLines="1"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:singleLine="true" />&ndash;&gt;-->
+            <AutoCompleteTextView
+                android:id="@+id/edit_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Titulo"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:singleLine="true" />
 
-        <!--&lt;!&ndash;</android.support.design.widget.TextInputLayout>&ndash;&gt;-->
+        </android.support.design.widget.TextInputLayout>
 
 
-        <!--&lt;!&ndash;<android.support.design.widget.TextInputLayout&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_height="wrap_content">&ndash;&gt;-->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <!--&lt;!&ndash;<AutoCompleteTextView&ndash;&gt;-->
-        <!--&lt;!&ndash;android:id="@+id/edit_features"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:hint="Caracteristica que será avaliada"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:inputType="text"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:maxLines="1"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:singleLine="true" />&ndash;&gt;-->
+            <AutoCompleteTextView
+                android:id="@+id/edit_features"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Caracteristica que será avaliada"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true" />
 
-        <!--&lt;!&ndash;</android.support.design.widget.TextInputLayout>&ndash;&gt;-->
+        </android.support.design.widget.TextInputLayout>
 
-        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-        <!--&lt;!&ndash;android:text="Para adicionar mais de um, separar com ;"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:textColor="#999"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_marginLeft="8dp"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_marginRight="8dp"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>&ndash;&gt;-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:text="Para adicionar mais de um, separar com ;"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#999" />
 
-        <!--&lt;!&ndash; Service &ndash;&gt;-->
-        <!--<LinearLayout-->
-            <!--android:id="@+id/content_service"-->
+        <!-- Service -->
+        <LinearLayout
+            android:id="@+id/content_service"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/edit_cidade"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Cidade"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/estado"
+                app:met_floatingLabel="normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Estado"
+                android:textColorHint="#05ab9a" />
+
+        </LinearLayout>
+
+
+        <!--<android.support.v7.widget.AppCompatButton-->
             <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:orientation="vertical"-->
-            <!--android:visibility="gone">-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:backgroundTint="@color/colorPrimaryDark"-->
+            <!--android:onClick="saveNewAvaliacao"-->
+            <!--android:text="salvar"-->
+            <!--android:textColor="@color/branco" />-->
 
-            <!--&lt;!&ndash;<android.support.design.widget.TextInputLayout&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="wrap_content">&ndash;&gt;-->
-
-            <!--&lt;!&ndash;<AutoCompleteTextView&ndash;&gt;-->
-            <!--&lt;!&ndash;android:id="@+id/edit_cidade"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:hint="Cidade"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:inputType="textEmailAddress"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:maxLines="1"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:singleLine="true" />&ndash;&gt;-->
-
-            <!--&lt;!&ndash;</android.support.design.widget.TextInputLayout>&ndash;&gt;-->
-
-            <!--&lt;!&ndash;<com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner&ndash;&gt;-->
-            <!--&lt;!&ndash;android:id="@+id/estado"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:hint="Estado"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:textColorHint="#05ab9a"&ndash;&gt;-->
-            <!--&lt;!&ndash;app:met_floatingLabel="normal" />&ndash;&gt;-->
-
-        <!--</LinearLayout>-->
-
-
-        <!--&lt;!&ndash;<android.support.v7.widget.AppCompatButton&ndash;&gt;-->
-        <!--&lt;!&ndash;android:onClick="saveNewAvaliacao"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_marginTop="16dp"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:backgroundTint="@color/colorPrimaryDark"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:text="salvar"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:textColor="@color/branco" />&ndash;&gt;-->
-
-    <!--</LinearLayout>-->
+    </LinearLayout>
 </RelativeLayout>
