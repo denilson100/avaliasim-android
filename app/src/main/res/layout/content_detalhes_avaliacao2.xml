@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".presentation.activity.RatingDetailsActivity"
     android:background="#eee"
-    tools:showIn="@layout/rating_details_activity">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".presentation.activity.DeliverableDetailsActivity"
+    tools:showIn="@layout/deliverable_details_activity">
 
     <RelativeLayout
         android:id="@+id/conteudo"
@@ -39,19 +39,19 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <!--<br.com.mobile10.avaliasim.libBarGraph.HorizontalBar-->
-                <!--android:id="@+id/horizontal"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:visibility="visible"/>-->
+            <!--android:id="@+id/horizontal"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:visibility="visible"/>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:padding="8dp"
+                android:background="#eee"
                 android:orientation="vertical"
-                android:visibility="visible"
-                android:background="#eee">
+                android:padding="8dp"
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -68,8 +68,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center|left"
-                            android:textStyle="bold"
-                            android:text="" />
+                            android:text=""
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -120,42 +120,39 @@
                             app:fabSize="mini"
                             app:layout_anchorGravity="bottom|right|end"
                             app:rippleColor="#999" />
-
-
                     </LinearLayout>
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="300dp">
 
-                <com.intrusoft.scatter.PieChart
-                    android:id="@+id/pie_chart"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    scatter:aboutChart="About Your Chart"
-                    scatter:aboutTextColor="#212121"
-                    scatter:centerColor="#eee"
-                    scatter:chartColor="#eee"
-                    scatter:aboutTextSize="46"
-                    scatter:textSize="42"
-                    scatter:equalPartition="false"
-                    scatter:textColor="@color/branco" />
+                    <com.intrusoft.scatter.PieChart
+                        android:id="@+id/pie_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        scatter:aboutChart="About Your Chart"
+                        scatter:aboutTextColor="#212121"
+                        scatter:aboutTextSize="46"
+                        scatter:centerColor="#eee"
+                        scatter:chartColor="#eee"
+                        scatter:equalPartition="false"
+                        scatter:textColor="@color/branco"
+                        scatter:textSize="42" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
             <TextView
-                android:text="Caracteristica"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:textStyle="bold"
+                android:layout_marginBottom="8dp"
                 android:layout_marginTop="16dp"
                 android:paddingLeft="16dp"
-                android:layout_marginBottom="8dp"/>
+                android:text="Caracteristica"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -166,10 +163,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
                 </RelativeLayout>
 
@@ -182,10 +179,7 @@
                 android:background="#ccc">
 
                 <include layout="@layout/grafico_line" />
-
             </LinearLayout>
-
-
         </LinearLayout>
 
         <RelativeLayout
@@ -202,9 +196,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal" />
-
         </RelativeLayout>
-
     </RelativeLayout>
-
 </android.support.v4.widget.NestedScrollView>

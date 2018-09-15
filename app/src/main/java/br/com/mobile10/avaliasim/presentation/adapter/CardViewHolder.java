@@ -7,8 +7,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import br.com.mobile10.avaliasim.R;
-import br.com.mobile10.avaliasim.model.Rating;
-import br.com.mobile10.avaliasim.presentation.activity.RatingDetailsActivity;
+import br.com.mobile10.avaliasim.model.Deliverable;
+import br.com.mobile10.avaliasim.presentation.activity.DeliverableDetailsActivity;
 
 
 /**
@@ -16,22 +16,20 @@ import br.com.mobile10.avaliasim.presentation.activity.RatingDetailsActivity;
  */
 public class CardViewHolder extends RecyclerView.ViewHolder {
 
-    private Rating rating;
+    private Deliverable deliverable;
     private TextView cardTitle;
-    private TextView ratingCreationDate;
     private ImageView cardDeliverableImage;
 
     CardViewHolder(View itemView) {
         super(itemView);
         cardTitle = itemView.findViewById(R.id.card_title);
-        ratingCreationDate = itemView.findViewById(R.id.creation_date_text_view);
         cardDeliverableImage = itemView.findViewById(R.id.card_view_holder_img);
         itemView.setOnClickListener(this::onCardClick);
     }
 
     private void onCardClick(View v) {
-        Intent intent = new Intent(v.getContext(), RatingDetailsActivity.class);
-        intent.putExtra("rating", getRating());
+        Intent intent = new Intent(v.getContext(), DeliverableDetailsActivity.class);
+        intent.putExtra("deliverable", getDeliverable());
         itemView.getContext().startActivity(intent);
     }
 
@@ -43,14 +41,6 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
         this.cardTitle = cardTitle;
     }
 
-    public TextView getRatingCreationDate() {
-        return ratingCreationDate;
-    }
-
-    public void setRatingCreationDate(TextView ratingCreationDate) {
-        this.ratingCreationDate = ratingCreationDate;
-    }
-
     public ImageView getCardDeliverableImage() {
         return cardDeliverableImage;
     }
@@ -59,11 +49,11 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
         this.cardDeliverableImage = cardDeliverableImage;
     }
 
-    public Rating getRating() {
-        return rating;
+    public Deliverable getDeliverable() {
+        return deliverable;
     }
 
-    public void setRating(Rating rating) {
-        this.rating = rating;
+    public void setDeliverable(Deliverable deliverable) {
+        this.deliverable = deliverable;
     }
 }

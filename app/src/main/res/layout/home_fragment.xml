@@ -29,19 +29,4 @@
                 android:layout_height="wrap_content" />
         </ViewSwitcher>
     </android.support.v4.widget.SwipeRefreshLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/rate_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignBottom="@id/swipe_container"
-        android:layout_alignEnd="@id/swipe_container"
-        android:layout_alignRight="@id/swipe_container"
-        android:layout_margin="16dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_add_black_24dp"
-        app:rippleColor="#FFF"
-        tools:ignore="VectorDrawableCompat" />
-
 </RelativeLayout>

@@ -23,7 +23,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.activity.ResetActivity" />
-        <activity android:name=".presentation.activity.NewRatingActivity" />
         <!-- <activity android:name=".presentation.activity.AvaliacaActivity" /> -->
 
 
@@ -34,7 +33,7 @@
             android:name=".presentation.activity.MainIntroPermission"
             android:theme="@style/Theme.Intro" />
         <activity
-            android:name=".presentation.activity.RatingDetailsActivity"
+            android:name=".presentation.activity.DeliverableDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- Coletar dados analitcs -->

@@ -1,40 +1,48 @@
 package br.com.mobile10.avaliasim.presentation.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
+import br.com.mobile10.avaliasim.model.Rating;
 
-public class RatingDetailsActivity extends AppCompatActivity
+public class DeliverableDetailsActivity extends AppCompatActivity
 //        extends BaseActivity implements RecyclerViewAdapterDetAvaliacoes.OnItemClicked,
 //        RecyclerViewAdapterFeatures.OnItemClicked, DatePickerFragmentDialog.OnDateSetListener,
 //        DateRangePickerFragment.OnDateRangeSelectedListener, DatePickerFragment.OnDateSelectedListener
 {
-//    private List<String> featureList = new ArrayList<>();
-//
-//    public static boolean keyBuscaPorId;
-//    private RelativeLayout fundoDinamic;
-//    FloatingActionButton fab, fabAllDate, fabRangeDate, fabUnicDate;
-//    TextView txtData;
-//
-//
+    private List<String> featureList = new ArrayList<>();
+
+    public static boolean keyBuscaPorId;
+    private RelativeLayout fundoDinamic;
+    FloatingActionButton fab, fabAllDate, fabRangeDate, fabUnicDate;
+    TextView txtData;
+
+
 //    RecyclerViewAdapterFeatures rcAdapter;
-//    RecyclerView rView;
-//
-//    private int key; // chave para buscar grafico. 0 = geral, 1 = busca data unica, 2 = busca com range de datas
-//    private final int geral = 0;
-//    private final int unicDate = 1;
-//    private final int rangeDate = 2;
-//
-//    int randomint = 20;
+    RecyclerView rView;
+
+    private int key; // chave para buscar grafico. 0 = geral, 1 = busca data unica, 2 = busca com range de datas
+    private final int geral = 0;
+    private final int unicDate = 1;
+    private final int rangeDate = 2;
+
+    int randomint = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rating_details_activity);
+        setContentView(R.layout.deliverable_details_activity);
 
-//        Rating rating = (Rating) getIntent().getSerializableExtra("rating");
-//
+        Rating rating = (Rating) getIntent().getSerializableExtra("rating");
+
 
 //        if (getIntent() != null) {
 //            avaliacao = (Avaliacao2) getIntent().getSerializableExtra("avaliacao");
@@ -42,7 +50,7 @@ public class RatingDetailsActivity extends AppCompatActivity
 //            showToast("Tente novamente");
 //            finish();
 //        }
-//
+
 //        txtData = findViewById(R.id.data);
 //        fundoDinamic = findViewById(R.id.fundo);
 //        fundoDinamic = findViewById(R.id.fundo);
@@ -54,7 +62,7 @@ public class RatingDetailsActivity extends AppCompatActivity
 //        fabAllDate = findViewById(R.id.fab_all_date);
 //        fabRangeDate = findViewById(R.id.fab_range_date);
 //        fabUnicDate = findViewById(R.id.fab_unic_date);
-//
+
 //        fab = findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -84,11 +92,11 @@ public class RatingDetailsActivity extends AppCompatActivity
 //                }
 //            }
 //        });
-//
-//        // List de Features
+
+        // List de Features
 //        this.featureList = AvalicaoUtil.getListFeature(avaliacao);
-//
-//        // Recyleview
+
+        // Recyleview
 //        rView = findViewById(R.id.recycler_view);
 //        rView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 //        rView.setHasFixedSize(true);
@@ -111,7 +119,6 @@ public class RatingDetailsActivity extends AppCompatActivity
 //            }
 //        });
 //        randomSet(lineView);
-
     }
 
 
@@ -122,7 +129,7 @@ public class RatingDetailsActivity extends AppCompatActivity
 //        TextView txtTotal = findViewById(R.id.total);
 //        txtTotal.setText(AvalicaoUtil.getTotoalDeAvaliacoes(avaliacao));
 //    }
-//
+
 //    @Override
 //    protected void onResume() {
 //        super.onResume();
@@ -131,7 +138,7 @@ public class RatingDetailsActivity extends AppCompatActivity
 //            keyBuscaPorId = false;
 //        }
 //    }
-//
+
 //    @Override
 //    protected void onStop() {
 //        super.onStop();
@@ -139,34 +146,34 @@ public class RatingDetailsActivity extends AppCompatActivity
 //        // Quando sair da tela, retorna animação ao normal
 //        AnimationsUtility.showCircularAnimationAvaliar(this, fundoDinamic, R.id.conteudo);
 //    }
-//
+
 //    private void executeAsyncTaskGetAvaliacaoPorId() {
 ////        new LoadingAvaliacaoPorID(this, avaliacao.idAvaliacao).execute();
 //    }
-//
+
 //    public void setAvaliacoesTotal(String result) {
 //        TextView txtTotal = findViewById(R.id.total);
 //        if (result != null)
 //            txtTotal.setText(result);
 //    }
-//
+
 //    public void moverButtonParaDireita() {
 //        TranslateAnimation anim = new TranslateAnimation(0f, 600f, 0f, 0f);
 //        anim.setDuration(1500);
 //
 //        fab.startAnimation(anim);
 //    }
-//
+
 //    @Override
 //    public void onItemClick(int position) {
 //
 //    }
-//
+
 //    public void setAvaliacaoPorId(Avaliacao2 avaliacao) {
 //        if (avaliacao != null)
 //            updateUI(avaliacao);
 //    }
-//
+
 //    @Override
 //    public void onItemClickFeature(int position) {
 //        Log.d("TAG", "Click: " + featureList.get(position));
@@ -200,12 +207,12 @@ public class RatingDetailsActivity extends AppCompatActivity
 //        }
 //
 //    }
-//
+
 //    @Override
 //    public void onDateSet(DatePickerFragmentDialog view, int year, int monthOfYear, int dayOfMonth) {
 //        Log.d("TAG", "Ano: " + year + " Mes: " + monthOfYear + " Dia: " + dayOfMonth);
 //    }
-//
+
 //    @Override
 //    public void onDateRangeSelected(int startDay, int startMonth, int startYear, int endDay, int endMonth, int endYear) {
 //        Log.d("range : ", "from: " + startDay + "-" + (startMonth + 1) + "-" + startYear + " to : " + endDay + "-" + (endMonth + 1) + "-" + endYear);
@@ -215,25 +222,25 @@ public class RatingDetailsActivity extends AppCompatActivity
 //        key = rangeDate;
 //
 //    }
-//
+
 //    public void clickIconAllDate(View view) {
 //        updateColorFab("all");
 //    }
-//
+
 //    public void clickIconDateRange(View view) {
 //        DateRangePickerFragment dateRangePickerFragment = DateRangePickerFragment.newInstance(RatingDetails.this, false);
 //        dateRangePickerFragment.show(getSupportFragmentManager(), "datePicker");
 //
 //        updateColorFab("range");
 //    }
-//
-//    public void clickIconUnicDate(View view) {
+
+    //    public void clickIconUnicDate(View view) {
 //        DatePickerFragment datePickerFragment = DatePickerFragment.newInstance(RatingDetails.this, false);
 //        datePickerFragment.show(getSupportFragmentManager(), "datePicker");
 //
 //        updateColorFab("unic");
 //    }
-//
+
 //    @Override
 //    public void onDateSelected(int day, int month, int year) {
 //        Log.d("range", "" + day + "-" + (month + 1) + "-" + year);
@@ -244,7 +251,7 @@ public class RatingDetailsActivity extends AppCompatActivity
 //        key = unicDate;
 //
 //    }
-//
+
 //    public void updateColorFab(String fab) {
 //        switch (fab) {
 //            case "all":
@@ -266,7 +273,7 @@ public class RatingDetailsActivity extends AppCompatActivity
 //                // erro
 //        }
 //    }
-//
+
 //    private void initLineView(LineView lineView) {
 //        ArrayList<String> test = new ArrayList<String>();
 //        for (int i = 0; i < randomint; i++) {
@@ -280,7 +287,7 @@ public class RatingDetailsActivity extends AppCompatActivity
 //        lineView.setDrawDotLine(true);
 //        lineView.setShowPopup(LineView.SHOW_POPUPS_NONE);
 //    }
-//
+
 //    private void randomSet(LineView lineView) {
 //        ArrayList<Integer> dataList = new ArrayList<>();
 //        float random = (float) (Math.random() * 9 + 1);
