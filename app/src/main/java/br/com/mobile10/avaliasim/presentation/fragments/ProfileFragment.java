@@ -84,11 +84,24 @@ public class ProfileFragment extends Fragment {
                 vs.showNext();
             }
         } else {
-            getFragmentManager()
-                    .beginTransaction()
-                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                    .replace(R.id.profile_fragment, new LoginFragment())
-                    .commit();
+//            getFragmentManager()
+//                    .beginTransaction()
+//                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+//                    .replace(R.id.profile_fragment, new LoginFragment())
+//                    .commit();
+            loggedUser = new User();
+            loggedUser.setName("Sem nome");
+            initializeViews(fragmentView);
+
+            profileName.setText(loggedUser.getName());
+            profileEmail.setText(loggedUser.getEmail());
+
+            if (loggedUser.getPhotoUrl() != null)
+                InterfaceUtils.loadImageFromUrl(CodeUtils.makeURL(loggedUser.getPhotoUrl()), this::onLoadedBitmap);
+            else {
+                profileImg.setImageResource(R.drawable.ic_person_black_24dp);
+                vs.showNext();
+            }
         }
     }
 

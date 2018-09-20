@@ -39,8 +39,8 @@ public class TabLayoutContainerActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 tab.getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
-                FirebaseAuth authenticator = FirebaseAuth.getInstance();
-                FirebaseUser currentUser = authenticator.getCurrentUser();
+//                FirebaseAuth authenticator = FirebaseAuth.getInstance();
+//                FirebaseUser currentUser = authenticator.getCurrentUser();
 
                 switch (tab.getPosition()) {
                     case 0:
@@ -50,7 +50,9 @@ public class TabLayoutContainerActivity extends AppCompatActivity {
                         replaceFragment(new BuscaFragment());
                         break;
                     case 2:
-                        replaceFragment(currentUser != null ? new ProfileFragment() : new LoginFragment());
+//                        replaceFragment(currentUser != null ? new ProfileFragment() : new LoginFragment());
+                        replaceFragment(new LoginFragment());
+
                         break;
                 }
             }
