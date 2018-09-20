@@ -31,6 +31,7 @@ import br.com.mobile10.avaliasim.data.dao.UserDAO;
 import br.com.mobile10.avaliasim.model.User;
 import br.com.mobile10.avaliasim.presentation.activity.MainIntroPermission;
 import br.com.mobile10.avaliasim.presentation.activity.UserEditionActivity;
+import br.com.mobile10.avaliasim.util.Alerts;
 import br.com.mobile10.avaliasim.util.CodeUtils;
 import br.com.mobile10.avaliasim.util.ImageUtility;
 import br.com.mobile10.avaliasim.util.InterfaceUtils;
@@ -135,7 +136,7 @@ public class ProfileFragment extends Fragment {
                 });
             } catch (IOException e) {
                 e.printStackTrace();
-                Toast.makeText(getActivity(), "Ocorreu um erro. Tente novamente.", Toast.LENGTH_SHORT).show();
+                Alerts.toast(getActivity(), "Ocorreu um erro. Tente novamente.");
             }
         }
     }

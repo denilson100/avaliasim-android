@@ -15,6 +15,7 @@ import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.data.dao.UserDAO;
 import br.com.mobile10.avaliasim.data.interfaces.IUserDAO;
 import br.com.mobile10.avaliasim.model.User;
+import br.com.mobile10.avaliasim.util.Alerts;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class UserEditionActivity extends AppCompatActivity {
@@ -96,7 +97,7 @@ public class UserEditionActivity extends AppCompatActivity {
         loggedUser.setState(stateInput.getText().toString());
 
         userDAO.update(loggedUser, result -> {
-            Toast.makeText(this, "Usuário editado com sucesso!", Toast.LENGTH_LONG).show();
+            Alerts.toast(this, "Usuário editado com sucesso!");
             //TODO: atualizar os dados do usuário após a edição
             finish();
         });

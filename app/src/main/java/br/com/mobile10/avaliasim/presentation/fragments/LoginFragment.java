@@ -21,6 +21,7 @@ import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.data.dao.UserDAO;
 import br.com.mobile10.avaliasim.data.interfaces.IUserDAO;
 import br.com.mobile10.avaliasim.presentation.activity.ResetActivity;
+import br.com.mobile10.avaliasim.util.Alerts;
 import br.com.mobile10.avaliasim.util.InterfaceUtils;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
@@ -65,7 +66,7 @@ public class LoginFragment extends Fragment {
                             .commit();
                     InterfaceUtils.hideKeyboard(getActivity());
                 } else
-                    Toast.makeText(getContext(), "Erro ao logar.", Toast.LENGTH_SHORT).show();
+                Alerts.toast(getActivity(), "Erro ao logar.");
 
                 InterfaceUtils.hideProgressDialog(progressDialog);
             });
@@ -81,12 +82,12 @@ public class LoginFragment extends Fragment {
 
             userDAO.findSignInMethods(email, resultingCodeForAuthVerification -> {
                 if (((int) resultingCodeForAuthVerification) == 1) {
-                    Toast.makeText(getActivity(), "Este email já está cadastrado. Tente recuperar a senha", Toast.LENGTH_SHORT).show();
+                    Alerts.toast(getActivity(), "Este email já está cadastrado. Tente recuperar a senha");
                     InterfaceUtils.hideProgressDialog(progressDialog);
                 } else
                     userDAO.create(email, password, resultingCodeForAccountCreation -> {
                         if (((int) resultingCodeForAccountCreation) == 1) {
-                            Toast.makeText(getActivity(), "Usuário registrado com sucesso", Toast.LENGTH_SHORT).show();
+                            Alerts.toast(getActivity(), "Usuário registrado com sucesso");
                             getFragmentManager()
                                     .beginTransaction()
                                     .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
@@ -94,7 +95,7 @@ public class LoginFragment extends Fragment {
                                     .commit();
                             InterfaceUtils.hideKeyboard(getActivity());
                         } else
-                            Toast.makeText(getActivity(), "Erro ao registrar usuário", Toast.LENGTH_SHORT).show();
+                        Alerts.toast(getActivity(), "Erro ao registrar usuário");
 
                         InterfaceUtils.hideProgressDialog(progressDialog);
                     });
