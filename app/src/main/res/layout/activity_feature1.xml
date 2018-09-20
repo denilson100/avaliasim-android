@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context="br.com.mobile10.avaliasim.activity.Feature1Activity">
+    tools:context=".presentation.activity.Feature1Activity">
 
     <RelativeLayout
         android:id="@+id/conteudo"

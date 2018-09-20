@@ -12,7 +12,6 @@ import java.util.List;
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.libBarGraph.interfaces.OnItemClickListener;
 import br.com.mobile10.avaliasim.libBarGraph.model.BarItem;
-import br.com.mobile10.avaliasim.libBarGraph.util.Util;
 
 /**
  * Created by user on 12/01/2018.

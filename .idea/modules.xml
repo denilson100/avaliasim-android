@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AvaliaSim.iml" filepath="$PROJECT_DIR$/AvaliaSim.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/avaliasim.iml" filepath="$PROJECT_DIR$/avaliasim.iml" />
     </modules>
   </component>
 </project>

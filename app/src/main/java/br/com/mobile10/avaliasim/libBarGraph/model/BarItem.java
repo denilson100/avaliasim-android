@@ -21,33 +21,6 @@ public class BarItem {
     private int textColorBar1;
     private int textColorBar2;
 
-    public BarItem(String description, Double value1, int colorBar1, int textColorBar1) {
-        this.setDescription(description);
-        this.setValue1(value1);
-        this.setColorBar1(colorBar1);
-        this.setTextColorBar1(textColorBar1);
-    }
-
-    public BarItem(String description, Double value1) {
-        this.setDescription(description);
-        this.setValue1(value1);
-    }
-
-    public BarItem(String description, Double value1, Double value2) {
-        this.setDescription(description);
-        this.setValue1(value1);
-        this.setValue2(value2);
-    }
-
-    public BarItem(String description, Double value1, Double value2, int colorBar1, int colorBar2, int textColorBar1, int textColorBar2) {
-        this.setDescription(description);
-        this.setValue1(value1);
-        this.setValue2(value2);
-        this.setColorBar1(colorBar1);
-        this.setColorBar2(colorBar2);
-        this.setTextColorBar1(textColorBar1);
-        this.setTextColorBar2(textColorBar2);
-    }
 
     public void setDescription(String description) {
         this.description = description;
