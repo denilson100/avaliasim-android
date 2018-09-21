@@ -21,8 +21,8 @@ public class MainIntroPermission extends IntroActivity {
         // Add slides, edit configuration...
         addSlide(new SimpleSlide.Builder()
                 .title("Permissão acesso as Imagens")
-                .description("Precisamos de sua permissão para acessar suas fotos.")
-                .image(R.drawable.ic_menu_camera)
+                .description("Precisamos de permissão para acessar suas fotos.")
+                .image(R.drawable.image_512)
                 .background(R.color.branco)
                 .backgroundDark(R.color.colorPrimaryDark)
                 .scrollable(false)

@@ -15,6 +15,8 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,20 +25,27 @@ import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 
 import java.io.IOException;
+import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
+import br.com.mobile10.avaliasim.data.dao.DeliverableDAO;
 import br.com.mobile10.avaliasim.data.dao.UserDAO;
+import br.com.mobile10.avaliasim.data.interfaces.IDeliverableDAO;
+import br.com.mobile10.avaliasim.model.Deliverable;
 import br.com.mobile10.avaliasim.model.User;
 import br.com.mobile10.avaliasim.presentation.activity.MainIntroPermission;
 import br.com.mobile10.avaliasim.presentation.activity.UserEditionActivity;
+import br.com.mobile10.avaliasim.presentation.adapter.RecyclerViewAdapter;
 import br.com.mobile10.avaliasim.util.Alerts;
 import br.com.mobile10.avaliasim.util.CodeUtils;
 import br.com.mobile10.avaliasim.util.ImageUtility;
 import br.com.mobile10.avaliasim.util.InterfaceUtils;
 import de.hdodenhof.circleimageview.CircleImageView;
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 /**
  * Created by denmont on 20/04/2018.
@@ -54,6 +63,11 @@ public class ProfileFragment extends Fragment {
     private UserDAO userDAO;
     private User loggedUser;
 
+    private RecyclerView recyclerView;
+    private RecyclerView recyclerViewFavorites;
+    private IDeliverableDAO deliverableDAO;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -68,6 +82,9 @@ public class ProfileFragment extends Fragment {
         userDAO = new UserDAO();
         userDAO.getLoggedUser();
         userDAO.findById(FirebaseAuth.getInstance().getCurrentUser().getUid(), this::onUserLoaded);
+
+        deliverableDAO = new DeliverableDAO();
+        deliverableDAO.findAll(this::loadDeliverableCards);
     }
 
     private void onUserLoaded(Object result) {
@@ -99,6 +116,10 @@ public class ProfileFragment extends Fragment {
         view.findViewById(R.id.edit_btn).setOnClickListener(this::onEditBtnClick);
         view.findViewById(R.id.logout_btn).setOnClickListener(this::onLogoutBtnClick);
         profileImg.setOnClickListener(this::onProfileImgClick);
+
+        recyclerView = view.findViewById(R.id.cards_recycler_view);
+        recyclerViewFavorites = view.findViewById(R.id.cards_recycler_view_favorite);
+
     }
 
     //TODO: reformular este método
@@ -157,4 +178,18 @@ public class ProfileFragment extends Fragment {
         alertDialog.getWindow().getAttributes().windowAnimations = R.style.dialog_animation;
         alertDialog.show();
     }
+
+    // Como ex esta chamando a lista de avaliações geral. Deve fazer um filtro e chamar apenas as que o usuario criou.
+    // Alem disso, a lista de favoritos esta aqui apenas como demostração
+    public void loadDeliverableCards(Object result) {
+        List<Deliverable> deliverables = (List<Deliverable>) result;
+        recyclerView.setItemAnimator(new SlideInUpAnimator());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setAdapter(new RecyclerViewAdapter(deliverables));
+
+        recyclerViewFavorites.setItemAnimator(new SlideInUpAnimator());
+        recyclerViewFavorites.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewFavorites.setAdapter(new RecyclerViewAdapter(deliverables));
+    }
+
 }

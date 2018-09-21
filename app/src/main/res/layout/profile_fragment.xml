@@ -54,13 +54,13 @@
                         app:srcCompat="@drawable/ic_edit_black_24dp" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:src="@drawable/ic_account_circle_black_24dp"
                         android:id="@+id/profile_image"
                         android:layout_width="96dp"
                         android:layout_height="96dp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
+                        android:src="@drawable/ic_account_circle_black_24dp"
                         tools:ignore="VectorDrawableCompat" />
 
                     <android.support.design.widget.FloatingActionButton
@@ -73,14 +73,48 @@
                 </LinearLayout>
 
 
-                <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_margin="16dp"-->
-                <!--android:text="Minhas Avaliações"-->
-                <!--android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-                <!--android:textColor="#212121"-->
-                <!--android:textStyle="bold" />-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:text="Minhas Avaliações"
+                    android:gravity="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#212121"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/cards_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:text="Avaliações Favoritas"
+                    android:gravity="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#212121"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginBottom="16dp">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/cards_recycler_view_favorite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>
