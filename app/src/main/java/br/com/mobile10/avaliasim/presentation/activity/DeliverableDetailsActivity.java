@@ -89,15 +89,15 @@ public class DeliverableDetailsActivity extends AppCompatActivity
     private void initializeViews() {
         lineView = findViewById(R.id.line_view);
         lineButton = findViewById(R.id.line_button);
-        txtData = findViewById(R.id.data);
+//        txtData = findViewById(R.id.data);
         fundoDinamic = findViewById(R.id.fundo);
         toolbar = findViewById(R.id.toolbar);
         txtType = findViewById(R.id.type);
         txtTotal = findViewById(R.id.total);
-        fabAllDate = findViewById(R.id.fab_all_date);
-        fabRangeDate = findViewById(R.id.fab_range_date);
-        fabUnicDate = findViewById(R.id.fab_unic_date);
-        fab = findViewById(R.id.fab);
+//        fabAllDate = findViewById(R.id.fab_all_date);
+//        fabRangeDate = findViewById(R.id.fab_range_date);
+//        fabUnicDate = findViewById(R.id.fab_unic_date);
+//        fab = findViewById(R.id.fab);
 //        rView = findViewById(R.id.recycler_view);
 
 

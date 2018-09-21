@@ -23,6 +23,7 @@ import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 
 import java.io.IOException;
 
@@ -76,37 +77,21 @@ public class ProfileFragment extends Fragment {
 
             profileName.setText(loggedUser.getName());
             profileEmail.setText(loggedUser.getEmail());
+            UrlImageViewHelper.setUrlDrawable(profileImg, loggedUser.getPhotoUrl(), R.drawable.ic_account_circle_black_24dp);
 
-            if (loggedUser.getPhotoUrl() != null)
-                InterfaceUtils.loadImageFromUrl(CodeUtils.makeURL(loggedUser.getPhotoUrl()), this::onLoadedBitmap);
-            else {
-                profileImg.setImageResource(R.drawable.ic_person_black_24dp);
-                vs.showNext();
-            }
         } else {
-//            getFragmentManager()
-//                    .beginTransaction()
-//                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-//                    .replace(R.id.profile_fragment, new LoginFragment())
-//                    .commit();
             loggedUser = new User();
             loggedUser.setName("Sem nome");
             initializeViews(fragmentView);
 
             profileName.setText(loggedUser.getName());
             profileEmail.setText(loggedUser.getEmail());
+            UrlImageViewHelper.setUrlDrawable(profileImg, loggedUser.getPhotoUrl(), R.drawable.ic_account_circle_black_24dp);
 
-            if (loggedUser.getPhotoUrl() != null)
-                InterfaceUtils.loadImageFromUrl(CodeUtils.makeURL(loggedUser.getPhotoUrl()), this::onLoadedBitmap);
-            else {
-                profileImg.setImageResource(R.drawable.ic_person_black_24dp);
-                vs.showNext();
-            }
         }
     }
 
     private void initializeViews(View view) {
-        vs = view.findViewById(R.id.profile_view_switcher);
         profileImg = view.findViewById(R.id.profile_image);
         profileName = view.findViewById(R.id.profile_name);
         profileEmail = view.findViewById(R.id.profile_email);
@@ -114,14 +99,6 @@ public class ProfileFragment extends Fragment {
         view.findViewById(R.id.edit_btn).setOnClickListener(this::onEditBtnClick);
         view.findViewById(R.id.logout_btn).setOnClickListener(this::onLogoutBtnClick);
         profileImg.setOnClickListener(this::onProfileImgClick);
-    }
-
-    public void onLoadedBitmap(Object bmp) {
-        Activity activity = getActivity();
-        activity.runOnUiThread(() -> {
-            profileImg.setImageBitmap((Bitmap) bmp);
-            vs.showNext();
-        });
     }
 
     //TODO: reformular este método

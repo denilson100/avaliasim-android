@@ -91,10 +91,10 @@ public class UserEditionActivity extends AppCompatActivity {
 
     private void onEditionBtnClick(View view) {
         loggedUser.setName(nameInput.getText().toString());
-        loggedUser.setPhoneNumber(phoneInput.getText().toString());
-        loggedUser.setAddress(addressInput.getText().toString());
-        loggedUser.setCity(cityInput.getText().toString());
-        loggedUser.setState(stateInput.getText().toString());
+        loggedUser.setPhoneNumber(phoneInput.getText().toString() != null ? phoneInput.getText().toString() : "");
+        loggedUser.setAddress(addressInput.getText().toString() != null ? addressInput.getText().toString() : "");
+        loggedUser.setCity(cityInput.getText().toString() != null ? cityInput.getText().toString() : "");
+        loggedUser.setState(stateInput.getText().toString() != null ? stateInput.getText().toString() : "");
 
         userDAO.update(loggedUser, result -> {
             Alerts.toast(this, "Usuário editado com sucesso!");

@@ -53,26 +53,15 @@
                         app:backgroundTint="@color/branco"
                         app:srcCompat="@drawable/ic_edit_black_24dp" />
 
-
-                    <ViewSwitcher
-                        android:id="@+id/profile_view_switcher"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".4">
-
-                        <android.support.v4.widget.ContentLoadingProgressBar
-                            style="?android:attr/progressBarStyle"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_gravity="center" />
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/profile_image"
-                            android:layout_width="96dp"
-                            android:layout_height="96dp"
-                            android:layout_gravity="center"
-                            tools:ignore="VectorDrawableCompat" />
-                    </ViewSwitcher>
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:src="@drawable/ic_account_circle_black_24dp"
+                        android:id="@+id/profile_image"
+                        android:layout_width="96dp"
+                        android:layout_height="96dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        tools:ignore="VectorDrawableCompat" />
 
                     <android.support.design.widget.FloatingActionButton
                         android:id="@+id/logout_btn"
