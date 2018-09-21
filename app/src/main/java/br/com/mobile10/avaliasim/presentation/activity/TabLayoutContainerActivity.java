@@ -11,14 +11,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.presentation.fragments.BuscaFragment;
-import br.com.mobile10.avaliasim.presentation.fragments.HomeFragment;
+import br.com.mobile10.avaliasim.presentation.fragments.ProductCardsFragment;
 import br.com.mobile10.avaliasim.presentation.fragments.LoginFragment;
-import br.com.mobile10.avaliasim.presentation.fragments.ProfileFragment;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class TabLayoutContainerActivity extends AppCompatActivity {
@@ -44,7 +40,7 @@ public class TabLayoutContainerActivity extends AppCompatActivity {
 
                 switch (tab.getPosition()) {
                     case 0:
-                        replaceFragment(new HomeFragment());
+                        replaceFragment(new ProductCardsFragment());
                         break;
                     case 1:
                         replaceFragment(new BuscaFragment());

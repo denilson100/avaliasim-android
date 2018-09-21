@@ -1,9 +1,13 @@
 package br.com.mobile10.avaliasim.presentation.activity;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -11,8 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
-import br.com.mobile10.avaliasim.model.Rating;
+import br.com.mobile10.avaliasim.model.Deliverable;
+import im.dacer.androidcharts.LineView;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class DeliverableDetailsActivity extends AppCompatActivity
 //        extends BaseActivity implements RecyclerViewAdapterDetAvaliacoes.OnItemClicked,
 //        RecyclerViewAdapterFeatures.OnItemClicked, DatePickerFragmentDialog.OnDateSetListener,
@@ -22,18 +28,23 @@ public class DeliverableDetailsActivity extends AppCompatActivity
 
     public static boolean keyBuscaPorId;
     private RelativeLayout fundoDinamic;
-    FloatingActionButton fab, fabAllDate, fabRangeDate, fabUnicDate;
-    TextView txtData;
-
-
-//    RecyclerViewAdapterFeatures rcAdapter;
-    RecyclerView rView;
+    private FloatingActionButton fab;
+    private FloatingActionButton fabAllDate;
+    private FloatingActionButton fabRangeDate;
+    private FloatingActionButton fabUnicDate;
+    private TextView txtData;
+    private TextView txtTotal;
+    private Toolbar toolbar;
+    private TextView txtType;
+    private LineView lineView;
+    private Button lineButton;
+    //    private RecyclerViewAdapterFeatures rcAdapter;
+    private RecyclerView recyclerView;
 
     private int key; // chave para buscar grafico. 0 = geral, 1 = busca data unica, 2 = busca com range de datas
     private final int geral = 0;
     private final int unicDate = 1;
     private final int rangeDate = 2;
-
     int randomint = 20;
 
     @Override
@@ -41,63 +52,17 @@ public class DeliverableDetailsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.deliverable_details_activity);
 
-        Rating rating = (Rating) getIntent().getSerializableExtra("rating");
+        initializeViews();
 
+        Deliverable deliverable = (Deliverable) getIntent().getSerializableExtra("deliverable");
+        toolbar.setTitle(deliverable.getName());
+        setSupportActionBar(toolbar);
+//        txtType.setText(avaliacao.type);
+//
 
-//        if (getIntent() != null) {
-//            avaliacao = (Avaliacao2) getIntent().getSerializableExtra("avaliacao");
-//        } else {
-//            showToast("Tente novamente");
-//            finish();
-//        }
+//        txtTotal.setText(AvalicaoUtil.getTotoalDeAvaliacoes(avaliacao));
 
-//        txtData = findViewById(R.id.data);
-//        fundoDinamic = findViewById(R.id.fundo);
-//        fundoDinamic = findViewById(R.id.fundo);
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        toolbar.setTitle(avaliacao.title);
-//        setSupportActionBar(toolbar);
-//        updateUI(avaliacao);
-//
-//        fabAllDate = findViewById(R.id.fab_all_date);
-//        fabRangeDate = findViewById(R.id.fab_range_date);
-//        fabUnicDate = findViewById(R.id.fab_unic_date);
-
-//        fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                //Se o usuário está logado...
-//                if (users != null) {
-//
-//                    AnimationsUtility.showCircularAnimationAvaliar(RatingDetails.this, fundoDinamic, R.id.conteudo);
-//
-//                    moverButtonParaDireita();
-//
-//                    new Handler().postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Intent intent = new Intent(RatingDetails.this, Feature1Activity.class);
-//                            intent.putExtra("avaliacao", avaliacao);
-//                            startActivity(intent);
-//                        }
-//                    }, 1000);
-//
-//                } else {
-//                    //TODO: passar para o fragment de login quando o usuário não estiver autenticado
-////                    Intent intent = new Intent(DetalhesAvaliacao.this, EmailPasswordActivity.class);
-////                    startActivity(intent);
-////                    finish();
-//                }
-//            }
-//        });
-
-        // List de Features
 //        this.featureList = AvalicaoUtil.getListFeature(avaliacao);
-
-        // Recyleview
-//        rView = findViewById(R.id.recycler_view);
 //        rView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 //        rView.setHasFixedSize(true);
 //
@@ -109,9 +74,9 @@ public class DeliverableDetailsActivity extends AppCompatActivity
 //        Graphic graphic = new Graphic(this);
 //        graphic.visaoGeral(avaliacao, "Média Geral");
 //
-//        final LineView lineView = (LineView) findViewById(R.id.line_view);
+
 //        initLineView(lineView);
-//        Button lineButton = findViewById(R.id.line_button);
+
 //        lineButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -121,14 +86,43 @@ public class DeliverableDetailsActivity extends AppCompatActivity
 //        randomSet(lineView);
     }
 
+    private void initializeViews() {
+        lineView = findViewById(R.id.line_view);
+        lineButton = findViewById(R.id.line_button);
+        txtData = findViewById(R.id.data);
+        fundoDinamic = findViewById(R.id.fundo);
+        toolbar = findViewById(R.id.toolbar);
+        txtType = findViewById(R.id.type);
+        txtTotal = findViewById(R.id.total);
+        fabAllDate = findViewById(R.id.fab_all_date);
+        fabRangeDate = findViewById(R.id.fab_range_date);
+        fabUnicDate = findViewById(R.id.fab_unic_date);
+        fab = findViewById(R.id.fab);
+//        rView = findViewById(R.id.recycler_view);
 
-//    public void updateUI(Avaliacao2 avaliacao) {
-//        TextView txtType = findViewById(R.id.type);
-//        txtType.setText(avaliacao.type);
-//
-//        TextView txtTotal = findViewById(R.id.total);
-//        txtTotal.setText(AvalicaoUtil.getTotoalDeAvaliacoes(avaliacao));
-//    }
+
+        fab.setOnClickListener(view -> {
+//            Se o usuário está logado...
+//            if (users != null) {
+//                AnimationsUtility.showCircularAnimationAvaliar(RatingDetails.this, fundoDinamic, R.id.conteudo);
+//                moverButtonParaDireita();
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Intent intent = new Intent(DeliverableDetailsActivity.this, Feature1Activity.class);
+//                        intent.putExtra("avaliacao", avaliacao);
+//                        startActivity(intent);
+//                    }
+//                }, 1000);
+//            } else {
+//                TODO:
+//                passar para o fragment de login quando o usuário não estiver autenticado
+//                Intent intent = new Intent(DetalhesAvaliacao.this, EmailPasswordActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+        });
+    }
 
 //    @Override
 //    protected void onResume() {
@@ -152,7 +146,6 @@ public class DeliverableDetailsActivity extends AppCompatActivity
 //    }
 
 //    public void setAvaliacoesTotal(String result) {
-//        TextView txtTotal = findViewById(R.id.total);
 //        if (result != null)
 //            txtTotal.setText(result);
 //    }

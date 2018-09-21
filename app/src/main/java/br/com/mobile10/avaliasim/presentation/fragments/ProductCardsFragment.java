@@ -30,7 +30,7 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
  * Created by denmont on 20/04/2018.
  */
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class HomeFragment extends Fragment {
+public class ProductCardsFragment extends Fragment {
 
     private SwipeRefreshLayout swipeLayout;
     private ViewSwitcher viewSwitcher;
