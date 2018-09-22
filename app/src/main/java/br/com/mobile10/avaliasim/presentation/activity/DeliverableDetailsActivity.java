@@ -1,110 +1,81 @@
 package br.com.mobile10.avaliasim.presentation.activity;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.intrusoft.scatter.ChartData;
+import com.intrusoft.scatter.PieChart;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
+import br.com.mobile10.avaliasim.data.dao.UserDAO;
+import br.com.mobile10.avaliasim.data.interfaces.IUserDAO;
 import br.com.mobile10.avaliasim.model.Deliverable;
-import im.dacer.androidcharts.LineView;
+import br.com.mobile10.avaliasim.util.AnimationsUtility;
+import br.com.mobile10.avaliasim.util.CodeUtils;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class DeliverableDetailsActivity extends AppCompatActivity
-//        extends BaseActivity implements RecyclerViewAdapterDetAvaliacoes.OnItemClicked,
-//        RecyclerViewAdapterFeatures.OnItemClicked, DatePickerFragmentDialog.OnDateSetListener,
-//        DateRangePickerFragment.OnDateRangeSelectedListener, DatePickerFragment.OnDateSelectedListener
-{
-    private List<String> featureList = new ArrayList<>();
+public class DeliverableDetailsActivity extends AppCompatActivity {
 
-    public static boolean keyBuscaPorId;
-    private RelativeLayout fundoDinamic;
-    private FloatingActionButton fab;
-    private FloatingActionButton fabAllDate;
-    private FloatingActionButton fabRangeDate;
-    private FloatingActionButton fabUnicDate;
-    private TextView txtData;
-    private TextView txtTotal;
     private Toolbar toolbar;
-    private TextView txtType;
-    private LineView lineView;
-    private Button lineButton;
-    //    private RecyclerViewAdapterFeatures rcAdapter;
-    private RecyclerView recyclerView;
-
-    private int key; // chave para buscar grafico. 0 = geral, 1 = busca data unica, 2 = busca com range de datas
-    private final int geral = 0;
-    private final int unicDate = 1;
-    private final int rangeDate = 2;
-    int randomint = 20;
+    private IUserDAO userDAO;
+    private CoordinatorLayout coordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.deliverable_details_activity);
 
+        Deliverable deliverable = (Deliverable) getIntent().getSerializableExtra("deliverable");
+        userDAO = new UserDAO();
+
         initializeViews();
 
-        Deliverable deliverable = (Deliverable) getIntent().getSerializableExtra("deliverable");
-        toolbar.setTitle(deliverable.getName());
         setSupportActionBar(toolbar);
-//        txtType.setText(avaliacao.type);
-//
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Pineng PN-888");
+        }
 
-//        txtTotal.setText(AvalicaoUtil.getTotoalDeAvaliacoes(avaliacao));
+//        TODO: pegar quantidade total de avaliações do produto e setar no textview
+        ((TextView) findViewById(R.id.deliverable_sub_title)).setText("X avaliações");
+        toolbar.setTitle(deliverable.getName());
 
-//        this.featureList = AvalicaoUtil.getListFeature(avaliacao);
-//        rView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-//        rView.setHasFixedSize(true);
-//
-//        rcAdapter = new RecyclerViewAdapterFeatures(this, featureList);
-//        rView.setItemAnimator(new SlideInUpAnimator());
-//        rView.setAdapter(rcAdapter);
-//        rcAdapter.setOnClick(this);
-//
-//        Graphic graphic = new Graphic(this);
-//        graphic.visaoGeral(avaliacao, "Média Geral");
-//
+        PieChart pieChart = findViewById(R.id.pie_chart);
+        List<ChartData> data = new ArrayList<>();
+        data.add(new ChartData("Bom (35%)", 35, Color.WHITE, Color.parseColor("#00FF00")));
+        data.add(new ChartData("Ruim (65%)", 65, Color.WHITE, Color.parseColor("#FF0000")));
+        pieChart.setChartData(data);
 
-//        initLineView(lineView);
+    }
 
-//        lineButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                randomSet(lineView);
-//            }
-//        });
-//        randomSet(lineView);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return true;
     }
 
     private void initializeViews() {
-        lineView = findViewById(R.id.line_view);
-        lineButton = findViewById(R.id.line_button);
-//        txtData = findViewById(R.id.data);
-        fundoDinamic = findViewById(R.id.fundo);
         toolbar = findViewById(R.id.toolbar);
-        txtType = findViewById(R.id.type);
-        txtTotal = findViewById(R.id.total);
-//        fabAllDate = findViewById(R.id.fab_all_date);
-//        fabRangeDate = findViewById(R.id.fab_range_date);
-//        fabUnicDate = findViewById(R.id.fab_unic_date);
-//        fab = findViewById(R.id.fab);
-//        rView = findViewById(R.id.recycler_view);
+        coordinatorLayout = findViewById(R.id.coordinator_container);
 
-
-        fab.setOnClickListener(view -> {
-//            Se o usuário está logado...
-//            if (users != null) {
-//                AnimationsUtility.showCircularAnimationAvaliar(RatingDetails.this, fundoDinamic, R.id.conteudo);
+        findViewById(R.id.new_rating_btn).setOnClickListener(view -> {
+            CodeUtils.showSnackbar(coordinatorLayout, "FAB!");
+//            if (userDAO.getLoggedUser() != null) {
+                //TODO: continuar animação
+//                AnimationsUtility.showCircularAnimationAvaliar(DeliverableDetailsActivity.this, fundoDinamic, R.id.conteudo);
 //                moverButtonParaDireita();
 //                new Handler().postDelayed(new Runnable() {
 //                    @Override
@@ -115,8 +86,7 @@ public class DeliverableDetailsActivity extends AppCompatActivity
 //                    }
 //                }, 1000);
 //            } else {
-//                TODO:
-//                passar para o fragment de login quando o usuário não estiver autenticado
+////                TODO: passar para o fragment de login quando o usuário não estiver autenticado
 //                Intent intent = new Intent(DetalhesAvaliacao.this, EmailPasswordActivity.class);
 //                startActivity(intent);
 //                finish();
@@ -265,20 +235,6 @@ public class DeliverableDetailsActivity extends AppCompatActivity
 //            default:
 //                // erro
 //        }
-//    }
-
-//    private void initLineView(LineView lineView) {
-//        ArrayList<String> test = new ArrayList<String>();
-//        for (int i = 0; i < randomint; i++) {
-//            test.add(String.valueOf(i + 1));
-//        }
-//        lineView.setBottomTextList(test);
-//        lineView.setColorArray(new int[]{
-//                Color.parseColor("#F44336"), Color.parseColor("#9C27B0"),
-//                Color.parseColor("#2196F3"), Color.parseColor("#009688")
-//        });
-//        lineView.setDrawDotLine(true);
-//        lineView.setShowPopup(LineView.SHOW_POPUPS_NONE);
 //    }
 
 //    private void randomSet(LineView lineView) {

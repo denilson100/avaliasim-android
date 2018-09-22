@@ -1,11 +1,7 @@
 package br.com.mobile10.avaliasim.model;
 
-import com.google.firebase.database.IgnoreExtraProperties;
-
 import java.io.Serializable;
 
-//Representa um produto ou serviço, que pode ser entregue por uma empresa a um cliente
-@IgnoreExtraProperties
 public class Deliverable implements Serializable {
     private String name;
     private String company;

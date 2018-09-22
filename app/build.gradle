@@ -54,24 +54,17 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     implementation 'com.github.IntruderShanky:scatter-piechart:1.0.0'
     implementation 'im.dacer:AndroidCharts:1.0.4'
-    // List
     implementation 'com.balysv:material-ripple:1.0.2'
-    // Imageview
     implementation 'com.mikhaellopez:circularimageview:3.0.2'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
-    // Calendario
     implementation('com.shagi:material-datepicker:1.3') {
         exclude group: 'com.android.support'
     }
     implementation 'com.wdullaer:materialdatetimepicker:3.6.0'
-    //Intro
     implementation 'com.heinrichreimersoftware:material-intro:1.6.2'
-    // tabs
     implementation 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
     implementation 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
-    // Transition
     implementation 'com.github.coyarzun89:fabtransitionactivity:0.2.0'
-    // utilidade
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

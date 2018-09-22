@@ -77,8 +77,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="16dp"
-                    android:text="Minhas Avaliações"
                     android:gravity="center"
+                    android:text="Minhas Avaliações"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="#212121"
                     android:textStyle="bold" />
@@ -98,8 +98,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="16dp"
-                    android:text="Avaliações Favoritas"
                     android:gravity="center"
+                    android:text="Avaliações Favoritas"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="#212121"
                     android:textStyle="bold" />

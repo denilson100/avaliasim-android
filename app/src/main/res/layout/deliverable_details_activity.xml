@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:scatter="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context=".presentation.activity.DeliverableDetailsActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -19,7 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
 
@@ -30,201 +30,86 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
         </android.support.design.widget.CollapsingToolbarLayout>
-
     </android.support.design.widget.AppBarLayout>
 
-    <!--<RelativeLayout-->
-    <!--android:id="@+id/conteudo"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
 
-    <!--<LinearLayout-->
-    <!--android:id="@+id/content_editar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/type"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="16dp"-->
-    <!--android:gravity="center"-->
-    <!--android:text="Type"-->
-    <!--android:textAppearance="@style/TextAppearance.AppCompat.Medium" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/total"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:gravity="center"-->
-    <!--android:text="Nenhuma avaliação"-->
-    <!--android:textAppearance="@style/TextAppearance.AppCompat.Medium" />-->
-
-    <!--&lt;!&ndash;<br.com.mobile10.avaliasim.libBarGraph.HorizontalBar&ndash;&gt;-->
-    <!--&lt;!&ndash;android:id="@+id/horizontal"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:visibility="visible"/>&ndash;&gt;-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="16dp"-->
-    <!--android:background="#eee"-->
-    <!--android:orientation="vertical"-->
-    <!--android:padding="8dp"-->
-    <!--android:visibility="visible">-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="58dp"-->
-    <!--android:orientation="horizontal">-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1">-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/data"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:gravity="center|left"-->
-    <!--android:text=""-->
-    <!--android:textStyle="bold" />-->
-
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:gravity="right">-->
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:background="#eee"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-    <!--android:id="@+id/fab_all_date"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center|right"-->
-    <!--android:layout_marginRight="8dp"-->
-    <!--android:clickable="true"-->
-    <!--android:onClick="clickIconAllDate"-->
-    <!--android:src="@drawable/ic_calendar"-->
-    <!--app:backgroundTint="@color/branco"-->
-    <!--app:fabSize="mini"-->
-    <!--app:layout_anchorGravity="bottom|right|end"-->
-    <!--app:rippleColor="#999" />-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-    <!--android:id="@+id/fab_range_date"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center|right"-->
-    <!--android:layout_marginRight="8dp"-->
-    <!--android:clickable="true"-->
-    <!--android:onClick="clickIconDateRange"-->
-    <!--android:src="@drawable/ic_date_range_black_24dp"-->
-    <!--app:backgroundTint="@color/cinza"-->
-    <!--app:fabSize="mini"-->
-    <!--app:layout_anchorGravity="bottom|right|end"-->
-    <!--app:rippleColor="#999" />-->
+            <!--TODO: colocar botão para nova avaliação no meio da linha do fim do appbarlayout-->
+            <TextView
+                android:id="@+id/deliverable_sub_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                tools:ignore="HardcodedText" />
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-    <!--android:id="@+id/fab_unic_date"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center|right"-->
-    <!--android:layout_marginRight="8dp"-->
-    <!--android:clickable="true"-->
-    <!--android:onClick="clickIconUnicDate"-->
-    <!--android:src="@drawable/ic_today_black_24dp"-->
-    <!--app:backgroundTint="@color/cinza"-->
-    <!--app:fabSize="mini"-->
-    <!--app:layout_anchorGravity="bottom|right|end"-->
-    <!--app:rippleColor="#999" />-->
-    <!--</LinearLayout>-->
-    <!--</LinearLayout>-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:gravity="end">
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="300dp">-->
+                <!--TODO: linkar métodos aos botões da interface-->
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_all_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    app:backgroundTint="@color/branco"
+                    app:srcCompat="@drawable/ic_calendar" />
 
-    <!--<com.intrusoft.scatter.PieChart-->
-    <!--android:id="@+id/pie_chart"-->
-    <!--scatter:aboutChart="About Your Chart"-->
-    <!--scatter:aboutTextColor="#212121"-->
-    <!--scatter:aboutTextSize="46"-->
-    <!--scatter:centerColor="#eee"-->
-    <!--scatter:chartColor="#eee"-->
-    <!--scatter:equalPartition="false"-->
-    <!--scatter:textColor="@color/branco"-->
-    <!--scatter:textSize="42"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent" />-->
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_range_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    app:backgroundTint="@color/branco"
+                    app:srcCompat="@drawable/ic_date_range_black_24dp" />
 
-    <!--</LinearLayout>-->
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_unic_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    app:backgroundTint="@color/branco"
+                    app:srcCompat="@drawable/ic_today_black_24dp" />
+            </LinearLayout>
 
-    <!--</LinearLayout>-->
+            <com.intrusoft.scatter.PieChart
+                android:id="@+id/pie_chart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                scatter:aboutChart="Impressão"
+                scatter:aboutTextColor="#212121"
+                scatter:aboutTextSize="72"
+                scatter:textSize="72"
+                scatter:centerColor="#eee"
+                scatter:chartColor="#eee"
+                scatter:equalPartition="false"
+                scatter:textColor="@color/branco" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:paddingLeft="16dp"-->
-        <!--android:text="Caracteristica"-->
-        <!--android:textAppearance="@style/TextAppearance.AppCompat.Headline"-->
-        <!--android:textStyle="bold" />-->
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="70dp"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<RelativeLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent">-->
-
-            <!--<android.support.v7.widget.RecyclerView-->
-                <!--android:id="@+id/recycler_view"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent" />-->
-
-        <!--</RelativeLayout>-->
-
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="400dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:background="#ccc">-->
-
-        <!--<include layout="@layout/grafico_line" />-->
-    <!--</LinearLayout>-->
-<!--</LinearLayout>-->
-
-<!--<RelativeLayout-->
-<!--android:id="@+id/loading_indicator"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="match_parent"-->
-<!--android:background="@color/branco"-->
-<!--android:gravity="center"-->
-<!--android:visibility="gone">-->
-
-<!--<android.support.v4.widget.ContentLoadingProgressBar-->
-    <!--android:id="@+id/progress_bar"-->
-    <!--style="?android:attr/progressBarStyleLarge"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center_horizontal" />-->
-<!--</RelativeLayout>-->
-    <!--</RelativeLayout>-->
-
-    <!--<android.support.design.widget.FloatingActionButton--><!--android:id="@+id/fab"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_margin="@dimen/fab_margin"--><!--app:layout_anchor="@id/app_bar"--><!--app:layout_anchorGravity="bottom|end"--><!--app:srcCompat="@drawable/ic_review" />-->
-
-    <!--<RelativeLayout--><!--android:id="@+id/fundo"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:background="#00FFFF"--><!--android:gravity="center"--><!--android:visibility="invisible">-->
-
-    <!--</RelativeLayout>-->
-</LinearLayout>
+    <!--Por que não aparece?-->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/new_rating_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="bottom|right|end"
+        app:pressedTranslationZ="12dp"
+        app:srcCompat="@drawable/ic_review" />
+</android.support.design.widget.CoordinatorLayout>
