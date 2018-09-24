@@ -1,26 +1,16 @@
 package br.com.mobile10.avaliasim.presentation.fragments;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -28,8 +18,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.data.dao.UserDAO;
 import br.com.mobile10.avaliasim.data.interfaces.IUserDAO;
-import br.com.mobile10.avaliasim.presentation.activity.ResetActivity;
-import br.com.mobile10.avaliasim.util.Alerts;
 import br.com.mobile10.avaliasim.util.InterfaceUtils;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
@@ -38,21 +26,6 @@ public class LoginFragment extends Fragment {
     private EditText emailEditText;
     private EditText pswEditText;
     private IUserDAO userDAO;
-
-    private FirebaseAuth mFirebaseAuth;
-    private FirebaseUser mFirebaseUser;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
-        if (mFirebaseUser != null) {
-            goToPerfilFragement();
-        }
-
-    }
 
     @Nullable
     @Override
@@ -70,8 +43,8 @@ public class LoginFragment extends Fragment {
     }
 
     private void onForgotPasswordBtnClick(View v) {
-        Intent intent = new Intent(getContext(), ResetActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(getContext(), ResetActivity.class);
+//        startActivity(intent);
     }
 
     private void onSignInBtnClick(View v) {
@@ -82,23 +55,14 @@ public class LoginFragment extends Fragment {
             ProgressDialog progressDialog = InterfaceUtils.showProgressDialog(getContext(), "Logando...");
             userDAO.signIn(email, password, result -> {
                 if (((int) result) == 1) {
-                    goToPerfilFragement();
+                    InterfaceUtils.replaceFragment(getFragmentManager(), R.id.login_fragment, new ProfileFragment());
                     InterfaceUtils.hideKeyboard(getActivity());
                 } else
-                Alerts.toast(getActivity(), "Erro ao logar.");
+                    InterfaceUtils.showToast(getActivity(), "Erro ao logar.");
 
                 InterfaceUtils.hideProgressDialog(progressDialog);
             });
-
         }
-    }
-
-    private void goToPerfilFragement() {
-        getFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                .replace(R.id.login_fragment, new ProfileFragment())
-                .commit();
     }
 
     private void onRegisterBtnClick(View v) {
@@ -110,20 +74,16 @@ public class LoginFragment extends Fragment {
 
             userDAO.findSignInMethods(email, resultingCodeForAuthVerification -> {
                 if (((int) resultingCodeForAuthVerification) == 1) {
-                    Alerts.toast(getActivity(), "Este email já está cadastrado. Tente recuperar a senha");
+                    InterfaceUtils.showToast(getActivity(), "Este email já está cadastrado. Tente recuperar a senha");
                     InterfaceUtils.hideProgressDialog(progressDialog);
                 } else
                     userDAO.create(email, password, resultingCodeForAccountCreation -> {
                         if (((int) resultingCodeForAccountCreation) == 1) {
-                            Alerts.toast(getActivity(), "Usuário registrado com sucesso");
-                            getFragmentManager()
-                                    .beginTransaction()
-                                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                                    .replace(R.id.login_fragment, new ProfileFragment())
-                                    .commit();
+                            InterfaceUtils.showToast(getActivity(), "Usuário registrado com sucesso");
+                            InterfaceUtils.replaceFragment(getFragmentManager(), R.id.login_fragment, new ProfileFragment());
                             InterfaceUtils.hideKeyboard(getActivity());
                         } else
-                        Alerts.toast(getActivity(), "Erro ao registrar usuário");
+                            InterfaceUtils.showToast(getActivity(), "Erro ao registrar usuário");
 
                         InterfaceUtils.hideProgressDialog(progressDialog);
                     });

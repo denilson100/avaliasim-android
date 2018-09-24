@@ -55,6 +55,7 @@ dependencies {
     implementation 'com.github.IntruderShanky:scatter-piechart:1.0.0'
     implementation 'im.dacer:AndroidCharts:1.0.4'
     implementation 'com.balysv:material-ripple:1.0.2'
+    implementation 'com.robertlevonyan.view:MaterialChipView:1.2.4'
     implementation 'com.mikhaellopez:circularimageview:3.0.2'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation('com.shagi:material-datepicker:1.3') {

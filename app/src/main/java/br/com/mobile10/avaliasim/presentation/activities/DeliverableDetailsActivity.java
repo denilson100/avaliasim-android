@@ -1,16 +1,18 @@
-package br.com.mobile10.avaliasim.presentation.activity;
+package br.com.mobile10.avaliasim.presentation.activities;
 
-import android.content.Intent;
+import android.app.ActionBar;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.TranslateAnimation;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.intrusoft.scatter.ChartData;
@@ -20,45 +22,58 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
+import br.com.mobile10.avaliasim.data.dao.RatingDAO;
 import br.com.mobile10.avaliasim.data.dao.UserDAO;
+import br.com.mobile10.avaliasim.data.interfaces.IRatingDAO;
 import br.com.mobile10.avaliasim.data.interfaces.IUserDAO;
 import br.com.mobile10.avaliasim.model.Deliverable;
-import br.com.mobile10.avaliasim.util.AnimationsUtility;
-import br.com.mobile10.avaliasim.util.CodeUtils;
+import br.com.mobile10.avaliasim.model.Rating;
+import br.com.mobile10.avaliasim.presentation.dialogs.NewRatingDialog;
+import br.com.mobile10.avaliasim.util.InterfaceUtils;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class DeliverableDetailsActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private IUserDAO userDAO;
+    private IRatingDAO ratingDAO;
     private CoordinatorLayout coordinatorLayout;
+    private Deliverable deliverable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.deliverable_details_activity);
 
-        Deliverable deliverable = (Deliverable) getIntent().getSerializableExtra("deliverable");
+        deliverable = (Deliverable) getIntent().getSerializableExtra("deliverable");
         userDAO = new UserDAO();
+        ratingDAO = new RatingDAO();
+        ratingDAO.findAllByDeliverableId(deliverable.getId(), this::onRatingsLoaded);
+    }
 
+    private void onRatingsLoaded(Object result) {
         initializeViews();
-
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Pineng PN-888");
-        }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(deliverable.getName());
+        List<Rating> ratings = (List<Rating>) result;
 
-//        TODO: pegar quantidade total de avaliações do produto e setar no textview
-        ((TextView) findViewById(R.id.deliverable_sub_title)).setText("X avaliações");
-        toolbar.setTitle(deliverable.getName());
+        String text = "";
+        if (ratings.size() == 0)
+            text = "Nenhuma avaliação";
+        else if (ratings.size() == 1)
+            text = ratings.size() + " avaliação";
+        else
+            text = ratings.size() + " avaliações";
 
+        ((TextView) findViewById(R.id.deliverable_sub_title)).setText(text);
+
+        //Como definir se uma avaliação foi boa ou ruim? Quantidade de bons e ruins nas features avaliadas?
         PieChart pieChart = findViewById(R.id.pie_chart);
         List<ChartData> data = new ArrayList<>();
         data.add(new ChartData("Bom (35%)", 35, Color.WHITE, Color.parseColor("#00FF00")));
         data.add(new ChartData("Ruim (65%)", 65, Color.WHITE, Color.parseColor("#FF0000")));
         pieChart.setChartData(data);
-
     }
 
     @Override
@@ -70,72 +85,34 @@ public class DeliverableDetailsActivity extends AppCompatActivity {
     private void initializeViews() {
         toolbar = findViewById(R.id.toolbar);
         coordinatorLayout = findViewById(R.id.coordinator_container);
-
-        findViewById(R.id.new_rating_btn).setOnClickListener(view -> {
-            CodeUtils.showSnackbar(coordinatorLayout, "FAB!");
-//            if (userDAO.getLoggedUser() != null) {
-                //TODO: continuar animação
-//                AnimationsUtility.showCircularAnimationAvaliar(DeliverableDetailsActivity.this, fundoDinamic, R.id.conteudo);
-//                moverButtonParaDireita();
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Intent intent = new Intent(DeliverableDetailsActivity.this, Feature1Activity.class);
-//                        intent.putExtra("avaliacao", avaliacao);
-//                        startActivity(intent);
-//                    }
-//                }, 1000);
-//            } else {
-////                TODO: passar para o fragment de login quando o usuário não estiver autenticado
-//                Intent intent = new Intent(DetalhesAvaliacao.this, EmailPasswordActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-        });
+        findViewById(R.id.new_rating_btn).setOnClickListener(this::onNewRatingBtnClick);
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        if (keyBuscaPorId) {
-//            executeAsyncTaskGetAvaliacaoPorId();
-//            keyBuscaPorId = false;
-//        }
-//    }
+    private void onNewRatingBtnClick(View view) {
+        RelativeLayout dynamicBackground = findViewById(R.id.fundo);
+        if (userDAO.getLoggedUser() != null) {
+            NewRatingDialog newRatingDialog = new NewRatingDialog(this);
+            newRatingDialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            newRatingDialog.show();
+//            new NewRatingDialog(this).show();
+//            AnimationsUtility.showCircularAnimationAvaliar(DeliverableDetailsActivity.this, dynamicBackground, R.id.conteudo);
+//            moverButtonParaDireita();
 
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//
-//        // Quando sair da tela, retorna animação ao normal
-//        AnimationsUtility.showCircularAnimationAvaliar(this, fundoDinamic, R.id.conteudo);
-//    }
+//            Intent intent = new Intent(DeliverableDetailsActivity.this, NewRatingActivity.class);
+//                    intent.putExtra("avaliacao", avaliacao);
+//            startActivity(intent);
+        } else {
+            finish();
+            InterfaceUtils.showToast(this, "Faça login para criar uma avaliação");
+        }
+    }
 
-//    private void executeAsyncTaskGetAvaliacaoPorId() {
-////        new LoadingAvaliacaoPorID(this, avaliacao.idAvaliacao).execute();
-//    }
 
-//    public void setAvaliacoesTotal(String result) {
-//        if (result != null)
-//            txtTotal.setText(result);
-//    }
-
-//    public void moverButtonParaDireita() {
-//        TranslateAnimation anim = new TranslateAnimation(0f, 600f, 0f, 0f);
-//        anim.setDuration(1500);
-//
+    public void moverButtonParaDireita() {
+        TranslateAnimation anim = new TranslateAnimation(0f, 600f, 0f, 0f);
+        anim.setDuration(1500);
 //        fab.startAnimation(anim);
-//    }
-
-//    @Override
-//    public void onItemClick(int position) {
-//
-//    }
-
-//    public void setAvaliacaoPorId(Avaliacao2 avaliacao) {
-//        if (avaliacao != null)
-//            updateUI(avaliacao);
-//    }
+    }
 
 //    @Override
 //    public void onItemClickFeature(int position) {
@@ -172,11 +149,6 @@ public class DeliverableDetailsActivity extends AppCompatActivity {
 //    }
 
 //    @Override
-//    public void onDateSet(DatePickerFragmentDialog view, int year, int monthOfYear, int dayOfMonth) {
-//        Log.d("TAG", "Ano: " + year + " Mes: " + monthOfYear + " Dia: " + dayOfMonth);
-//    }
-
-//    @Override
 //    public void onDateRangeSelected(int startDay, int startMonth, int startYear, int endDay, int endMonth, int endYear) {
 //        Log.d("range : ", "from: " + startDay + "-" + (startMonth + 1) + "-" + startYear + " to : " + endDay + "-" + (endMonth + 1) + "-" + endYear);
 //        txtData.setText("Data: " + startDay + "/" + (startMonth + 1) + "/" + startYear + " a " + endDay + "/" + (endMonth + 1) + "/" + endYear);
@@ -185,7 +157,6 @@ public class DeliverableDetailsActivity extends AppCompatActivity {
 //        key = rangeDate;
 //
 //    }
-
 //    public void clickIconAllDate(View view) {
 //        updateColorFab("all");
 //    }
@@ -213,28 +184,6 @@ public class DeliverableDetailsActivity extends AppCompatActivity {
 ////        Constants.DATE_UNIC = Format.convertStringInDate(dateInString);
 //        key = unicDate;
 //
-//    }
-
-//    public void updateColorFab(String fab) {
-//        switch (fab) {
-//            case "all":
-//                fabAllDate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.branco)));
-//                fabRangeDate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.cinza)));
-//                fabUnicDate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.cinza)));
-//                break;
-//            case "range":
-//                fabAllDate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.cinza)));
-//                fabRangeDate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.branco)));
-//                fabUnicDate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.cinza)));
-//                break;
-//            case "unic":
-//                fabAllDate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.cinza)));
-//                fabRangeDate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.cinza)));
-//                fabUnicDate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.branco)));
-//                break;
-//            default:
-//                // erro
-//        }
 //    }
 
 //    private void randomSet(LineView lineView) {

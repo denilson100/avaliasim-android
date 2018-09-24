@@ -1,4 +1,4 @@
-package br.com.mobile10.avaliasim.presentation.activity;
+package br.com.mobile10.avaliasim.presentation.activities;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -6,15 +6,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import br.com.mobile10.avaliasim.R;
-import br.com.mobile10.avaliasim.presentation.fragments.BuscaFragment;
-import br.com.mobile10.avaliasim.presentation.fragments.ProductCardsFragment;
+import br.com.mobile10.avaliasim.data.dao.UserDAO;
+import br.com.mobile10.avaliasim.data.interfaces.IUserDAO;
+import br.com.mobile10.avaliasim.presentation.fragments.DeliverableCardsFragment;
 import br.com.mobile10.avaliasim.presentation.fragments.LoginFragment;
+import br.com.mobile10.avaliasim.presentation.fragments.ProfileFragment;
+import br.com.mobile10.avaliasim.presentation.fragments.RatingSearchFragment;
+import br.com.mobile10.avaliasim.util.InterfaceUtils;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class TabLayoutContainerActivity extends AppCompatActivity {
@@ -24,41 +25,30 @@ public class TabLayoutContainerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_layout_container_activity);
 
+        IUserDAO userDAO = new UserDAO();
         TabLayout tabLayout = findViewById(R.id.tab_layout_container);
         tabLayout.setBackgroundColor(getResources().getColor(R.color.preto));
         tabLayout.addTab(tabLayout.newTab().setText("Top 10").setIcon(R.drawable.ic_star_black_24dp), true);
         tabLayout.addTab(tabLayout.newTab().setText("Buscar").setIcon(R.drawable.ic_search_black_24dp));
         tabLayout.addTab(tabLayout.newTab().setText("Perfil").setIcon(R.drawable.ic_person_black_24dp));
+
         //TODO: criar este listener em um arquivo separado
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 tab.getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
-
-//                FirebaseAuth authenticator = FirebaseAuth.getInstance();
-//                FirebaseUser currentUser = authenticator.getCurrentUser();
-
                 switch (tab.getPosition()) {
                     case 0:
-                        replaceFragment(new ProductCardsFragment());
+                        InterfaceUtils.replaceFragment(getSupportFragmentManager(), R.id.frame_container, new DeliverableCardsFragment());
                         break;
                     case 1:
-                        replaceFragment(new BuscaFragment());
+                        InterfaceUtils.replaceFragment(getSupportFragmentManager(), R.id.frame_container, new RatingSearchFragment());
                         break;
                     case 2:
-//                        replaceFragment(currentUser != null ? new ProfileFragment() : new LoginFragment());
-                        replaceFragment(new LoginFragment());
-
+                        InterfaceUtils.replaceFragment(getSupportFragmentManager(), R.id.frame_container,
+                                userDAO.getLoggedUser() != null ? new ProfileFragment() : new LoginFragment());
                         break;
                 }
-            }
-
-            private void replaceFragment(Fragment fragment) {
-                FragmentManager fm = getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.frame_container, fragment);
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                ft.commit();
             }
 
             @Override

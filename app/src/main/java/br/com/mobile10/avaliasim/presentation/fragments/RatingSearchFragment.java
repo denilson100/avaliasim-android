@@ -13,7 +13,7 @@ import br.com.mobile10.avaliasim.R;
  * Created by denmont on 20/04/2018.
  */
 
-public class BuscaFragment extends Fragment {
+public class RatingSearchFragment extends Fragment {
 
     @Nullable
     @Override

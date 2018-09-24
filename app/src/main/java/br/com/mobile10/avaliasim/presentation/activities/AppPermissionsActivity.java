@@ -1,4 +1,4 @@
-package br.com.mobile10.avaliasim.presentation.activity;
+package br.com.mobile10.avaliasim.presentation.activities;
 
 import android.Manifest;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import br.com.mobile10.avaliasim.R;
  * Created by denmont on 04/02/2018.
  */
 
-public class MainIntroPermission extends IntroActivity {
+public class AppPermissionsActivity extends IntroActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,5 +29,4 @@ public class MainIntroPermission extends IntroActivity {
                 .permission(Manifest.permission.READ_EXTERNAL_STORAGE)
                 .build());
     }
-
 }

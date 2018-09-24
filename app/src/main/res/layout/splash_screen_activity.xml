@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".presentation.activity.SplashScreen">
+    tools:context=".presentation.activities.SplashScreenActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -41,8 +41,7 @@
         <ImageView
             android:id="@+id/word_v"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/logo_v" />
+            android:layout_height="100dp" />
 
     </RelativeLayout>
 

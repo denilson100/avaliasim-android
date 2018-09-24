@@ -1,17 +1,13 @@
 package br.com.mobile10.avaliasim.model;
 
-import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.PropertyName;
 
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by denmont on 16/04/2018.
- */
-@IgnoreExtraProperties
 public class Rating implements Serializable {
     private String id;
-    private Deliverable deliverable;
+    private String deliverableId;
     private String title;
     private Long timestamp;
     private List<Feature> features;
@@ -48,11 +44,14 @@ public class Rating implements Serializable {
         this.id = id;
     }
 
-    public Deliverable getDeliverable() {
-        return deliverable;
+    @PropertyName("deliverable")
+    public String getDeliverableId() {
+        return deliverableId;
     }
 
-    public void setDeliverable(Deliverable deliverable) {
-        this.deliverable = deliverable;
+
+    @PropertyName("deliverable")
+    public void setDeliverableId(String deliverableId) {
+        this.deliverableId = deliverableId;
     }
 }

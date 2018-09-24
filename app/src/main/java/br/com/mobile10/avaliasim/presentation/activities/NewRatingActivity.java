@@ -1,53 +1,31 @@
-//package br.com.mobile10.avaliasim.presentation.activity;
-//
-//import android.os.Bundle;
-//import android.os.Handler;
-//import android.view.View;
-//import android.widget.ImageView;
-//import android.widget.RelativeLayout;
-//import android.widget.TextView;
-//
-//import com.google.firebase.auth.FirebaseAuth;
-//import com.google.firebase.auth.FirebaseUser;
-//
-//import br.com.mobile10.avaliasim.R;
-//import br.com.mobile10.avaliasim.data.dao.FeatureDaoImplementacao;
-//import br.com.mobile10.avaliasim.data.interfaces.FeatureDao;
-//import br.com.mobile10.avaliasim.model.Avaliacao2;
-//import br.com.mobile10.avaliasim.util.AnimationsUtility;
-//import br.com.mobile10.avaliasim.util.BaseActivity;
-//
-///**
-// * Created by denmont on 16/04/2018.
-// */
-//public class Feature1Activity extends BaseActivity implements FeatureDao {
-//
-//    Avaliacao2 avaliacao;
-//    private FirebaseAuth mAuth;
-//    FirebaseUser users;
-//
-//    TextView txtTitle, txtType, txtFeature;
-//    int quantidadeDeFeatures = 0;
-//    private RelativeLayout fundoDinamic;
-//    private ImageView imgFundoAnimation;
-//
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_feature1);
-//
-//        mAuth = FirebaseAuth.getInstance();
-//        FirebaseUser user = mAuth.getCurrentUser();
-//        users = user;
-//
-//        if (getIntent() != null) {
-//            avaliacao = (Avaliacao2) getIntent().getSerializableExtra("avaliacao");
-//        } else {
-////            showToast("Tente novamente");
-//            finish();
-//        }
-//
+package br.com.mobile10.avaliasim.presentation.activities;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import br.com.mobile10.avaliasim.R;
+
+
+public class NewRatingActivity extends AppCompatActivity {
+
+    TextView txtTitle, txtType, txtFeature;
+    int quantidadeDeFeatures = 0;
+    private RelativeLayout fundoDinamic;
+    private ImageView imgFundoAnimation;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.new_rating_activity);
+
+        //TODO: desacoplar features para criar as animações de cada
+
+//        getIntent().getSerializableExtra("avaliacao");
+
 //        fundoDinamic = findViewById(R.id.fundo);
 //        imgFundoAnimation = findViewById(R.id.image_animation);
 //        txtTitle = findViewById(R.id.title);
@@ -58,8 +36,8 @@
 //
 //        txtFeature = findViewById(R.id.feature);
 //        updateUI();
-//    }
-//
+    }
+
 //    public void updateUI() {
 //        try {
 //            txtFeature.setText(avaliacao.features.get(quantidadeDeFeatures));
@@ -77,13 +55,7 @@
 //            }, 1000);
 //        }
 //    }
-//
-//    @Override
-//    public void avaliarFeatures(Avaliacao2 avaliacao, String userId, String status, String featureAvaliada) {
-//        FeatureDaoImplementacao dao = new FeatureDaoImplementacao();
-////        dao.avaliarFeatures(avaliacao, userId, status, featureAvaliada);
-//    }
-//
+
 //    public void avaliarComoRuim(View view) {
 //        avaliarFeatures(avaliacao, users.getUid(), "negative", avaliacao.features.get(quantidadeDeFeatures));
 //        quantidadeDeFeatures++;
@@ -96,7 +68,7 @@
 //        handler.postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
-//                AnimationsUtility.showCircularAnimationRuim(Feature1Activity.this, fundoDinamic, R.id.conteudo);
+//                AnimationsUtility.showCircularAnimationRuim(NewRatingActivity.this, fundoDinamic, R.id.conteudo);
 //                updateUI();
 //            }
 //        }, 1000);
@@ -114,9 +86,9 @@
 //        handler.postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
-//                AnimationsUtility.showCircularAnimationBom(Feature1Activity.this, fundoDinamic, R.id.conteudo);
+//                AnimationsUtility.showCircularAnimationBom(NewRatingActivity.this, fundoDinamic, R.id.conteudo);
 //                updateUI();
 //            }
 //        }, 1000);
 //    }
-//}
+}

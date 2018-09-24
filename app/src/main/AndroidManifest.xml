@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".presentation.activity.SplashScreen"
+            android:name=".presentation.activities.SplashScreenActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -22,16 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.activity.ResetActivity" />
+        <activity android:name=".presentation.activities.ResetActivity" />
         <activity
-            android:name=".presentation.activity.TabLayoutContainerActivity"
+            android:name=".presentation.activities.TabLayoutContainerActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".presentation.activity.MainIntroPermission"
+            android:name=".presentation.activities.AppPermissionsActivity"
             android:theme="@style/Theme.Intro" />
         <activity
-            android:name=".presentation.activity.DeliverableDetailsActivity"
+            android:name=".presentation.activities.DeliverableDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- Coletar dados analitcs -->
@@ -41,7 +41,8 @@
         <meta-data
             android:name="firebase_crash_collection_enabled"
             android:value="true" />
-        <activity android:name=".presentation.activity.UserEditionActivity" />
+        <activity android:name=".presentation.activities.UserEditionActivity" />
+        <activity android:name=".presentation.activities.NewRatingActivity" />
     </application>
 
 </manifest>

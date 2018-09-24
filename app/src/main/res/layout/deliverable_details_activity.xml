@@ -6,7 +6,7 @@
     android:id="@+id/coordinator_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.activity.DeliverableDetailsActivity">
+    tools:context=".presentation.activities.DeliverableDetailsActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -112,4 +112,13 @@
         app:layout_anchorGravity="bottom|right|end"
         app:pressedTranslationZ="12dp"
         app:srcCompat="@drawable/ic_review" />
+
+    <RelativeLayout
+        android:id="@+id/fundo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00FFFF"
+        android:gravity="center"
+        android:visibility="invisible">
+    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

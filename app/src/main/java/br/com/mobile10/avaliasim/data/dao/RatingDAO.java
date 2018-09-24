@@ -75,4 +75,21 @@ public class RatingDAO implements IRatingDAO {
         databaseReference.child(rating.getId()).setValue(rating, (dbError, dbReferece) -> onCompleteOperationListener
                 .onCompletion(dbError == null ? 1 : 0));
     }
+
+    @Override
+    public void findAllByDeliverableId(String deliverableId, OnCompleteOperationListener onCompleteOperationListener) {
+        databaseReference.orderByChild("deliverable").equalTo(deliverableId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<Rating> ratings = new ArrayList<>();
+                dataSnapshot.getChildren().forEach(snapshot -> ratings.add(snapshot.getValue(Rating.class)));
+                onCompleteOperationListener.onCompletion(ratings);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 }

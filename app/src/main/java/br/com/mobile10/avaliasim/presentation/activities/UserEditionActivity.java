@@ -1,4 +1,4 @@
-package br.com.mobile10.avaliasim.presentation.activity;
+package br.com.mobile10.avaliasim.presentation.activities;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -9,13 +9,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ListAdapter;
-import android.widget.Toast;
 
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.data.dao.UserDAO;
 import br.com.mobile10.avaliasim.data.interfaces.IUserDAO;
 import br.com.mobile10.avaliasim.model.User;
-import br.com.mobile10.avaliasim.util.Alerts;
+import br.com.mobile10.avaliasim.util.InterfaceUtils;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class UserEditionActivity extends AppCompatActivity {
@@ -91,14 +90,16 @@ public class UserEditionActivity extends AppCompatActivity {
 
     private void onEditionBtnClick(View view) {
         loggedUser.setName(nameInput.getText().toString());
-        loggedUser.setPhoneNumber(phoneInput.getText().toString() != null ? phoneInput.getText().toString() : "");
-        loggedUser.setAddress(addressInput.getText().toString() != null ? addressInput.getText().toString() : "");
-        loggedUser.setCity(cityInput.getText().toString() != null ? cityInput.getText().toString() : "");
-        loggedUser.setState(stateInput.getText().toString() != null ? stateInput.getText().toString() : "");
+        loggedUser.setPhoneNumber(phoneInput.getText().toString());
+        loggedUser.setAddress(addressInput.getText().toString());
+        loggedUser.setCity(cityInput.getText().toString());
+        loggedUser.setState(stateInput.getText().toString());
 
         userDAO.update(loggedUser, result -> {
-            Alerts.toast(this, "Usuário editado com sucesso!");
-            //TODO: atualizar os dados do usuário após a edição
+            if ((int) result == 1)
+                InterfaceUtils.showToast(this, "Usuário editado com sucesso!");
+            else
+                InterfaceUtils.showToast(this, "Erro ao tentar atualizar informações");
             finish();
         });
     }

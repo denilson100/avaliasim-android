@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -14,6 +15,7 @@ import br.com.mobile10.avaliasim.R;
  * Created by denmont on 10/02/2018.
  */
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class AnimationsUtility {
 
     /**
@@ -84,33 +86,27 @@ public class AnimationsUtility {
     }
 
     public static void showCircularAnimationAvaliar(Activity activity, View view, int idConteudo) {
+        int centerX = view.getRight();
+        int centerY = (view.getTop() + view.getBottom()) / 3;
+        float radius = Math.max(view.getWidth(), view.getHeight()) * 2.0f;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (view.getVisibility() == View.INVISIBLE) {
+            view.setBackgroundColor(activity.getResources().getColor(R.color.branco));
+            view.setVisibility(View.VISIBLE);
+            Animator animator = ViewAnimationUtils.createCircularReveal(view, centerX, centerY, 0, radius);
+            animator.setDuration(700);
+            animator.start();
 
-            int centerX = view.getRight();
-            int centerY = (view.getTop() + view.getBottom()) / 3;
-            float radius = Math.max(view.getWidth(), view.getHeight()) * 2.0f;
-
-            if (view.getVisibility() == View.INVISIBLE) {
-
-                view.setBackgroundColor(activity.getResources().getColor(R.color.branco));
-                view.setVisibility(View.VISIBLE);
-                Animator animator = ViewAnimationUtils.createCircularReveal(view, centerX, centerY, 0, radius);
-                animator.setDuration(700);
-                animator.start();
-
-            } else {
-                Log.d("TAG", "ENTROU NO ELSE");
-                Animator reveal = ViewAnimationUtils.createCircularReveal(view, centerX, centerY, radius, 0);
-                reveal.addListener(new AnimatorListenerAdapter() {
-                    public void onAnimationEnd(Animator animation) {
-                        view.setVisibility(View.INVISIBLE);
-
-                    }
-                });
-                reveal.start();
-                activity.findViewById(idConteudo).setVisibility(View.VISIBLE);
-            }
+        } else {
+            Log.d("TAG", "ENTROU NO ELSE");
+            Animator reveal = ViewAnimationUtils.createCircularReveal(view, centerX, centerY, radius, 0);
+//            reveal.addListener(new AnimatorListenerAdapter() {
+//                public void onAnimationEnd(Animator animation) {
+//                    view.setVisibility(View.INVISIBLE);
+//                }
+//            });
+//            reveal.start();
+//            activity.findViewById(idConteudo).setVisibility(View.VISIBLE);
         }
     }
 }

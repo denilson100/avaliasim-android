@@ -5,8 +5,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,5 +54,21 @@ public class InterfaceUtils {
                 e.printStackTrace();
             }
         }).start();
+    }
+
+    public static void showSnackbar(CoordinatorLayout coordinatorLayout, String message) {
+        Snackbar.make(coordinatorLayout, message, Snackbar.LENGTH_LONG).show();
+    }
+
+    public static void showToast(Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+    }
+
+    public static void replaceFragment(FragmentManager fragmentManager, int frameLayoutId, Fragment newFragment) {
+        fragmentManager
+                .beginTransaction()
+                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                .replace(frameLayoutId, newFragment)
+                .commit();
     }
 }

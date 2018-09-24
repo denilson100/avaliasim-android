@@ -23,14 +23,11 @@ import br.com.mobile10.avaliasim.data.interfaces.IClockDAO;
 import br.com.mobile10.avaliasim.data.interfaces.IDeliverableDAO;
 import br.com.mobile10.avaliasim.data.interfaces.IUserDAO;
 import br.com.mobile10.avaliasim.model.Deliverable;
-import br.com.mobile10.avaliasim.presentation.adapter.RecyclerViewAdapter;
+import br.com.mobile10.avaliasim.presentation.adapters.RecyclerViewAdapter;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
-/**
- * Created by denmont on 20/04/2018.
- */
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class ProductCardsFragment extends Fragment {
+public class DeliverableCardsFragment extends Fragment {
 
     private SwipeRefreshLayout swipeLayout;
     private ViewSwitcher viewSwitcher;

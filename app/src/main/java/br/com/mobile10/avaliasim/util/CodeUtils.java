@@ -12,7 +12,7 @@ import java.net.URL;
 
 public class CodeUtils {
 
-    public static URL makeURL(String textUrl) {
+    public static URL buildURL(String textUrl) {
         try {
             return new URL(textUrl);
         } catch (MalformedURLException ex) {
@@ -30,13 +30,5 @@ public class CodeUtils {
             context = ((ContextWrapper) context).getBaseContext();
         }
         return null;
-    }
-
-    public static void showSnackbar(CoordinatorLayout coordinatorLayout, String message) {
-        Snackbar.make(coordinatorLayout, message, Snackbar.LENGTH_LONG).show();
-    }
-
-    public static void showToast(Context context, String message) {
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 }

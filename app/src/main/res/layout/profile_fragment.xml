@@ -60,7 +60,6 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
-                        android:src="@drawable/ic_account_circle_black_24dp"
                         tools:ignore="VectorDrawableCompat" />
 
                     <android.support.design.widget.FloatingActionButton

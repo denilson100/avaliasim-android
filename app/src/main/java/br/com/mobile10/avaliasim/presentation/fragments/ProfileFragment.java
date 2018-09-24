@@ -21,11 +21,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ViewSwitcher;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 
 import java.io.IOException;
@@ -37,11 +34,9 @@ import br.com.mobile10.avaliasim.data.dao.UserDAO;
 import br.com.mobile10.avaliasim.data.interfaces.IDeliverableDAO;
 import br.com.mobile10.avaliasim.model.Deliverable;
 import br.com.mobile10.avaliasim.model.User;
-import br.com.mobile10.avaliasim.presentation.activity.MainIntroPermission;
-import br.com.mobile10.avaliasim.presentation.activity.UserEditionActivity;
-import br.com.mobile10.avaliasim.presentation.adapter.RecyclerViewAdapter;
-import br.com.mobile10.avaliasim.util.Alerts;
-import br.com.mobile10.avaliasim.util.CodeUtils;
+import br.com.mobile10.avaliasim.presentation.activities.AppPermissionsActivity;
+import br.com.mobile10.avaliasim.presentation.activities.UserEditionActivity;
+import br.com.mobile10.avaliasim.presentation.adapters.RecyclerViewAdapter;
 import br.com.mobile10.avaliasim.util.ImageUtility;
 import br.com.mobile10.avaliasim.util.InterfaceUtils;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -54,7 +49,6 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 public class ProfileFragment extends Fragment {
 
     private View fragmentView;
-    private ViewSwitcher vs;
     private ImageUtility imageUtility = new ImageUtility();
     private CircleImageView profileImg;
     private TextView profileName;
@@ -88,24 +82,12 @@ public class ProfileFragment extends Fragment {
     }
 
     private void onUserLoaded(Object result) {
-        if (result != null) {
-            loggedUser = (User) result;
-            initializeViews(fragmentView);
+        loggedUser = (User) result;
+        initializeViews(fragmentView);
 
-            profileName.setText(loggedUser.getName());
-            profileEmail.setText(loggedUser.getEmail());
-            UrlImageViewHelper.setUrlDrawable(profileImg, loggedUser.getPhotoUrl(), R.drawable.ic_account_circle_black_24dp);
-
-        } else {
-            loggedUser = new User();
-            loggedUser.setName("Sem nome");
-            initializeViews(fragmentView);
-
-            profileName.setText(loggedUser.getName());
-            profileEmail.setText(loggedUser.getEmail());
-            UrlImageViewHelper.setUrlDrawable(profileImg, loggedUser.getPhotoUrl(), R.drawable.ic_account_circle_black_24dp);
-
-        }
+        profileName.setText(loggedUser.getName());
+        profileEmail.setText(loggedUser.getEmail());
+        UrlImageViewHelper.setUrlDrawable(profileImg, loggedUser.getPhotoUrl(), R.drawable.ic_account_circle_black_24dp);
     }
 
     private void initializeViews(View view) {
@@ -119,15 +101,13 @@ public class ProfileFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.cards_recycler_view);
         recyclerViewFavorites = view.findViewById(R.id.cards_recycler_view_favorite);
-
     }
 
-    //TODO: reformular este método
     public void onProfileImgClick(View v) {
         int permissionCheckStorageRead = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE);
 
         if (permissionCheckStorageRead != PackageManager.PERMISSION_GRANTED) {
-            Intent intent2 = new Intent(getActivity(), MainIntroPermission.class);
+            Intent intent2 = new Intent(getActivity(), AppPermissionsActivity.class);
             startActivity(intent2);
         } else
             startActivityForResult(imageUtility.getPickImageChooserIntent(getActivity()), 200);
@@ -147,7 +127,7 @@ public class ProfileFragment extends Fragment {
                 });
             } catch (IOException e) {
                 e.printStackTrace();
-                Alerts.toast(getActivity(), "Ocorreu um erro. Tente novamente.");
+                InterfaceUtils.showToast(getActivity(), "Ocorreu um erro. Tente novamente.");
             }
         }
     }
@@ -165,11 +145,7 @@ public class ProfileFragment extends Fragment {
         alertDialogBuilder
                 .setPositiveButton("Deslogar",
                         (dialog, id) -> {
-                            getFragmentManager()
-                                    .beginTransaction()
-                                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                                    .replace(R.id.profile_fragment, new LoginFragment())
-                                    .commit();
+                            InterfaceUtils.replaceFragment(getFragmentManager(), R.id.profile_fragment, new LoginFragment());
                             userDAO.signOut();
                         })
                 .setNegativeButton("Cancelar", null);

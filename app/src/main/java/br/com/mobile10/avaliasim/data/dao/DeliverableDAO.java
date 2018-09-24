@@ -32,7 +32,11 @@ public class DeliverableDAO implements IDeliverableDAO {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<Deliverable> deliverables = new ArrayList<>();
-                dataSnapshot.getChildren().forEach(snapshot -> deliverables.add(snapshot.getValue(Deliverable.class)));
+                dataSnapshot.getChildren().forEach(snapshot -> {
+                    Deliverable deliverable = snapshot.getValue(Deliverable.class);
+                    deliverable.setId(snapshot.getKey());
+                    deliverables.add(deliverable);
+                });
                 onCompleteOperationListener.onCompletion(deliverables);
             }
 
@@ -64,11 +68,9 @@ public class DeliverableDAO implements IDeliverableDAO {
 
     @Override
     public void delete(String id, OnCompleteOperationListener onCompleteOperationListener) {
-
     }
 
     @Override
     public void update(Deliverable object, OnCompleteOperationListener onCompleteOperationListener) {
-
     }
 }
