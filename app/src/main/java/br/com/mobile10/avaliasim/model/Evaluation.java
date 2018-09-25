@@ -13,6 +13,7 @@ public class Evaluation implements Serializable {
     private String nameAuthor;
     private String photoAuthor;
     private List<String> features;
+    private String[] featureArray;
 
     public Evaluation(){}
 
@@ -65,11 +66,20 @@ public class Evaluation implements Serializable {
         this.features = features;
     }
 
+    public String[] getFeatureArray() {
+        return featureArray;
+    }
+
+    public void setFeatureArray(String[] featureArray) {
+        this.featureArray = featureArray;
+    }
+
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("authorName", nameAuthor);
         result.put("authorPhoto", photoAuthor);
+        result.put("features", features);
 
         return result;
     }

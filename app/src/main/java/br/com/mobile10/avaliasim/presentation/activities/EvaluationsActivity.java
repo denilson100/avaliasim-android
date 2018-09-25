@@ -45,6 +45,7 @@ import br.com.mobile10.avaliasim.presentation.adapters.RecyclerViewAdapter;
 import br.com.mobile10.avaliasim.presentation.adapters.RecyclerViewAdapterEvaluation;
 import br.com.mobile10.avaliasim.presentation.fragments.ProfileFragment;
 import br.com.mobile10.avaliasim.util.InterfaceUtils;
+import br.com.mobile10.avaliasim.util.Support;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
@@ -140,7 +141,7 @@ public class EvaluationsActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         //TODO Verificar se o editText está vazio. Outros tipos tb, ex: se ja tem a feature criada por outro usuario
                         if (loggedUser != null) {
-                            newEvaluation();
+                            newEvaluation(Support.getFeaturesList(mEditChipsFeatures.getText().toString()));
                         }
                         alertDialog.cancel();
                     }
@@ -163,10 +164,11 @@ public class EvaluationsActivity extends AppCompatActivity {
         loggedUser = (User) result;
     }
 
-    private void newEvaluation() {
+    private void newEvaluation(List<String> featureList) {
         Evaluation evaluation = new Evaluation();
         evaluation.setNameAuthor(loggedUser.getName());
         evaluation.setPhotoAuthor(loggedUser.getPhotoUrl().toString());
+        evaluation.setFeatures(featureList);
 
         ProgressDialog progressDialog = InterfaceUtils.showProgressDialog(this, "Criando...");
         evaluationDAO.create(evaluation, result -> {
