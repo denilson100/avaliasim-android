@@ -394,4 +394,5 @@
         <item>Sergipe (SE)</item>
         <item>Tocantins (TO)</item>
     </string-array>
+    <string name="title_activity_evaluations">EvaluationsActivity</string>
 </resources>

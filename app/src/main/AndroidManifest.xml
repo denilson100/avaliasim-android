@@ -26,7 +26,7 @@
         <activity
             android:name=".presentation.activities.TabLayoutContainerActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".presentation.activities.AppPermissionsActivity"
             android:theme="@style/Theme.Intro" />
@@ -41,8 +41,13 @@
         <meta-data
             android:name="firebase_crash_collection_enabled"
             android:value="true" />
+
         <activity android:name=".presentation.activities.UserEditionActivity" />
         <activity android:name=".presentation.activities.NewRatingActivity" />
+        <activity
+            android:name=".presentation.activities.EvaluationsActivity"
+            android:label="@string/title_activity_evaluations"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

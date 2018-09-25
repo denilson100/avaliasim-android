@@ -9,6 +9,7 @@ import android.widget.TextView;
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.model.Deliverable;
 import br.com.mobile10.avaliasim.presentation.activities.DeliverableDetailsActivity;
+import br.com.mobile10.avaliasim.presentation.activities.EvaluationsActivity;
 
 public class DeliverableCardViewHolder extends RecyclerView.ViewHolder {
 
@@ -24,7 +25,11 @@ public class DeliverableCardViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void onCardClick(View v) {
-        Intent intent = new Intent(v.getContext(), DeliverableDetailsActivity.class);
+//        Intent intent = new Intent(v.getContext(), DeliverableDetailsActivity.class);
+//        intent.putExtra("deliverable", deliverable);
+//        itemView.getContext().startActivity(intent);
+
+        Intent intent = new Intent(v.getContext(), EvaluationsActivity.class);
         intent.putExtra("deliverable", deliverable);
         itemView.getContext().startActivity(intent);
     }
