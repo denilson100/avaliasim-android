@@ -1,7 +1,11 @@
 package br.com.mobile10.avaliasim.model;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Evaluation implements Serializable {
     private String id;
@@ -59,5 +63,14 @@ public class Evaluation implements Serializable {
 
     public void setFeatures(List<String> features) {
         this.features = features;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("authorName", nameAuthor);
+        result.put("authorPhoto", photoAuthor);
+
+        return result;
     }
 }

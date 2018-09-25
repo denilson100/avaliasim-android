@@ -10,21 +10,27 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import br.com.mobile10.avaliasim.data.interfaces.IDeliverableDAO;
 import br.com.mobile10.avaliasim.data.interfaces.IEvaluationDAO;
 import br.com.mobile10.avaliasim.data.interfaces.OnCompleteOperationListener;
 import br.com.mobile10.avaliasim.model.Deliverable;
 import br.com.mobile10.avaliasim.model.Evaluation;
+import br.com.mobile10.avaliasim.model.User;
 import br.com.mobile10.avaliasim.util.Constants;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class EvaluationDAO implements IEvaluationDAO {
 
     private DatabaseReference databaseReference;
+    private Evaluation evaluation;
+    private String deriverableId;
 
     public EvaluationDAO(String deriverableId) {
+        this.deriverableId = deriverableId;
         databaseReference = FirebaseDatabase.getInstance().getReference().child(Constants.DB_ROOT).child("evaluations").child(deriverableId);
     }
 
@@ -77,7 +83,13 @@ public class EvaluationDAO implements IEvaluationDAO {
     }
 
     @Override
-    public void create(Deliverable object, OnCompleteOperationListener onCompleteOperationListener) {
+    public void create(Evaluation object, OnCompleteOperationListener onCompleteOperationListener) {
+        if (object != null) {
+            String key = databaseReference.child(Constants.DB_ROOT).push().getKey();
+            Map<String, Object> postValues = object.toMap();
+            databaseReference.child(key).setValue(postValues)
+                    .addOnCompleteListener(listener -> onCompleteOperationListener.onCompletion(listener.isSuccessful() ? 1 : 0));
+        }
     }
 
     @Override
@@ -85,6 +97,6 @@ public class EvaluationDAO implements IEvaluationDAO {
     }
 
     @Override
-    public void update(Deliverable object, OnCompleteOperationListener onCompleteOperationListener) {
+    public void update(Evaluation object, OnCompleteOperationListener onCompleteOperationListener) {
     }
 }
