@@ -7,12 +7,12 @@ public class Support {
 
     /**
      * Conversor de list em array
-     * @param text separado por ;
+     * @param text separado por ,
      * @return
      */
     public static List<String> getFeaturesList(String text) {
         List<String> list = new ArrayList<String>();
-        String[] textoSeparado = text.split(";\\s");
+        String[] textoSeparado = text.split(",\\s");
         for (int i=0; i < textoSeparado.length; i++) {
             list.add(textoSeparado[i]);
         }

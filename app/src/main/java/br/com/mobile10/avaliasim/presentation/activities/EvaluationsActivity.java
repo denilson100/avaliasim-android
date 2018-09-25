@@ -17,15 +17,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.ViewSwitcher;
 
+import com.android.ex.chips.BaseRecipientAdapter;
+import com.android.ex.chips.RecipientEditTextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
@@ -66,6 +71,7 @@ public class EvaluationsActivity extends AppCompatActivity {
     private CollapsingToolbarLayout toolbarLayout;
     private View promptsView;
     private EditText mEditChipsFeatures;
+    private RecipientEditTextView chips;
     private AlertDialog alertDialog;
 
     private User loggedUser;
@@ -133,15 +139,28 @@ public class EvaluationsActivity extends AppCompatActivity {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setView(promptsView);
-        mEditChipsFeatures = (EditText) promptsView.findViewById(R.id.edit_chips_features);
+        chips = (RecipientEditTextView) promptsView.findViewById(R.id.edit_chips_features);
+        chips.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        BaseRecipientAdapter baseRecipientAdapter = new BaseRecipientAdapter(this);
+
+        baseRecipientAdapter.setShowMobileOnly(false);
+        chips.isHorizontalScrollBarEnabled();
+        chips.setAdapter(baseRecipientAdapter);
+
         AppCompatButton btnNew = (AppCompatButton) promptsView.findViewById(R.id.new_evaluation);
         btnNew.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if (!validateForm()) {
+                            return;
+                        }
                         //TODO Verificar se o editText está vazio. Outros tipos tb, ex: se ja tem a feature criada por outro usuario
                         if (loggedUser != null) {
-                            newEvaluation(Support.getFeaturesList(mEditChipsFeatures.getText().toString()));
+                            String features1 = chips.getText().toString();
+                            String features2 = features1.replace("<", "");
+                            String featuresFinal = features2.replace(">", "");
+                            newEvaluation(Support.getFeaturesList(featuresFinal));
                         }
                         alertDialog.cancel();
                     }
@@ -181,6 +200,20 @@ public class EvaluationsActivity extends AppCompatActivity {
 
             InterfaceUtils.hideProgressDialog(progressDialog);
         });
+    }
+
+    private boolean validateForm() {
+        boolean valid = true;
+
+        String nome = chips.getText().toString();
+        if (TextUtils.isEmpty(nome)) {
+            chips.setError("vazio");
+            valid = false;
+        } else {
+            chips.setError(null);
+        }
+
+        return valid;
     }
 
 }
