@@ -10,6 +10,7 @@ import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.model.Deliverable;
 import br.com.mobile10.avaliasim.presentation.activities.DeliverableDetailsActivity;
 import br.com.mobile10.avaliasim.presentation.activities.EvaluationsActivity;
+import br.com.mobile10.avaliasim.util.Constants;
 
 public class DeliverableCardViewHolder extends RecyclerView.ViewHolder {
 
@@ -31,6 +32,7 @@ public class DeliverableCardViewHolder extends RecyclerView.ViewHolder {
 
         Intent intent = new Intent(v.getContext(), EvaluationsActivity.class);
         intent.putExtra("deliverable", deliverable);
+        Constants.DELIVERABLE = deliverable;
         itemView.getContext().startActivity(intent);
     }
 

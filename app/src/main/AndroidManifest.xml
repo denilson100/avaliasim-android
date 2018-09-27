@@ -48,6 +48,10 @@
             android:name=".presentation.activities.EvaluationsActivity"
             android:label="@string/title_activity_evaluations"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".presentation.activities.DetailEvaluationActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".presentation.activities.AvaliandoActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

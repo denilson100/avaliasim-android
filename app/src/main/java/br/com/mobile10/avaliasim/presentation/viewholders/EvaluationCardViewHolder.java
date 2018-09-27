@@ -9,12 +9,14 @@ import android.widget.TextView;
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.model.Deliverable;
 import br.com.mobile10.avaliasim.model.Evaluation;
+import br.com.mobile10.avaliasim.presentation.activities.DetailEvaluationActivity;
 import br.com.mobile10.avaliasim.presentation.activities.EvaluationsActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EvaluationCardViewHolder extends RecyclerView.ViewHolder {
 
     private Evaluation evaluation;
+    private Deliverable deliverable;
     private TextView nameAuthor;
     private TextView textFeature;
     private CircleImageView imageViewphotoAuthor;
@@ -29,9 +31,10 @@ public class EvaluationCardViewHolder extends RecyclerView.ViewHolder {
 
     private void onCardClick(View v) {
         // Vai para detailsEvaluation
-        Intent intent = new Intent(v.getContext(), EvaluationsActivity.class);
+        Intent intent = new Intent(v.getContext(), DetailEvaluationActivity.class);
         intent.putExtra("evaluation", evaluation);
-//        itemView.getContext().startActivity(intent);
+        intent.putExtra("deliverable", deliverable);
+        itemView.getContext().startActivity(intent);
     }
 
     public TextView getNameAuthor() {
@@ -46,7 +49,11 @@ public class EvaluationCardViewHolder extends RecyclerView.ViewHolder {
         return imageViewphotoAuthor;
     }
 
-    public void setDeliverable(Evaluation evaluation) {
+    public void setDeliverable(Deliverable deliverable) {
+        this.evaluation = evaluation;
+    }
+
+    public void setEvaluation(Evaluation evaluation) {
         this.evaluation = evaluation;
     }
 }

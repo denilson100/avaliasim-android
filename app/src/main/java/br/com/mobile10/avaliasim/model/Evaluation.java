@@ -13,6 +13,7 @@ public class Evaluation implements Serializable {
     private String nameAuthor;
     private String photoAuthor;
     private List<String> features;
+    private List<Feature> featuresList;
     private String[] featureArray;
 
     public Evaluation(){}
@@ -64,6 +65,14 @@ public class Evaluation implements Serializable {
 
     public void setFeatures(List<String> features) {
         this.features = features;
+    }
+
+    public List<Feature> getFeaturesList() {
+        return featuresList;
+    }
+
+    public void setFeaturesList(List<Feature> featuresList) {
+        this.featuresList = featuresList;
     }
 
     public String[] getFeatureArray() {

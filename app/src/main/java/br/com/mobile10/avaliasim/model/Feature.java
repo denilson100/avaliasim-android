@@ -1,10 +1,18 @@
 package br.com.mobile10.avaliasim.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Feature implements Serializable {
-    private String name;
-    private Boolean good;
+    public String name;
+    public List<MyDate> date;
+
+    public Feature() {}
+
+    public Feature(String name, List<MyDate> date) {
+        this.name = name;
+        this.date = date;
+    }
 
     public String getName() {
         return name;
@@ -14,11 +22,11 @@ public class Feature implements Serializable {
         this.name = name;
     }
 
-    public Boolean getGood() {
-        return good;
+    public List<MyDate> getDate() {
+        return date;
     }
 
-    public void setGood(Boolean good) {
-        this.good = good;
+    public void setDate(List<MyDate> date) {
+        this.date = date;
     }
 }

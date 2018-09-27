@@ -51,7 +51,7 @@ public class RecyclerViewAdapterEvaluation extends RecyclerView.Adapter<Evaluati
             features += feature + "  ";
         }
 
-        holder.setDeliverable(evaluation);
+        holder.setEvaluation(evaluation);
         holder.getTextFeature().setText(features);
         holder.getNameAuthor().setText(evaluation.getNameAuthor());
         UrlImageViewHelper.setUrlDrawable(holder.getPhotoAuthor(), evaluation.getPhotoAuthor(), R.drawable.ic_account_circle_black_24dp);

@@ -9,7 +9,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +22,12 @@ import br.com.mobile10.avaliasim.data.interfaces.IEvaluationDAO;
 import br.com.mobile10.avaliasim.data.interfaces.OnCompleteOperationListener;
 import br.com.mobile10.avaliasim.model.Deliverable;
 import br.com.mobile10.avaliasim.model.Evaluation;
+import br.com.mobile10.avaliasim.model.Feature;
+import br.com.mobile10.avaliasim.model.MyDate;
 import br.com.mobile10.avaliasim.model.User;
+import br.com.mobile10.avaliasim.model.Vote;
 import br.com.mobile10.avaliasim.util.Constants;
+import br.com.mobile10.avaliasim.util.Format;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class EvaluationDAO implements IEvaluationDAO {
@@ -28,6 +35,8 @@ public class EvaluationDAO implements IEvaluationDAO {
     private DatabaseReference databaseReference;
     private Evaluation evaluation;
     private String deriverableId;
+    private String total;
+    private int result;
 
     public EvaluationDAO(String deriverableId) {
         this.deriverableId = deriverableId;
@@ -49,11 +58,41 @@ public class EvaluationDAO implements IEvaluationDAO {
                         String featute = (String) snapFeature.getValue();
                         features.add(featute);
                     }
+                    List<Feature> featureList = new ArrayList<Feature>();
+                    for (DataSnapshot list : snapshot.child("ratingList").getChildren()) {
+
+                        String featureName = list.getKey();
+
+                        List<MyDate> listDate = new ArrayList<MyDate>();
+                        for (DataSnapshot data : list.getChildren()) {
+
+                            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+                            Date date = null;
+                            String stringDate = data.getKey();
+                            try {
+                                date = formatter.parse(stringDate);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            int positive = (int) data.child("positive").getChildrenCount();
+                            int negative = (int) data.child("negative").getChildrenCount();
+
+                            MyDate myDate1 = new MyDate(positive, negative, date);
+                            listDate.add(myDate1);
+
+                        }
+
+                        Feature feature = new Feature(featureName, listDate);
+                        featureList.add(feature);
+
+                    }
 
                     Evaluation evaluation = new Evaluation();
                     evaluation.setNameAuthor(authorName);
                     evaluation.setPhotoAuthor(authorPhoto);
                     evaluation.setFeatures(features);
+                    evaluation.setFeaturesList(featureList);
                     evaluation.setId(snapshot.getKey());
                     evaluations.add(evaluation);
                 });
@@ -64,6 +103,58 @@ public class EvaluationDAO implements IEvaluationDAO {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+    }
+
+    @Override
+    public void findTotalEvaluation(Evaluation evaluation, OnCompleteOperationListener onCompleteOperationListener) {
+        databaseReference = FirebaseDatabase.getInstance().getReference().child(Constants.DB_ROOT).child("evaluations").child(Constants.DELIVERABLE.getId());
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot av : dataSnapshot.getChildren()) {
+
+                    if (evaluation.getId().equalsIgnoreCase(av.getKey())) {
+
+                        for (DataSnapshot list : av.child("ratingList").getChildren()) {
+
+                            for (DataSnapshot feature : list.getChildren()) {
+
+                                result += (int) feature.child("positive").getChildrenCount();
+                                result += (int) feature.child("negative").getChildrenCount();
+                                total = "Total: " + result + " avaliações";
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+                onCompleteOperationListener.onCompletion(total);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    public void avaliar(Evaluation object, String userId, String featureAvaliada, String status, OnCompleteOperationListener onCompleteOperationListener) {
+        String dataAtual = Format.Date(Constants.DATA_ATUAL);
+        String key = databaseReference.child("ratingList").child(featureAvaliada).child(dataAtual).child(status).child(userId).getKey();
+        Vote voto = new Vote(userId);
+        Map<String, Object> postValuesVoto = voto.toMap();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+
+        String caminhoPrivado = "/" + object.getId() + "/ratingList/" + featureAvaliada + "/" + dataAtual + "/" + status + "/";
+        childUpdates.put(caminhoPrivado + key, postValuesVoto);
+
+        databaseReference.updateChildren(childUpdates);
+
     }
 
     @Override
