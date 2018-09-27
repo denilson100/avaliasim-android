@@ -6,8 +6,8 @@ android {
         applicationId "br.com.mobile10.avaliasim"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 17
-        versionName "0.15"
+        versionCode 18
+        versionName "0.16"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

@@ -85,9 +85,15 @@ public class ProfileFragment extends Fragment {
         loggedUser = (User) result;
         initializeViews(fragmentView);
 
-        profileName.setText(loggedUser.getName());
-        profileEmail.setText(loggedUser.getEmail());
-        UrlImageViewHelper.setUrlDrawable(profileImg, loggedUser.getPhotoUrl(), R.drawable.ic_account_circle_black_24dp);
+        if (loggedUser != null) {
+            profileName.setText(loggedUser.getName());
+            profileEmail.setText(loggedUser.getEmail());
+            UrlImageViewHelper.setUrlDrawable(profileImg, loggedUser.getPhotoUrl(), R.drawable.ic_account_circle_black_24dp);
+        } else {
+            profileName.setText("Sem nome");
+            profileEmail.setText("");
+            UrlImageViewHelper.setUrlDrawable(profileImg, "", R.drawable.ic_account_circle_black_24dp);
+        }
     }
 
     private void initializeViews(View view) {
