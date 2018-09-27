@@ -50,16 +50,20 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
+    public void delete(String userId, OnCompleteOperationListener onCompleteOperationListener) {
+        databaseReference.child(userId).removeValue((dbError, dbReference) -> onCompleteOperationListener
+                .onCompletion(dbError == null ? 1 : 0));
+    }
+
+    @Override
     public void findSignInMethods(String email, OnCompleteOperationListener onCompleteOperationListener) {
         authenticationManager.fetchSignInMethodsForEmail(email).addOnCompleteListener(listener -> {
             List<String> signInMethods = listener.getResult().getSignInMethods();
             AtomicBoolean isRegistered = new AtomicBoolean(false);
-
             signInMethods.forEach(method -> {
                 if ("password".equals(method))
                     isRegistered.set(true);
             });
-
             onCompleteOperationListener.onCompletion(isRegistered.get() ? 1 : 0);
         });
     }
@@ -67,13 +71,11 @@ public class UserDAO implements IUserDAO {
     @Override
     public void create(String email, String password, OnCompleteOperationListener onCompleteOperationListener) {
         authenticationManager.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            //Cadastrou no Firebase auth
             if (task.isSuccessful()) {
                 User user = new User();
                 user.setId(authenticationManager.getCurrentUser().getUid());
                 user.setName(authenticationManager.getCurrentUser().getDisplayName());
                 user.setEmail(authenticationManager.getCurrentUser().getEmail());
-                user.setPhotoUrl(authenticationManager.getCurrentUser().getPhotoUrl().toString());
                 user.setPhoneNumber(authenticationManager.getCurrentUser().getPhoneNumber());
                 databaseReference
                         .child(authenticationManager.getCurrentUser().getUid())
@@ -81,12 +83,6 @@ public class UserDAO implements IUserDAO {
                         .addOnCompleteListener(listener -> onCompleteOperationListener.onCompletion(listener.isSuccessful() ? 1 : 0));
             }
         });
-    }
-
-    @Override
-    public void delete(String userId, OnCompleteOperationListener onCompleteOperationListener) {
-        databaseReference.child(userId).removeValue((dbError, dbReference) -> onCompleteOperationListener
-                .onCompletion(dbError == null ? 1 : 0));
     }
 
     @Override
