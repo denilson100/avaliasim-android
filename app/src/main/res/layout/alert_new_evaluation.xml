@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="8dp" >
+    android:padding="8dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:text="Que caracteristicas deseja Avaliar"/>
+        android:text="Quais características deseja avaliar?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -24,7 +23,6 @@
             android:layout_height="match_parent"
             android:hint="Caracteristica"
             android:inputType="text" />
-
     </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.AppCompatButton
@@ -32,9 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:background="@color/colorPrimary"
         android:text="Criar"
-        android:textColor="@android:color/white"
-        android:background="@color/colorPrimary"/>
-
-
+        android:textColor="@android:color/white" />
 </LinearLayout>

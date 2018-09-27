@@ -1,6 +1,5 @@
 package br.com.mobile10.avaliasim.presentation.activities;
 
-import android.app.ActionBar;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;

@@ -11,18 +11,17 @@ import com.balysv.materialripple.MaterialRippleLayout;
 import java.util.List;
 
 import br.com.mobile10.avaliasim.R;
-import br.com.mobile10.avaliasim.presentation.activities.DetailEvaluationActivity;
-import br.com.mobile10.avaliasim.presentation.activities.EvaluationsActivity;
+import br.com.mobile10.avaliasim.presentation.activities.EvaluationDetailActivity;
 
 public class RecyclerViewAdapterFeatures extends RecyclerView.Adapter<RecyclerViewHoldersFeatures> {
 
     private List<String> itemList;
     private Context context;
-    private DetailEvaluationActivity activity;
+    private EvaluationDetailActivity activity;
     //declare interface
     private OnItemClicked onClick;
 
-    public RecyclerViewAdapterFeatures(DetailEvaluationActivity activity, List<String> itemList) {
+    public RecyclerViewAdapterFeatures(EvaluationDetailActivity activity, List<String> itemList) {
         this.itemList = itemList;
         this.activity = activity;
 

@@ -3,14 +3,12 @@ package br.com.mobile10.avaliasim.presentation.viewholders;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import br.com.mobile10.avaliasim.R;
 import br.com.mobile10.avaliasim.model.Deliverable;
 import br.com.mobile10.avaliasim.model.Evaluation;
-import br.com.mobile10.avaliasim.presentation.activities.DetailEvaluationActivity;
-import br.com.mobile10.avaliasim.presentation.activities.EvaluationsActivity;
+import br.com.mobile10.avaliasim.presentation.activities.EvaluationDetailActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EvaluationCardViewHolder extends RecyclerView.ViewHolder {
@@ -31,7 +29,7 @@ public class EvaluationCardViewHolder extends RecyclerView.ViewHolder {
 
     private void onCardClick(View v) {
         // Vai para detailsEvaluation
-        Intent intent = new Intent(v.getContext(), DetailEvaluationActivity.class);
+        Intent intent = new Intent(v.getContext(), EvaluationDetailActivity.class);
         intent.putExtra("evaluation", evaluation);
         intent.putExtra("deliverable", deliverable);
         itemView.getContext().startActivity(intent);
